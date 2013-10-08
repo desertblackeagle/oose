@@ -1,4 +1,4 @@
-package chess;
+package Chess;
 
 /* @author Red Rose
  * Function:a manager to control board
