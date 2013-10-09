@@ -1,4 +1,4 @@
-package chess;
+package Chess;
 
 /* Author:Red Rose
  * Function:a example
