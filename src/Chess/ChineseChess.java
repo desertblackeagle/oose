@@ -174,7 +174,7 @@ public class ChineseChess extends chess{
 		
 	}
 //	public boolean eat(chess other)
-//	{
+//	{c
 //		if(this.name)
 //		{
 //			

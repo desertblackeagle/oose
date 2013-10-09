@@ -9,23 +9,19 @@ package Chess;
 public class BoardManager {
 	
 	public void moveTo(){
-		moveChess();
+		//(move chess to position)
 		if(canMove()){
 			if(haveTarget()){
 				if(canEat()){
 					eatChess();
 				}
 				else{
-					//move back
+					//(move back)
 		   		}
 			}
 		}else{
-			//move back
+			//(move back)
 		}
-	}
-	
-	private void moveChess(){
-		
 	}
 	
 	private boolean canMove(){
