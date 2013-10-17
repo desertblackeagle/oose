@@ -4,6 +4,8 @@ public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		int 哈囉 = 5;
+		System.out.println(哈囉);
 		String[] chesses = new String[16];
 		chesses[0]="King";
 		chesses[1]="Guard";

@@ -1,6 +1,6 @@
 package Chess;
 
-public class ChineseChess extends chess{
+public class ChineseChess extends Chess{
 	
 	private static int guardCountOfRed = 3;
 	private static int guardCountOfBlack = 3;

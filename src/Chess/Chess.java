@@ -32,16 +32,16 @@ class position
 //		this.x = x;
 //	}
 }
-public class chess {
+public class Chess {
 	
-	private String chessName;//´Ñ¤l¦WºÙ
-	private boolean chessCover;//¬O§_¬°ÂÐ»\ªº(·t´Ñ¨Ï¥Î)
-	private position boardPosition = new position(); //´Ñ½L¦ì¸m
-	private String[] eatRule = new String[7];//¥i¦Yªº´Ñ¤l
-	private int rank;//¶¥¯Å
-	private position startPosition = new position() ;//ªì©l¦ì¸m
-	private String color;//´Ñ¤lªºÃC¦â
-	//boolean moveRule ()//²¾°Êªº³W«h
+	private String chessName;//ï¿½Ñ¤lï¿½Wï¿½ï¿½
+	private boolean chessCover;//ï¿½Oï¿½_ï¿½ï¿½ï¿½Ð»\ï¿½ï¿½(ï¿½tï¿½Ñ¨Ï¥ï¿½)
+	private position boardPosition = new position(); //ï¿½Ñ½Lï¿½ï¿½m
+	private String[] eatRule = new String[7];//ï¿½iï¿½Yï¿½ï¿½ï¿½Ñ¤l
+	private int rank;//ï¿½ï¿½ï¿½ï¿½
+	private position startPosition = new position() ;//ï¿½ï¿½lï¿½ï¿½m
+	private String color;//ï¿½Ñ¤lï¿½ï¿½ï¿½Cï¿½ï¿½
+	//boolean moveRule ()//ï¿½ï¿½ï¿½Êªï¿½ï¿½Wï¿½h
 //	private int count;
 //	private String[] chesses = new String[16];
 //	public chess(String name)
@@ -51,7 +51,7 @@ public class chess {
 //		setEatRule();
 //		
 //	}
-	public chess(String name,String color)
+	public Chess(String name,String color)
 	{
 		chessName = name;
 		this.color = color;
@@ -232,7 +232,7 @@ public class chess {
 //		}
 //		else if(chessName.equalsIgnoreCase("Cannon")&& !color.equalsIgnoreCase(other.getColor()))
 //		{
-//			if()//¦b¨âÂIª½½u¤W¥t¦³¤¤¶¡¤@¤l®É«h¥i¦Y
+//			if()//ï¿½bï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½uï¿½Wï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½lï¿½É«hï¿½iï¿½Y
 //			{
 //				return true;
 //			}

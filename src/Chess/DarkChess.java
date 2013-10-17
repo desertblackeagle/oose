@@ -1,7 +1,7 @@
 package Chess;
 import java.util.LinkedList;
 import java.util.Random;
-public class DarkChess extends chess{
+public class DarkChess extends Chess{
 //	int[] xTimes= {0,0,0,0,0,0,0,0} ;
 //	int[] yTimes = {0,0,0,0};
 	private static LinkedList<position> position = new LinkedList<position>();
@@ -37,7 +37,7 @@ public class DarkChess extends chess{
 //			yTimes[i] = 0;
 //		}
 		
-//		for(int i=0 ; i < 31 ; i++)//X¶b
+//		for(int i=0 ; i < 31 ; i++)//Xï¿½b
 //		{
 		
 		x = ran.nextInt(8);//0~7
@@ -128,7 +128,7 @@ public class DarkChess extends chess{
 //			}
 //			setStartPositionX(randomNumber);
 //			
-//			for(int k=0 ; k<4; k++)//Y¶b
+//			for(int k=0 ; k<4; k++)//Yï¿½b
 //			{
 //				randomNumber = ran.nextInt(4)+1;//1~4
 //				System.out.println("3ranNum = " + randomNumber);
