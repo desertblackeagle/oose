@@ -12,7 +12,7 @@ public class  Chess {
 	{
 		
 	}
-	public Chess(int color , boolean chessCover , int x ,int y)
+	public Chess(int color , boolean chessCover , int x ,int y )
 	{
 		this.color = color;
 		this.chessCover = chessCover;
@@ -68,6 +68,13 @@ public class  Chess {
 			temp[i] = eatRule[i];
 		}
 		return temp;
+	}
+	public void setRule(String[] eatRule)
+	{
+		for(int i=0 ; i < eatRule.length ; i++)
+		{
+			this.eatRule[i] = eatRule[i];
+		}
 	}
 	public boolean moveRule()
 	{

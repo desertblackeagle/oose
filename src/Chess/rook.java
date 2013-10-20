@@ -7,5 +7,6 @@ public class rook extends Chess{
 		super(color, chessCover, x, y);
 		setName("Rook");
 	}
+	
 
 }
