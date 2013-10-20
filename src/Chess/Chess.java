@@ -8,14 +8,14 @@ public class  Chess {
 	private int color = 0;// 0 為 紅色 , 1 為黑色;
 	private String[] eatRule = {};
 
-//	public Chess()
-//	{
-//		
-//	}
-//	public Chess(String name )
-//	{
-//		chessName = name;
-//	}
+	public Chess()
+	{
+		
+	}
+	public Chess(String name )
+	{
+		chessName = name;
+	}
 	
 	public int getX()
 	{
@@ -36,6 +36,10 @@ public class  Chess {
 	public String getName()
 	{
 		return chessName;
+	}
+	public void setName(String name)
+	{
+		chessName = name;
 	}
 	public boolean getChessCover()
 	{
