@@ -64,6 +64,6 @@ public class  Chess {
 	}
 	public boolean moveRule()
 	{
-		
+		return false;
 	};
 }
