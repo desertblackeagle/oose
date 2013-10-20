@@ -22,8 +22,8 @@ public class BoardManager {
 			if (haveTarget(toX, toY)) {
 				eatChess(chess, toX, toY);
 			} else {
-				chineseChessLocationList[toX][toY] = chineseChessLocationList[chess.x][chess.y];
-				chineseChessLocationList[chess.x][chess.y] = null;
+				chineseChessLocationList[toX][toY] = chineseChessLocationList[chess.getX()][chess.getY()];
+				chineseChessLocationList[chess.getX()][chess.getY()] = null;
 			}
 		} else {
 			// (move back)
@@ -50,8 +50,8 @@ public class BoardManager {
 
 	private void eatChess(Chess chess, int toX, int toY) {
 		// the chess from chessLocationList1[toX][toY] been set location to out of board
-		chineseChessLocationList[toX][toY] = chineseChessLocationList[chess.x][chess.y];
-		chineseChessLocationList[chess.x][chess.y] = null;
+		chineseChessLocationList[toX][toY] = chineseChessLocationList[chess.getX()][chess.getY()];
+		chineseChessLocationList[chess.getX()][chess.getY()] = null;
 	}
 
 	public void printChess() {
@@ -61,7 +61,7 @@ public class BoardManager {
 				if (this.chineseChessLocationList[i][j] == null) {
 					System.out.printf("%7s", "null");
 				} else {
-					System.out.printf("%7s", this.chineseChessLocationList[i][j].name);
+					System.out.printf("%7s", this.chineseChessLocationList[i][j].getName());
 				}
 			}
 			System.out.println();
