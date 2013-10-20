@@ -69,7 +69,7 @@ public class  Chess {
 		}
 		return temp;
 	}
-	public void setRule(String[] eatRule)
+	public void setEatRule(String[] eatRule)
 	{
 		for(int i=0 ; i < eatRule.length ; i++)
 		{
