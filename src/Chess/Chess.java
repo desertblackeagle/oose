@@ -12,9 +12,12 @@ public class  Chess {
 	{
 		
 	}
-	public Chess(String name )
+	public Chess(int color , boolean chessCover , int x ,int y)
 	{
-		chessName = name;
+		this.color = color;
+		this.chessCover = chessCover;
+		this.x = x;
+		this.y = y;
 	}
 	
 	public int getX()
