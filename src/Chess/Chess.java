@@ -1,12 +1,16 @@
 package Chess;
 
+import java.util.StringTokenizer;
+
+import SuperStringTokenizer;
+
 public class  Chess {
 	private int x = 0;// position x
 	private int y = 0;// position y
 	private String chessName = "";
 	private boolean chessCover = false; // false 為覆蓋 , true 為 掀開
 	private int color = 0;// 0 為 紅色 , 1 為黑色;
-	private String[] eatRule = {};
+	private String[] eatRule = new String[7];
 
 	public Chess()
 	{
@@ -69,11 +73,17 @@ public class  Chess {
 		}
 		return temp;
 	}
-	public void setEatRule(String[] eatRule)
+	public void setEatRule(String eatRule)
 	{
-		for(int i=0 ; i < eatRule.length ; i++)
+//		for(int i=0 ; i < eatRule.length ; i++)
+//		{
+//			this.eatRule[i] = eatRule[i];
+//		}
+		String del ="," ;
+		StringTokenizer st = new StringTokenizer(eatRule,del);
+		for(int i=0 ; i < st.countTokens() ; i++)
 		{
-			this.eatRule[i] = eatRule[i];
+			this.eatRule[i] = st.nextToken();
 		}
 	}
 	public boolean moveRule()
