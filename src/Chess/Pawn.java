@@ -8,7 +8,7 @@ public class Pawn extends Chess{
 //		setEatRule(eatRule);
 	}
 	@Override
-	public boolean moveRule()
+	public boolean moveRule(int toX ,int toY ,int color)
 	{
 		
 		return false;
