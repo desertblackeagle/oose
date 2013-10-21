@@ -9,7 +9,7 @@ public class Horse extends Chess{
 //		setEatRule(eatRule);
 	}
 	@Override
-	public boolean moveRule(int toX ,int toY ,int color)
+	public boolean moveRule(int toX ,int toY ,int whichGame ,Chess[][] board)
 	{
 		
 		return false;

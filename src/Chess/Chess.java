@@ -74,10 +74,7 @@ public class  Chess {
 	}
 	public void setEatRule(String eatRule)
 	{
-//		for(int i=0 ; i < eatRule.length ; i++)
-//		{
-//			this.eatRule[i] = eatRule[i];
-//		}
+
 		String del ="," ;
 		StringTokenizer st = new StringTokenizer(eatRule,del);
 		for(int i=0 ; i < st.countTokens() ; i++)
@@ -85,8 +82,8 @@ public class  Chess {
 			this.eatRule[i] = st.nextToken();
 		}
 	}
-	public boolean moveRule(int toX, int toY ,int whichGame)
+	public boolean moveRule(int toX, int toY ,int whichGame ,Chess[][] board)
 	{
-		return false;
+		return true;
 	};
 }
