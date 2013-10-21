@@ -1,5 +1,7 @@
 package Chess;
 
+import Chess.Chess;
+
 public class Rook extends Chess{
 
 	public Rook(int color , boolean chessCover , int x ,int y)
@@ -11,37 +13,50 @@ public class Rook extends Chess{
 	@Override
 	public boolean moveRule(int toX ,int toY ,int whichGame ,Chess[][] board)
 	{
-		if(whichGame == 1)//ç„¡æ³•åˆ¤æ–·ä¸­é€”æ˜¯å¦æœ‰æ£‹å­
+		int grid;//®æ¤l¼Æ
+		if(whichGame == 1)//­x´Ñ
 		{
-			if(toX == getX() )//åªç§»å‹•yè»¸åº§æ¨™
+			if(toX == getX() )//¥u²¾°Êy¶b®y¼Ğ
 			{
+				grid = Math.abs(toY - getY());
+			
+				for(int i=0; i < grid-1 ; i++)
+				{
+					if(board[getY()+1+i][toX] != null)
+					{
+						return false;
+					}
+				}
+				return true;
 				
-				return true;
+				
 			}
-			else if(toY == getY())//åªç§»å‹•xè»¸åº§æ¨™
+			else if(toY == getY())//¥u²¾°Êx¶b®y¼Ğ
 			{
+				grid = Math.abs(toY - getY());
+				
+				for(int i=0; i < grid-1 ; i++)
+				{
+					if(board[toY][getX()+i+1] != null)
+					{
+						return false;
+					}
+				}
 				return true;
-			}
-			else
-			{
-				return false;
 			}
 		}
-		else
+		else//·t´Ñ
 		{
-			if((getX()+ 1) == toX || (getX()- 1) == toX)//
+			if((Math.abs(getX() - toX) == 1) && getY() == toY)
 			{
 				return true;
 			}
-			else if((getY()+ 1) == toY || (getY()- 1) == toY)
+			else if((Math.abs(getY() - toY) == 1) && getX() == toX)
 			{
 				return true;
-			}
-			else
-			{
-				return false;
 			}
 		}
+		return false;
 		
 	};
 }
