@@ -11,6 +11,6 @@ public class Pawn extends Chess{
 	public boolean moveRule(int toX ,int toY ,int whichGame ,Chess[][] board)
 	{
 		
-		return false;
+		return true;
 	};
 }
