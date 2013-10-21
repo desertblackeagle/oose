@@ -23,6 +23,7 @@ public class BoardManager {
 		}
 		// (move chess to position)
 		if (canMove(chess, toX, toY)) {
+			System.out.println("move");
 			if (haveTarget(toX, toY)) {
 				if(chess.getColor() != chineseChessLocationList[toY][toX].getColor()){
 					eatChess(chess, toX, toY);

@@ -13,7 +13,7 @@ public class Test {
 		manager.chineseChessLocationList[2][1] = horse2;
 		// System.out.printf("%s\n","______________________________________________________");
 		manager.printChess();
-		manager.moveTo(horse1, 2, 3);
+		manager.moveTo(horse1, 20, 3);
 		manager.printChess();
 	}
 
