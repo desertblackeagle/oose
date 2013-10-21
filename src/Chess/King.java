@@ -8,7 +8,7 @@ public class King extends Chess{
 //		setEatRule(eatRule);
 	}
 	@Override
-	public boolean moveRule(int toX ,int toY ,int color)
+	public boolean moveRule(int toX ,int toY ,int color ,Chess[][] board)
 	{
 		
 		return false;
