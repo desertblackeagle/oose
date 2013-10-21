@@ -2,64 +2,52 @@ package Chess;
 
 import Chess.Chess;
 
-public class Pawn extends Chess{
-	public Pawn(int color , boolean chessCover , int x ,int y)
-	{
+public class Pawn extends Chess {
+	public Pawn(int color, boolean chessCover, int x, int y) {
 		super(color, chessCover, x, y);
 		setName("Pawn");
 		setEatRule("King,Pawn");
 	}
+
 	@Override
-	public boolean moveRule(int toX ,int toY ,int whichGame ,Chess[][] board)
-	{
-		if(whichGame == 1)//­x´Ñ
+	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
+		if (whichGame == 1)// è»æ£‹
 		{
-			if(getColor()==0)//¬õ¦â
+			if (getColor() == 0)// ç´…è‰²
 			{
-				if(getY() > 4 )//¥u¯à©¹«e¨«
+				if (getY() > 4)// åªèƒ½å¾€å‰èµ°
 				{
-					if(getY() - toY ==1)
+					if (getY() - toY == 1) {
+						return true;
+					}
+				} else if (getY() <= 4) {
+					if (getY() - toY == 1 || Math.abs(getX() - toX) == 1)// éæ²³å¾Œå¯å¾€å‰æˆ–å·¦å³
 					{
 						return true;
 					}
 				}
-				else if (getY() <= 4)
+			} else// é»‘è‰²
+			{
+				if (getY() < 5)// åªèƒ½å¾€å‰èµ°
 				{
-					if(getY() - toY ==1 || Math.abs(getX() - toX) ==1 )//¹Lªe«á¥i©¹«e©Î¥ª¥k
+					if (getY() - toY == -1) {
+						return true;
+					}
+				} else if (getY() >= 5) {
+					if (getY() - toY == -1 || Math.abs(getX() - toX) == 1)// éæ²³å¾Œå¯å¾€å‰æˆ–å·¦å³
 					{
 						return true;
 					}
 				}
 			}
-			else//¶Â¦â
-			{
-				if(getY() < 5 )//¥u¯à©¹«e¨«
-				{
-					if(getY() - toY == -1)
-					{
-						return true;
-					}
-				}
-				else if (getY() >= 5)
-				{
-					if(getY() - toY == -1 || Math.abs(getX() - toX) ==1 )//¹Lªe«á¥i©¹«e©Î¥ª¥k
-					{
-						return true;
-					}
-				}
-			}
-		}
-		else//·t´Ñ
+		} else// æš—æ£‹
 		{
-			if((Math.abs(getX() - toX) == 1) && getY() == toY)
-			{
+			if ((Math.abs(getX() - toX) == 1) && getY() == toY) {
+				return true;
+			} else if ((Math.abs(getY() - toY) == 1) && getX() == toX) {
 				return true;
 			}
-			else if((Math.abs(getY() - toY) == 1) && getX() == toX)
-			{
-				return true;
-			}
-			
+
 		}
 		return false;
 	};

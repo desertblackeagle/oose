@@ -2,54 +2,44 @@ package Chess;
 
 import Chess.Chess;
 
-public class Cannon extends Chess{
-	public Cannon(int color , boolean chessCover , int x ,int y)
-	{
+public class Cannon extends Chess {
+	public Cannon(int color, boolean chessCover, int x, int y) {
 		super(color, chessCover, x, y);
 		setName("Cannon");
 		setEatRule("King,Guard,Bishop,Rook,Horse,Cannon,Pawn");
 	}
+
 	@Override
-	public boolean moveRule(int toX ,int toY ,int whichGame ,Chess[][] board)
-	{
-		int grid;//®æ¤l¼Æ
-		if(whichGame == 1)//­x´Ñ
+	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
+		int grid;// æ ¼å­æ•¸
+		if (whichGame == 1)// è»æ£‹
 		{
-			if(toX == getX() )//¥u²¾°Êy¶b®y¼Ğ
+			if (toX == getX())// åªç§»å‹•yè»¸åº§æ¨™
 			{
 				grid = Math.abs(toY - getY());
-			
-				for(int i=0; i < grid-1 ; i++)
-				{
-					if(board[getY()+1+i][toX] != null)
-					{
+
+				for (int i = 0; i < grid - 1; i++) {
+					if (board[getY() + 1 + i][toX] != null) {
 						return false;
 					}
 				}
-				return true;		
-			}
-			else if(toY == getY())//¥u²¾°Êx¶b®y¼Ğ
+				return true;
+			} else if (toY == getY())// åªç§»å‹•xè»¸åº§æ¨™
 			{
 				grid = Math.abs(toY - getY());
-				
-				for(int i=0; i < grid-1 ; i++)
-				{
-					if(board[toY][getX()+i+1] != null)
-					{
+
+				for (int i = 0; i < grid - 1; i++) {
+					if (board[toY][getX() + i + 1] != null) {
 						return false;
 					}
 				}
 				return true;
 			}
-		}
-		else//·t´Ñ
+		} else// æš—æ£‹
 		{
-			if((Math.abs(getX() - toX) == 1) && getY() == toY)
-			{
+			if ((Math.abs(getX() - toX) == 1) && getY() == toY) {
 				return true;
-			}
-			else if((Math.abs(getY() - toY) == 1) && getX() == toX)
-			{
+			} else if ((Math.abs(getY() - toY) == 1) && getX() == toX) {
 				return true;
 			}
 		}
