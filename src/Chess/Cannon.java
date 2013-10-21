@@ -26,7 +26,7 @@ public class Cannon extends Chess {
 				return true;
 			} else if (toY == getY())// 只移動x軸座標
 			{
-				grid = Math.abs(toY - getY());
+				grid = Math.abs(toX - getX());
 
 				for (int i = 0; i < grid - 1; i++) {
 					if (board[toY][getX() + i + 1] != null) {
