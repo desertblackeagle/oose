@@ -31,7 +31,7 @@ public class BoardManager {
 	}
 
 	private boolean canMove(Chess chess, int toX, int toY) {
-		return chess.moveRule();
+		return chess.moveRule(toX, toY, whichGame , chineseChessLocationList);
 	}
 
 	private boolean haveTarget(int toX, int toY) {
