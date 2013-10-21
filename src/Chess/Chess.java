@@ -2,7 +2,6 @@ package Chess;
 
 import java.util.StringTokenizer;
 
-import SuperStringTokenizer;
 
 public class  Chess {
 	private int x = 0;// position x
