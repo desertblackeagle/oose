@@ -13,8 +13,9 @@ public class Rook extends Chess{
 	{
 		if(whichGame == 1)//無法判斷中途是否有棋子
 		{
-			if(toX == getX())//只移動y軸座標
+			if(toX == getX() )//只移動y軸座標
 			{
+				
 				return true;
 			}
 			else if(toY == getY())//只移動x軸座標
