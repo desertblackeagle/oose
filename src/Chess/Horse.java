@@ -12,7 +12,7 @@ public class Horse extends Chess {
 
 	@Override
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
-		if (whichGame == 1)// ­x´Ñ
+		if (whichGame == 1)// 軍棋
 		{
 			if (Math.abs(toX - getX()) == 2 && Math.abs(toY - getY()) == 1) {
 				if (board[getY()][getX() + 1] != null || board[getY()][getX() - 1] != null) {
@@ -25,7 +25,7 @@ public class Horse extends Chess {
 				}
 				return true;
 			}
-		} else// ·t´Ñ
+		} else// 暗棋
 		{
 			if ((Math.abs(getX() - toX) == 1) && getY() == toY) {
 				return true;
