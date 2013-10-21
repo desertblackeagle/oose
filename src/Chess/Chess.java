@@ -85,7 +85,7 @@ public class  Chess {
 			this.eatRule[i] = st.nextToken();
 		}
 	}
-	public boolean moveRule(int toX, int toY ,int color)
+	public boolean moveRule(int toX, int toY ,int whichGame)
 	{
 		return false;
 	};

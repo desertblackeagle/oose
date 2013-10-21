@@ -11,7 +11,10 @@ public class Rook extends Chess{
 	@Override
 	public boolean moveRule(int toX ,int toY ,int color)
 	{
-		
+		if(color == 1)
+		{
+			
+		}
 		return false;
 	};
 }
