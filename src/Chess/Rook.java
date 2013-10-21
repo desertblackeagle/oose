@@ -9,7 +9,7 @@ public class Rook extends Chess{
 		setEatRule("Rook,Horse,Cannon,Pawn");
 	}
 	@Override
-	public boolean moveRule()
+	public boolean moveRule(int toX ,int toY)
 	{
 		
 		return false;
