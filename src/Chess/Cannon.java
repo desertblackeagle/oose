@@ -17,22 +17,38 @@ public class Cannon extends Chess {
 			if (toX == getX())// 只移動y軸座標
 			{
 				grid = Math.abs(toY - getY());
-
-				for (int i = 0; i < grid - 1; i++) {
-					if (board[getY() + 1 + i][toX] != null) {
-						return false;
+				if(toY - getY() < 0){
+					for (int i = 0; i < grid - 1; i++) {
+						if (board[getY() - 1 - i][toX] != null) {
+							return false;
+						}
+					}
+				}else{
+					for (int i = 0; i < grid - 1; i++) {
+						if (board[getY() + 1 + i][toX] != null) {
+							return false;
+						}
 					}
 				}
+				
 				return true;
 			} else if (toY == getY())// 只移動x軸座標
 			{
 				grid = Math.abs(toX - getX());
-
-				for (int i = 0; i < grid - 1; i++) {
-					if (board[toY][getX() + i + 1] != null) {
-						return false;
+				if(toX - getX() < 0){
+					for (int i = 0; i < grid - 1; i++) {
+						if (board[toY][getX() - i - 1] != null) {
+							return false;
+						}
+					}
+				}else{
+					for (int i = 0; i < grid - 1; i++) {
+						if (board[toY][getX() + i + 1] != null) {
+							return false;
+						}
 					}
 				}
+				
 				return true;
 			}
 		} else// 暗棋

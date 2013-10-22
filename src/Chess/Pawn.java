@@ -13,6 +13,7 @@ public class Pawn extends Chess {
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
 		if (whichGame == 1)// 軍棋
 		{
+			
 			if (getColor() == 0)// 紅色
 			{
 				if (getY() > 4)// 只能往前走
