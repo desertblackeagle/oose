@@ -68,7 +68,7 @@ public class BoardManager {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 9; j++) {
 				if (this.chineseChessLocationList[i][j] == null) {
-					System.out.printf("%7s", "null");
+					System.out.printf("%7s", j + " " + i);
 				} else {
 					System.out.printf("%7s", this.chineseChessLocationList[i][j].getName());
 				}

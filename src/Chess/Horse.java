@@ -15,12 +15,12 @@ public class Horse extends Chess {
 		if (whichGame == 1)// 軍棋
 		{
 			if (Math.abs(toX - getX()) == 2 && Math.abs(toY - getY()) == 1) {
-				if (board[getY()][getX() + 1] != null || board[getY()][getX() - 1] != null) {
+				if (board[getY()][getX() + ((toX - getX()) / 2)] != null) {
 					return false;
 				}
 				return true;
 			} else if (Math.abs(toY - getY()) == 2 && Math.abs(toX - getX()) == 1) {
-				if (board[getY() + 1][getX()] != null || board[getY() - 1][getX()] != null) {
+				if (board[getY() + ((toY - getY()) / 2)][getX()] != null) {
 					return false;
 				}
 				return true;
