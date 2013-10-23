@@ -11,12 +11,41 @@ public class Cannon extends Chess {
 
 	@Override
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
-		int grid;// 格子數
+		int grid=0;// 格子數
+		int count;
+		
+		if(toX == getX())
+		{
+			grid = Math.abs(toY - getY());
+		}
+		else if(toY == getY())
+		{
+			grid = Math.abs(toX - getX());
+		}
+		
+		if(board[toY][toX] != null)
+		{
+			count=0;
+			for(int i= 0; i < grid-1 ; i++ )
+			{
+				if (board[getY() - 1 - i][toX] != null) {
+					count++;
+				}
+			}
+			if(count ==1 && toX == getX() || toY == getY() )
+			{	
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		if (whichGame == 1)// 軍棋
 		{
 			if (toX == getX())// 只移動y軸座標
 			{
-				grid = Math.abs(toY - getY());
+				
 				if(toY - getY() < 0){
 					for (int i = 0; i < grid - 1; i++) {
 						if (board[getY() - 1 - i][toX] != null) {
@@ -34,7 +63,7 @@ public class Cannon extends Chess {
 				return true;
 			} else if (toY == getY())// 只移動x軸座標
 			{
-				grid = Math.abs(toX - getX());
+				
 				if(toX - getX() < 0){
 					for (int i = 0; i < grid - 1; i++) {
 						if (board[toY][getX() - i - 1] != null) {
