@@ -18,7 +18,7 @@ public class Pawn extends Chess {
 			{
 				if (getY() > 4)// 只能往前走
 				{
-					if (getY() - toY == 1) {
+					if (getY() - toY == 1 && toX == getX()) {
 						return true;
 					}
 				} else if (getY() <= 4) {
@@ -31,7 +31,7 @@ public class Pawn extends Chess {
 			{
 				if (getY() < 5)// 只能往前走
 				{
-					if (getY() - toY == -1) {
+					if (getY() - toY == -1 && toX == getX()) {
 						return true;
 					}
 				} else if (getY() >= 5) {

@@ -59,6 +59,7 @@ public class Test {
 //		manager.moveTo(redHorse1, 4, 4);
 		manager.moveTo(blackPawn3, 5, 4);
 		
+		
 		manager.printChess();
 	}
 
