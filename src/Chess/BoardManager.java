@@ -17,13 +17,22 @@ public class BoardManager {
 	Chess[][] chineseChessLocationList = new Chess[10][9];
 
 	public void moveTo(Chess chess, int toX, int toY) {
+		if(toX < 0 || toX > 9 || toY < 0 || toY > 10){
+			// (move back)
+			return;
+		}
 		// (move chess to position)
 		if (canMove(chess, toX, toY)) {
+			System.out.println("move");
 			if (haveTarget(toX, toY)) {
-				eatChess(chess, toX, toY);
+				if(chess.getColor() != chineseChessLocationList[toY][toX].getColor()){
+					eatChess(chess, toX, toY);
+				}else{
+					// (move back)
+				}
 			} else {
-				chineseChessLocationList[toX][toY] = chineseChessLocationList[chess.getX()][chess.getY()];
-				chineseChessLocationList[chess.getX()][chess.getY()] = null;
+				chineseChessLocationList[toY][toX] = chineseChessLocationList[chess.getY()][chess.getX()];
+				chineseChessLocationList[chess.getY()][chess.getX()] = null;
 			}
 		} else {
 			// (move back)
@@ -35,7 +44,7 @@ public class BoardManager {
 	}
 
 	private boolean haveTarget(int toX, int toY) {
-		if (chineseChessLocationList[toX][toY] == null) {
+		if (chineseChessLocationList[toY][toX] == null) {
 			return false;
 		} else {
 			return true;
@@ -50,8 +59,8 @@ public class BoardManager {
 
 	private void eatChess(Chess chess, int toX, int toY) {
 		// the chess from chessLocationList1[toX][toY] been set location to out of board
-		chineseChessLocationList[toX][toY] = chineseChessLocationList[chess.getX()][chess.getY()];
-		chineseChessLocationList[chess.getX()][chess.getY()] = null;
+		chineseChessLocationList[toY][toX] = chineseChessLocationList[chess.getY()][chess.getX()];
+		chineseChessLocationList[chess.getY()][chess.getX()] = null;
 	}
 
 	public void printChess() {
@@ -59,7 +68,7 @@ public class BoardManager {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 9; j++) {
 				if (this.chineseChessLocationList[i][j] == null) {
-					System.out.printf("%7s", "null");
+					System.out.printf("%7s", j + " " + i);
 				} else {
 					System.out.printf("%7s", this.chineseChessLocationList[i][j].getName());
 				}
