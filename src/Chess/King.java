@@ -29,7 +29,7 @@ public class King extends Chess{
 					return false;
 				}
 			}
-			else if(this.getColor() == 1){//假如為黑色
+			else if(this.getColor() == 1){ //假如為黑色
 				if(toX < 6 && toX > 2 && toY > -1 && toY < 5){
 					if(toX == getX()){ //只能移動Y軸
 						return true; 
