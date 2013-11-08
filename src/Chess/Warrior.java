@@ -5,7 +5,7 @@ public class Warrior extends Chess{
 	{
 		super(color, chessCover, x, y);
 		setName("Warrior");
-//		setEatRule(eatRule);
+		setEatRule("Cannon,Elephant,Horse,Pawn,Rook,Warrior");
 	}
 	@Override
 	public boolean moveRule(int toX ,int toY ,int whichGame ,Chess[][] board)
