@@ -37,20 +37,20 @@ public class Rook extends Chess {
 			} else if (toY == getY())// 只移動x軸座標
 			{
 				grid = Math.abs(toX - getX());
-				if(toX - getX() < 0){
+				if (toX - getX() < 0) {
 					for (int i = 0; i < grid - 1; i++) {
 						if (board[toY][getX() - i - 1] != null) {
 							return false;
 						}
 					}
-				}else{
+				} else {
 					for (int i = 0; i < grid - 1; i++) {
 						if (board[toY][getX() + i + 1] != null) {
 							return false;
 						}
 					}
 				}
-				
+
 				return true;
 			}
 		} else// 暗棋

@@ -53,11 +53,11 @@ public class Test {
 		manager.chineseChessLocationList[3][8] = blackPawn5;
 		// System.out.printf("%s\n","______________________________________________________");
 		manager.printChess();
-//		manager.moveTo(redHorse1, 2, 7);
+		manager.moveTo(redCannon1, 1, 0);
 //		manager.moveTo(redHorse1, 1, 5);
 //		manager.moveTo(redHorse1, 2, 3);
 //		manager.moveTo(redHorse1, 4, 4);
-		manager.moveTo(blackPawn3, 5, 4);
+		manager.moveTo(redCannon1, 1, 5);
 		
 		
 		manager.printChess();
