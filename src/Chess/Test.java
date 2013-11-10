@@ -28,6 +28,8 @@ public class Test {
 		Pawn blackPawn3 = new Pawn(1,false,4,3);
 		Pawn blackPawn4 = new Pawn(1,false,6,3);
 		Pawn blackPawn5 = new Pawn(1,false,8,3);
+		Elephant blackElephant1 = new Elephant(1,false,2,0);
+		Elephant redElephant1 = new Elephant(0,false,2,9);
 		
 		manager.chineseChessLocationList[9][1] = redHorse1;
 		manager.chineseChessLocationList[9][7] = redHorse2;
@@ -51,13 +53,19 @@ public class Test {
 		manager.chineseChessLocationList[3][4] = blackPawn3;
 		manager.chineseChessLocationList[3][6] = blackPawn4;
 		manager.chineseChessLocationList[3][8] = blackPawn5;
+		manager.chineseChessLocationList[0][2] = blackElephant1;
+		manager.chineseChessLocationList[9][2] = redElephant1;
 		// System.out.printf("%s\n","______________________________________________________");
 		manager.printChess();
 //		manager.moveTo(redHorse1, 2, 7);
 //		manager.moveTo(redHorse1, 1, 5);
 //		manager.moveTo(redHorse1, 2, 3);
 //		manager.moveTo(redHorse1, 4, 4);
-		manager.moveTo(blackPawn3, 5, 4);
+//		manager.moveTo(blackPawn3, 5, 4);
+//		manager.moveTo(blackRook1, 0, 1);
+//		manager.moveTo(blackRook1, 1, 1);
+		manager.moveTo(blackElephant1, 3, 2);
+		manager.moveTo(redElephant1, 4, 7);
 		
 		
 		manager.printChess();
