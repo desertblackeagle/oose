@@ -14,24 +14,62 @@ public class Cannon extends Chess {
 		int grid=0;// 格子數
 		int count;
 		
-		if(toX == getX())
-		{
-			grid = Math.abs(toY - getY());
-		}
-		else if(toY == getY())
-		{
-			grid = Math.abs(toX - getX());
-		}
-		
+//		if(toX == getX())
+//		{
+//			grid = Math.abs(toY - getY());
+//		}
+//		else if(toY == getY())
+//		{
+//			grid = Math.abs(toX - getX());
+//		}
+		count=0;
 		if(board[toY][toX] != null)
 		{
-			count=0;
-			for(int i= 0; i < grid-1 ; i++ )
+			if(toX == getX()  )
 			{
-				if (board[getY() - 1 - i][toX] != null) {
-					count++;
+				if(toY -getY() > 0)
+				{
+					for(int i= getY() +1 ; i < toY -1 ; i++ )
+					{
+						if (board[i][toX] != null) {
+							count++;
+						}
+					}
 				}
+				else
+				{
+					for(int i= toY +1 ; i < getY() -1 ; i++ )
+					{
+						if (board[i][toX] != null) {
+							count++;
+						}
+					}
+				}
+				
 			}
+			else if(toY == getY()  )
+			{
+				if(toX -getX() > 0)
+				{
+					for(int i= getX() +1 ; i < toX -1 ; i++ )
+					{
+						if (board[i][toX] != null) {
+							count++;
+						}
+					}
+				}
+				else
+				{
+					for(int i= toX +1 ; i < getX() -1 ; i++ )
+					{
+						if (board[i][toX] != null) {
+							count++;
+						}
+					}
+				}
+				
+			}
+		
 			if(count ==1 && toX == getX() || toY == getY() )
 			{	
 				return true;
