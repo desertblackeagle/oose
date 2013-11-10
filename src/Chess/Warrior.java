@@ -12,16 +12,14 @@ public class Warrior extends Chess{
 	{
 		if(whichGame == 1){
 			if(this.getColor() == 0){ //假如為紅色
-				if(toX > 3 || toX < 5 || toX == 3 || toX == 5 || toY > 9 || toY < 7 || toY == 9 || toY == 7){ //判斷是否在九宮格內
-					if((getX()+ 1) == toX && getY()+ 1 == toY){ //只能斜向移動
+				if(toX >=3 && toX <=5 && toY <= 9 && toY >=7 ){ //判斷是否在九宮格內
+					if(Math.abs(toX - getX()) ==1 && getY()+ 1 == toY){ //只能斜向移動
 						return true;
 						}
-					else if((getX()- 1) == toX && getY()- 1 == toY){//只能斜向移動
+					else if(Math.abs(toX - getX()) ==1 && getY()- 1 == toY){//只能斜向移動
 						return true;
 						}
-					else if(toX == getX()){ //只能移動Y軸
-						return true; 
-						}
+					
 				}
 				else{
 					return false;
@@ -29,16 +27,14 @@ public class Warrior extends Chess{
 			}
 		
 			else if(this.getColor() == 1){//假如為黑色
-				if(toX > 3 || toX < 5 || toX == 3 || toX == 5 || toY > 0 || toY < 2 || toY == 0 || toY == 2){//判斷是否在九宮格內
+				if(toX >=3 && toX <=5 && toY <= 2 && toY >=0){//判斷是否在九宮格內
 					if((getX()+ 1) == toX && getY()+ 1 == toY){ //只能斜向移動
 						return true;
 					}
 					else if((getX()- 1) == toX && getY()- 1 == toY){//只能斜向移動
 						return true;
 					}
-					else if(toX == getX()){ //只能移動Y軸
-						return true; 
-					}
+					
 				}
 				else{
 					return false;

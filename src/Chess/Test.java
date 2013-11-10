@@ -30,6 +30,10 @@ public class Test {
 		Pawn blackPawn5 = new Pawn(1,false,8,3);
 		Elephant blackElephant1 = new Elephant(1,false,2,0);
 		Elephant redElephant1 = new Elephant(0,false,2,9);
+		King blackKing = new King(1,false,4,0);
+		King redKing = new King(0,false,4,9);
+		Warrior blackWarrior1 = new Warrior(1,false,3,0);
+		Warrior redWarrior1 = new Warrior(0,false,3,9);
 		
 		manager.chineseChessLocationList[9][1] = redHorse1;
 		manager.chineseChessLocationList[9][7] = redHorse2;
@@ -55,6 +59,10 @@ public class Test {
 		manager.chineseChessLocationList[3][8] = blackPawn5;
 		manager.chineseChessLocationList[0][2] = blackElephant1;
 		manager.chineseChessLocationList[9][2] = redElephant1;
+		manager.chineseChessLocationList[0][4] = blackKing;
+		manager.chineseChessLocationList[9][4] = redKing;
+		manager.chineseChessLocationList[0][3] = blackWarrior1;
+		manager.chineseChessLocationList[9][3] = redWarrior1;
 		// System.out.printf("%s\n","______________________________________________________");
 		manager.printChess();
 //		manager.moveTo(redHorse1, 2, 7);
@@ -64,10 +72,14 @@ public class Test {
 //		manager.moveTo(blackPawn3, 5, 4);
 //		manager.moveTo(blackRook1, 0, 1);
 //		manager.moveTo(blackRook1, 1, 1);
-		manager.moveTo(blackElephant1, 3, 2);
+//		manager.moveTo(blackElephant1, 3, 2);
 		manager.moveTo(redElephant1, 4, 7);
-		
-		
+		manager.moveTo(redWarrior1, 4, 8);
+		manager.moveTo(blackWarrior1, 4, 1);
+		manager.moveTo(redKing, 3, 9);
+		manager.moveTo(blackKing, 3, 0);
+		manager.moveTo(redKing, 3, 0);
+		manager.moveTo(redWarrior1, 4, 9);
 		manager.printChess();
 	}
 
