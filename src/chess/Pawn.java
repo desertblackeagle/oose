@@ -1,20 +1,39 @@
-package Chess;
+package chess;
 
-import Chess.Chess;
+import controlUnit.LocationPoint;
 
 public class Pawn extends Chess {
-	public Pawn(int color, boolean chessCover, int x, int y) {
-		super(color, chessCover, x, y);
+	static final int chinessChess = 1;
+	static final int red = 0;
+
+	public Pawn(int color, boolean chessCover, int x, int y, Chess[][] board) {
+		super(color, chessCover, x, y, board);
 		setName("Pawn");
+		if (color == 0) {
+			setChineseName("兵");
+		} else {
+			setChineseName("卒");
+		}
+
+		setEatRule("King,Pawn");
+	}
+
+	public Pawn(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
+		super(color, chessCover, point.getX(), point.getY(), board);
+		setName("Pawn");
+		if (color == 0) {
+			setChineseName("兵");
+		} else {
+			setChineseName("卒");
+		}
 		setEatRule("King,Pawn");
 	}
 
 	@Override
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
-		if (whichGame == 1)// 軍棋
+		if (whichGame == chinessChess)// 軍棋
 		{
-			
-			if (getColor() == 0)// 紅色
+			if (getColor() == red)// 紅色
 			{
 				if (getY() > 4)// 只能往前走
 				{
@@ -31,7 +50,7 @@ public class Pawn extends Chess {
 			{
 				if (getY() < 5)// 只能往前走
 				{
-					if ( toY - getY() == 1 && toX == getX()) {
+					if (toY - getY() == 1 && toX == getX()) {
 						return true;
 					}
 				} else if (getY() >= 5) {

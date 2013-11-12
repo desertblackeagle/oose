@@ -1,19 +1,37 @@
-package Chess;
+package chess;
 
-import Chess.Chess;
+import chess.Chess;
+import controlUnit.LocationPoint;
 
 public class Rook extends Chess {
+	static final int chinessChess = 1;
 
-	public Rook(int color, boolean chessCover, int x, int y) {
-		super(color, chessCover, x, y);
+	public Rook(int color, boolean chessCover, int x, int y, Chess[][] board) {
+		super(color, chessCover, x, y, board);
 		setName("Rook");
+		if (color == 0) {
+			setChineseName("俥");
+		} else {
+			setChineseName("車");
+		}
+		setEatRule("Rook,Horse,Cannon,Pawn");
+	}
+
+	public Rook(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
+		super(color, chessCover, point.getX(), point.getY(), board);
+		setName("Rook");
+		if (color == 0) {
+			setChineseName("俥");
+		} else {
+			setChineseName("車");
+		}
 		setEatRule("Rook,Horse,Cannon,Pawn");
 	}
 
 	@Override
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
 		int grid;// 格子數
-		if (whichGame == 1)// 軍棋
+		if (whichGame == chinessChess)// 軍棋
 		{
 			if (toX == getX())// 只移動y軸座標
 			{

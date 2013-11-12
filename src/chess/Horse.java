@@ -1,18 +1,38 @@
-package Chess;
+package chess;
 
-import Chess.Chess;
+import chess.Chess;
+import controlUnit.LocationPoint;
 
 public class Horse extends Chess {
+	static final int chinessChess = 1;
 
-	public Horse(int color, boolean chessCover, int x, int y) {
-		super(color, chessCover, x, y);
+	public Horse(int color, boolean chessCover, int x, int y, Chess[][] board) {
+		super(color, chessCover, x, y, board);
 		setName("Horse");
+		if (color == 0) {
+			setChineseName("傌");
+		} else {
+			setChineseName("馬");
+		}
+//		System.out.println(getName()+"set rule");
+		setEatRule("Horse,Cannon,Pawn");
+	}
+
+	public Horse(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
+		super(color, chessCover, point.getX(), point.getY(), board);
+		setName("Horse");
+		if (color == 0) {
+			setChineseName("傌");
+		} else {
+			setChineseName("馬");
+		}
+//		System.out.println(getName()+"set rule");
 		setEatRule("Horse,Cannon,Pawn");
 	}
 
 	@Override
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
-		if (whichGame == 1)// 軍棋
+		if (whichGame == chinessChess)// 軍棋
 		{
 			if (Math.abs(toX - getX()) == 2 && Math.abs(toY - getY()) == 1) {
 				if (board[getY()][getX() + ((toX - getX()) / 2)] != null) {
