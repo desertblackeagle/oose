@@ -107,7 +107,7 @@ public class BoardManager {
 			return true;
 		} else {
 			for (int i =0;i<chess.getEatRule().length;i++) {
-				System.out.println(chineseChessLocationList[toY][toX].getName()+" "+chess.getEatRule()[i]);
+//				System.out.println(chineseChessLocationList[toY][toX].getName()+" "+chess.getEatRule()[i]);
 				if (chineseChessLocationList[toY][toX].getName().equals(chess.getEatRule()[i])) {
 					return true;
 				}
@@ -125,7 +125,7 @@ public class BoardManager {
 
 	private void eatChess(ButtonChess btnChess, int toX, int toY, LocationMap locationMap, ButtonChessArrayList buttonChessArrayList) {
 		// the chess from chessLocationList1[toX][toY] been set location to out of board
-		System.out.println(buttonChessArrayList.getBtnArrayList());
+//		System.out.println(buttonChessArrayList.getBtnArrayList());
 		for (int i = 0; i < buttonChessArrayList.getBtnArrayList().size(); i++) {
 			if (buttonChessArrayList.getBtnArrayList().get(i).getChess().equals(chineseChessLocationList[toY][toX])) {
 				buttonChessArrayList.getBtnArrayList().get(i).setLocation(1000, 1000);
