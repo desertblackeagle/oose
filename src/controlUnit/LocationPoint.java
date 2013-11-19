@@ -2,7 +2,7 @@ package controlUnit;
 
 public class LocationPoint {
 	private int x;
-	int y;
+	private int y;
 
 	public LocationPoint(int x, int y) {
 		// TODO Auto-generated constructor stub

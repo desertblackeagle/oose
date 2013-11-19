@@ -17,11 +17,13 @@ public class BoardManager {
 	final static int taiwanChess = 0;
 	static final int red = 0;
 	static final int black = 1;
+	
 	LocationMap locationMap;
-	int forWhoToChess = turnRed;
-	int whichGame; // chinese chess = 1 ; taiwanese chess = 0;
-	int redChessNum = 16;
-	int blackChessNum = 16;
+	
+	private int forWhoToChess = turnRed;
+	private int whichGame; // chinese chess = 1 ; taiwanese chess = 0;
+	private int redChessNum = 16;
+	private int blackChessNum = 16;
 
 	Chess[][] chineseChessLocationList = new Chess[10][9];
 
