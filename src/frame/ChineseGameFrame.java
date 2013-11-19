@@ -16,10 +16,10 @@ import frameChess.ButtonChess;
 
 public class ChineseGameFrame implements MouseMotionListener, MouseListener {
 //	ChessTable chessTable;
-	LocationMap locationMap;
-	JFrame frame;
-	BoardManager manager;
-	ButtonChessArrayList buttonArrayList;
+	private LocationMap locationMap;
+	private JFrame frame;
+	private BoardManager manager;
+	private ButtonChessArrayList buttonArrayList;
 
 	ChineseGameFrame(BoardManager manager, ButtonChessArrayList buttonArrayList) {
 		this.manager = manager;
@@ -31,10 +31,10 @@ public class ChineseGameFrame implements MouseMotionListener, MouseListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 
-		for (int i = 0; i < buttonArrayList.btnArrayList.size(); i++) {
-			frame.add(buttonArrayList.btnArrayList.get(i));
-			buttonArrayList.btnArrayList.get(i).addMouseListener(this);
-			buttonArrayList.btnArrayList.get(i).addMouseMotionListener(this);
+		for (int i = 0; i < buttonArrayList.getBtnArrayList().size(); i++) {
+			frame.add(buttonArrayList.getBtnArrayList().get(i));
+			buttonArrayList.getBtnArrayList().get(i).addMouseListener(this);
+			buttonArrayList.getBtnArrayList().get(i).addMouseMotionListener(this);
 		}
 
 		ChineseChessBoardPanel cp = new ChineseChessBoardPanel();
