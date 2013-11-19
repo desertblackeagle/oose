@@ -15,7 +15,7 @@ import controlUnit.LocationMap;
 import frameChess.ButtonChess;
 
 public class ChineseGameFrame implements MouseMotionListener, MouseListener {
-	ChessTable chessTable;
+//	ChessTable chessTable;
 	LocationMap locationMap;
 	JFrame frame;
 	BoardManager manager;
@@ -25,6 +25,7 @@ public class ChineseGameFrame implements MouseMotionListener, MouseListener {
 		this.manager = manager;
 		locationMap = new LocationMap();
 		this.buttonArrayList = buttonArrayList;
+//		this.chessTable = chesstable;
 		frame = new JFrame();
 		frame.setSize(900, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,6 +42,7 @@ public class ChineseGameFrame implements MouseMotionListener, MouseListener {
 		cp.setBackground(Color.BLACK);
 
 		frame.add(cp);
+		
 		frame.setVisible(true);
 	}
 

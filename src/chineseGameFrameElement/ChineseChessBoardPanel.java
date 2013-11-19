@@ -4,7 +4,10 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/* @author Red Rose
+ * Function:a panel to display chinese chess board
+ * Last Update:2013/11/14
+ */
 public class ChineseChessBoardPanel extends JPanel {
 
 	public ChineseChessBoardPanel() {

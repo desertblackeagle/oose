@@ -15,18 +15,18 @@ public class Elephant extends Chess {
 		} else {
 			setChineseName("象");
 		}
-		setEatRule("Rook,Horse,Cannon,Pawn");
+		setEatRule("Rook,Horse,Cannon,Pawn,Elephant");
 	}
 
 	public Elephant(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
 		setName("Elephant");
-		if (color == 0) {
-			setChineseName("相");
-		} else {
-			setChineseName("象");
-		}
-		setEatRule("Rook,Horse,Cannon,Pawn");
+//		if (color == 0) {
+//			setChineseName("相");
+//		} else {
+//			setChineseName("象");
+//		}
+		setEatRule("Rook,Horse,Cannon,Pawn,Elephant");
 	}
 
 	@Override
@@ -100,7 +100,25 @@ public class Elephant extends Chess {
 					return false;
 				}
 			}
+		} else// 暗棋
+		{
+			if ((Math.abs(getX() - toX) == 1) && getY() == toY) {
+				return true;
+			} else if ((Math.abs(getY() - toY) == 1) && getX() == toX) {
+				return true;
+			}
 		}
 		return false;
-	}
+	};
+
+	@Override
+	public void setChessCover(boolean cover) {
+		// TODO Auto-generated method stub
+		super.setChessCover(cover);
+		if (getColor() == 0) {
+			setChineseName("相");
+		} else {
+			setChineseName("象");
+		}
+	};
 }

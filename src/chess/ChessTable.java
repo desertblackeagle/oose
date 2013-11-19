@@ -2,7 +2,10 @@ package chess;
 
 import controlUnit.BoardManager;
 import controlUnit.LocationPoint;
-
+/* @author Red Rose
+ * Function:a table to create and store chess
+ * Last Update:2013/11/15
+ */
 public class ChessTable {
 	private Horse redHorse1;
 	private Horse redHorse2;
@@ -76,27 +79,25 @@ public class ChessTable {
 			blackWarrior1 = new Warrior(1, false, 3, 0, manager.getChineseChessLocationList());
 			blackWarrior2 = new Warrior(1, false, 5, 0, manager.getChineseChessLocationList());
 		} else {
+			//location is store Locationpoing
 			LocationPoint[] location = new LocationPoint[32];
 
 			int count = 0;
+			//initial LocationPoing for ChessTable
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 8; j++) {
 					location[count] = new LocationPoint(j, i);
 					count++;
 				}
 			}
-
+			// random to change order
 			for (int i = 0; i < 32; i++) {
 				LocationPoint temp = location[i];
 				int random = (int) (Math.random() * 32);
 				location[i] = location[random];
 				location[random] = temp;
 			}
-
-//			for (int i = 0; i < 32; i++) {
-//				System.out.println(location[i]);
-//			}
-
+			
 			redHorse1 = new Horse(0, true, location[0], manager.getChineseChessLocationList());
 			redHorse2 = new Horse(0, true, location[1], manager.getChineseChessLocationList());
 			blackHorse1 = new Horse(1, true, location[2], manager.getChineseChessLocationList());

@@ -20,11 +20,11 @@ public class Rook extends Chess {
 	public Rook(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
 		setName("Rook");
-		if (color == 0) {
-			setChineseName("俥");
-		} else {
-			setChineseName("車");
-		}
+//		if (color == 0) {
+//			setChineseName("俥");
+//		} else {
+//			setChineseName("車");
+//		}
 		setEatRule("Rook,Horse,Cannon,Pawn");
 	}
 
@@ -81,5 +81,16 @@ public class Rook extends Chess {
 		}
 		return false;
 
+	};
+
+	@Override
+	public void setChessCover(boolean cover) {
+		// TODO Auto-generated method stub
+		super.setChessCover(cover);
+		if (getColor() == 0) {
+			setChineseName("俥");
+		} else {
+			setChineseName("車");
+		}
 	};
 }

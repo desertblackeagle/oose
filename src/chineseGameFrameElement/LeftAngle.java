@@ -4,7 +4,10 @@ import java.awt.BasicStroke;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+/* @author Red Rose
+ * Function:a element of chinese chess board
+ * Last Update:2013/11/14
+ */
 public class LeftAngle extends Canvas {
 
 	public void paint(Graphics g) {
