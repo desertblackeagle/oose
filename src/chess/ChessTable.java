@@ -40,12 +40,12 @@ public class ChessTable {
 	private Warrior blackWarrior1;
 	private Warrior blackWarrior2;
 
-	static final int chinessChess = 1;
+	static final int chineseChess = 1;
 	static final int taiwanChess = 0;
 
 	public ChessTable(BoardManager manager) {
 		// TODO Auto-generated constructor stub
-		if (manager.getWhichGame() == chinessChess) {
+		if (manager.getWhichGame() == chineseChess) {
 			redHorse1 = new Horse(0, false, 1, 9, manager.getChineseChessLocationList());
 			redHorse2 = new Horse(0, false, 7, 9, manager.getChineseChessLocationList());
 			blackHorse1 = new Horse(1, false, 1, 0, manager.getChineseChessLocationList());

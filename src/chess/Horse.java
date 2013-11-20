@@ -4,7 +4,7 @@ import chess.Chess;
 import controlUnit.LocationPoint;
 
 public class Horse extends Chess {
-	static final int chinessChess = 1;
+//	static final int chinessChess = 1;
 
 	public Horse(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
@@ -32,7 +32,7 @@ public class Horse extends Chess {
 
 	@Override
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
-		if (whichGame == chinessChess)// 軍棋
+		if (whichGame == chineseChess)// 軍棋
 		{
 			if (Math.abs(toX - getX()) == 2 && Math.abs(toY - getY()) == 1) {
 				if (board[getY()][getX() + ((toX - getX()) / 2)] != null) {

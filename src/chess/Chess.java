@@ -9,8 +9,10 @@ public class Chess {
 	private String chineseName = "";
 	private boolean chessCover = false; // false 為覆蓋 , true 為 掀開
 	private int color = 0;// 0 為 紅色 , 1 為黑色;
-	static final int chinessChess = 1;
+	static final int chineseChess = 1;
 	static final int taiwanChess = 0;
+	static final int red = 0;
+	static final int black = 1;
 	private String[] eatRule = new String[7];
 	
 	public Chess() {

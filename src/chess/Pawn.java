@@ -3,8 +3,8 @@ package chess;
 import controlUnit.LocationPoint;
 
 public class Pawn extends Chess {
-	static final int chinessChess = 1;
-	static final int red = 0;
+//	static final int chinessChess = 1;
+//	static final int red = 0;
 
 	public Pawn(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
@@ -31,7 +31,7 @@ public class Pawn extends Chess {
 
 	@Override
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
-		if (whichGame == chinessChess)// 軍棋
+		if (whichGame == chineseChess)// 軍棋
 		{
 			if (getColor() == red)// 紅色
 			{

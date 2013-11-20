@@ -4,7 +4,7 @@ import chess.Chess;
 import controlUnit.LocationPoint;
 
 public class Cannon extends Chess {
-	static final int chinessChess = 1;
+//	static final int chinessChess = 1;
 
 	public Cannon(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
@@ -73,7 +73,7 @@ public class Cannon extends Chess {
 				return false;
 			}
 		}
-		if (whichGame == chinessChess)// 軍棋
+		if (whichGame == chineseChess)// 軍棋
 		{
 			if (toX == getX())// 只移動y軸座標
 			{
