@@ -21,9 +21,9 @@ public class ButtonChess extends JButton {
 			setForeground(Color.red);
 		}
 		if (whichGame == 1) {
-			setLocation(locationMap.getChineseLocationMap()[chess.getY()][chess.getX()].getY(), locationMap.getChineseLocationMap()[chess.getY()][chess.getX()].getX());
+			setLocation(locationMap.getChineseLocationMap()[chess.getY()][chess.getX()].getX(), locationMap.getChineseLocationMap()[chess.getY()][chess.getX()].getY());
 		} else {
-			setLocation(locationMap.getTaiwaneseLocationMap()[chess.getY()][chess.getX()].getY(), locationMap.getTaiwaneseLocationMap()[chess.getY()][chess.getX()].getX());
+			setLocation(locationMap.getTaiwaneseLocationMap()[chess.getY()][chess.getX()].getX(), locationMap.getTaiwaneseLocationMap()[chess.getY()][chess.getX()].getY());
 		}
 
 		setSize(50, 50);

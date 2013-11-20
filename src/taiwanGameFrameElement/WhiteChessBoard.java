@@ -22,11 +22,17 @@ public class WhiteChessBoard extends Canvas {
 		for (int i = 0; i < 9; i++) {
 			((Graphics2D) g).drawLine(30 + i * 70, 30, 30 + i * 70, 310);
 		}
-//
+
+		for (int i = 0; i < 2; i++) {
+			((Graphics2D) g).drawLine(30 + i * 560, 380, 30 + i * 560, 660);
+		}
+
+		for (int i = 0; i < 2; i++) {
+			((Graphics2D) g).drawLine(30, 380 + i * 280, 590, 380 + i * 280);
+		}
 //		for (int i = 0; i < 9; i++) {
 //			((Graphics2D) g).drawLine(30 + i * 70, 380, 30 + i * 70, 660);
 //		}
-//
 //		for (int i = 0; i < 2; i++) {
 //			((Graphics2D) g).drawLine(30 + i * 560, 310, 30 + i * 560, 380);
 //		}

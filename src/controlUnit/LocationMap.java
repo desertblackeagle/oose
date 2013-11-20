@@ -2,22 +2,31 @@ package controlUnit;
 
 public class LocationMap {
 	private LocationPoint[][] chineseLocationPoint;
-	private LocationPoint[][] taiwaneseLocationPoint;
-
+	private LocationPoint[][] taiwanLocationPoint;
+	private LocationPoint[][] taiwanDeadLocationPoint;
+	private int taiwanDeadChessLocIndexX = -1;
+	private int taiwanDeadChessLocIndexY = 0;
 	public LocationMap() {
 		// TODO Auto-generated constructor stub
 		chineseLocationPoint = new LocationPoint[10][9];
-		taiwaneseLocationPoint = new LocationPoint[4][8];
-
+		taiwanLocationPoint = new LocationPoint[4][8];
+		taiwanDeadLocationPoint = new LocationPoint[4][8];
+		
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 9; j++) {
-				chineseLocationPoint[i][j] = new LocationPoint(i * 70 + 5, j * 70 + 5);
+				chineseLocationPoint[i][j] = new LocationPoint(j * 70 + 5, i * 70 + 5);
 			}
 		}
 
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 8; j++) {
-				taiwaneseLocationPoint[i][j] = new LocationPoint(i * 70 + 40, j * 70 + 40);
+				taiwanLocationPoint[i][j] = new LocationPoint(j * 70 + 40, i * 70 + 40);
+			}
+		}
+		
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 8; j++) {
+				taiwanDeadLocationPoint[i][j] = new LocationPoint(j * 70 + 40, i * 70 + 390);
 			}
 		}
 	}
@@ -28,8 +37,25 @@ public class LocationMap {
 	}
 
 	public LocationPoint[][] getTaiwaneseLocationMap() {
-		LocationPoint[][] temp = taiwaneseLocationPoint.clone();
+		LocationPoint[][] temp = taiwanLocationPoint.clone();
 		return temp;
+	}
+	
+	public LocationPoint[][] getTaiwanDeadLocationMap() {
+		LocationPoint[][] temp = taiwanDeadLocationPoint.clone();
+		return temp;
+	}
+	
+	public LocationPoint getDeadLocation() {
+		if(taiwanDeadChessLocIndexX >= 7){
+			taiwanDeadChessLocIndexX = 0;
+			taiwanDeadChessLocIndexY++;
+		}else{
+			taiwanDeadChessLocIndexX++;
+		}
+		LocationPoint tmp = taiwanDeadLocationPoint[taiwanDeadChessLocIndexY][taiwanDeadChessLocIndexX];
+		System.out.println("XY : "+taiwanDeadChessLocIndexY+" "+taiwanDeadChessLocIndexX);
+		return tmp;
 	}
 
 	public static void main(String[] args) {
@@ -45,6 +71,13 @@ public class LocationMap {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 8; j++) {
 				System.out.printf("%3d:%3d ", lm.getTaiwaneseLocationMap()[i][j].getX(), lm.getTaiwaneseLocationMap()[i][j].getY());
+			}
+			System.out.println();
+		}
+		System.out.println();
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 8; j++) {
+				System.out.printf("%3d:%3d ", lm.getTaiwanDeadLocationMap()[i][j].getX(), lm.getTaiwanDeadLocationMap()[i][j].getY());
 			}
 			System.out.println();
 		}
