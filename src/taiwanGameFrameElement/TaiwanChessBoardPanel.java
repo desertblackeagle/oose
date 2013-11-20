@@ -15,7 +15,7 @@ public class TaiwanChessBoardPanel extends JPanel {
 		this.setLayout(null);
 
 		WhiteChessBoard whiteChessBoard = new WhiteChessBoard();
-		whiteChessBoard.setBounds(0, 0, 630, 350);
+		whiteChessBoard.setBounds(0, 0, 630, 700);
 		whiteChessBoard.setBackground(Color.white);
 		this.add(whiteChessBoard);
 	}

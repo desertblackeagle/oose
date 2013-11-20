@@ -26,7 +26,7 @@ public class TaiwanGameFrame implements MouseMotionListener, MouseListener {
 		this.buttonArrayList = buttonArrayList;
 
 		frame = new JFrame();
-		frame.setSize(900, 800);
+		frame.setSize(900, 740);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 
@@ -92,28 +92,28 @@ public class TaiwanGameFrame implements MouseMotionListener, MouseListener {
 		System.out.println(x + " " + y);
 		if (x > 525 || y > 245 || x < -35 || y < -35) {
 			System.out.println("超出範圍");
-			((ButtonChess) e.getSource()).setLocation(locationMap.getTaiwaneseLocationMap()[((ButtonChess) e.getSource()).getChess().getY()][((ButtonChess) e.getSource()).getChess().getX()].getY(),
-					locationMap.getTaiwaneseLocationMap()[((ButtonChess) e.getSource()).getChess().getY()][((ButtonChess) e.getSource()).getChess().getX()].getX());
+			((ButtonChess) e.getSource()).setLocation(locationMap.getTaiwaneseLocationMap()[((ButtonChess) e.getSource()).getChess().getY()][((ButtonChess) e.getSource()).getChess().getX()].getX(),
+					locationMap.getTaiwaneseLocationMap()[((ButtonChess) e.getSource()).getChess().getY()][((ButtonChess) e.getSource()).getChess().getX()].getY());
 			return;
 		}
 //		System.out.println(((ButtonChess) e.getSource()).setl);
 		if ((x % 70) <= 35 && (y % 70) <= 35) {
 			System.out.println(x / 70 + " " + y / 70);
 
-			((JButton) e.getSource()).setLocation(locationMap.getTaiwaneseLocationMap()[y / 70][x / 70].getY(), locationMap.getTaiwaneseLocationMap()[y / 70][x / 70].getX());
+			((JButton) e.getSource()).setLocation(locationMap.getTaiwaneseLocationMap()[y / 70][x / 70].getX(), locationMap.getTaiwaneseLocationMap()[y / 70][x / 70].getY());
 			manager.moveTo(((ButtonChess) e.getSource()), (x / 70), (y / 70), locationMap, buttonArrayList);
 
 		} else if ((x % 70) > 35 && (y % 70) > 35) {
 			System.out.println((x / 70 + 1) + " " + (y / 70 + 1));
-			((JButton) e.getSource()).setLocation(locationMap.getTaiwaneseLocationMap()[y / 70 + 1][x / 70 + 1].getY(), locationMap.getTaiwaneseLocationMap()[y / 70 + 1][x / 70 + 1].getX());
+			((JButton) e.getSource()).setLocation(locationMap.getTaiwaneseLocationMap()[y / 70 + 1][x / 70 + 1].getX(), locationMap.getTaiwaneseLocationMap()[y / 70 + 1][x / 70 + 1].getY());
 			manager.moveTo(((ButtonChess) e.getSource()), (x / 70 + 1), (y / 70 + 1), locationMap, buttonArrayList);
 		} else if ((x % 70) > 35 && (y % 70) < 35) {
 			System.out.println((x / 70 + 1) + " " + y / 70);
-			((JButton) e.getSource()).setLocation(locationMap.getTaiwaneseLocationMap()[y / 70][x / 70 + 1].getY(), locationMap.getTaiwaneseLocationMap()[y / 70][x / 70 + 1].getX());
+			((JButton) e.getSource()).setLocation(locationMap.getTaiwaneseLocationMap()[y / 70][x / 70 + 1].getX(), locationMap.getTaiwaneseLocationMap()[y / 70][x / 70 + 1].getY());
 			manager.moveTo(((ButtonChess) e.getSource()), (x / 70 + 1), (y / 70), locationMap, buttonArrayList);
 		} else if ((x % 70) < 35 && (y % 70) > 35) {
 			System.out.println(x / 70 + " " + (y / 70 + 1));
-			((JButton) e.getSource()).setLocation(locationMap.getTaiwaneseLocationMap()[y / 70 + 1][x / 70].getY(), locationMap.getTaiwaneseLocationMap()[y / 70 + 1][x / 70].getX());
+			((JButton) e.getSource()).setLocation(locationMap.getTaiwaneseLocationMap()[y / 70 + 1][x / 70].getX(), locationMap.getTaiwaneseLocationMap()[y / 70 + 1][x / 70].getY());
 			manager.moveTo(((ButtonChess) e.getSource()), (x / 70), (y / 70 + 1), locationMap, buttonArrayList);
 		}
 //		else if ((x % 70) == 35 && (y % 70) == 35) {
