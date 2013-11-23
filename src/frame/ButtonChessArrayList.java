@@ -12,44 +12,44 @@ public class ButtonChessArrayList {
 	private ButtonChess btnRedHorse1, btnRedHorse2, btnBlackHorse1, btnBlackHorse2, btnRedRook1, btnRedRook2, btnBlackRook1, btnBlackRook2, btnRedCannon1, btnRedCannon2, btnBlackCannon1, btnBlackCannon2, btnRedPawn1, btnRedPawn2, btnRedPawn3, btnRedPawn4, btnRedPawn5, btnBlackPawn1, btnBlackPawn2,
 			btnBlackPawn3, btnBlackPawn4, btnBlackPawn5, btnRedKing, btnBlackKing, btnRedElephant1, btnRedElephant2, btnBlackElephant1, btnBlackElephant2, btnRedWarrior1, btnRedWarrior2, btnBlackWarrior1, btnBlackWarrior2;
 	private ArrayList<ButtonChess> btnArrayList;
-	ChessTable chessTable;
-
-	public ButtonChessArrayList(BoardManager manager, LocationMap locationMap, ChessTable chessTable) {
+	private LocationMap locationMap = new LocationMap();
+	
+	public ButtonChessArrayList(BoardManager manager, ChessTable chessTable) {
 		// TODO Auto-generated constructor stub
-		this.chessTable = chessTable;
 		btnArrayList = new ArrayList<ButtonChess>();
-		btnRedHorse1 = new ButtonChess(chessTable.getRedHorse1().getChineseName(), chessTable.getRedHorse1(), locationMap, manager.getWhichGame());
-		btnRedHorse2 = new ButtonChess(chessTable.getRedHorse2().getChineseName(), chessTable.getRedHorse2(), locationMap, manager.getWhichGame());
-		btnBlackHorse1 = new ButtonChess(chessTable.getBlackHorse1().getChineseName(), chessTable.getBlackHorse1(), locationMap, manager.getWhichGame());
-		btnBlackHorse2 = new ButtonChess(chessTable.getBlackHorse2().getChineseName(), chessTable.getBlackHorse2(), locationMap, manager.getWhichGame());
-		btnRedRook1 = new ButtonChess(chessTable.getRedRook1().getChineseName(), chessTable.getRedRook1(), locationMap, manager.getWhichGame());
-		btnRedRook2 = new ButtonChess(chessTable.getRedRook2().getChineseName(), chessTable.getRedRook2(), locationMap, manager.getWhichGame());
-		btnBlackRook1 = new ButtonChess(chessTable.getBlackRook1().getChineseName(), chessTable.getBlackRook1(), locationMap, manager.getWhichGame());
-		btnBlackRook2 = new ButtonChess(chessTable.getBlackRook2().getChineseName(), chessTable.getBlackRook2(), locationMap, manager.getWhichGame());
-		btnRedCannon1 = new ButtonChess(chessTable.getRedCannon1().getChineseName(), chessTable.getRedCannon1(), locationMap, manager.getWhichGame());
-		btnRedCannon2 = new ButtonChess(chessTable.getRedCannon2().getChineseName(), chessTable.getRedCannon2(), locationMap, manager.getWhichGame());
-		btnBlackCannon1 = new ButtonChess(chessTable.getBlackCannon1().getChineseName(), chessTable.getBlackCannon1(), locationMap, manager.getWhichGame());
-		btnBlackCannon2 = new ButtonChess(chessTable.getBlackCannon2().getChineseName(), chessTable.getBlackCannon2(), locationMap, manager.getWhichGame());
-		btnRedPawn1 = new ButtonChess(chessTable.getRedPawn1().getChineseName(), chessTable.getRedPawn1(), locationMap, manager.getWhichGame());
-		btnRedPawn2 = new ButtonChess(chessTable.getRedPawn2().getChineseName(), chessTable.getRedPawn2(), locationMap, manager.getWhichGame());
-		btnRedPawn3 = new ButtonChess(chessTable.getRedPawn3().getChineseName(), chessTable.getRedPawn3(), locationMap, manager.getWhichGame());
-		btnRedPawn4 = new ButtonChess(chessTable.getRedPawn4().getChineseName(), chessTable.getRedPawn4(), locationMap, manager.getWhichGame());
-		btnRedPawn5 = new ButtonChess(chessTable.getRedPawn5().getChineseName(), chessTable.getRedPawn5(), locationMap, manager.getWhichGame());
-		btnBlackPawn1 = new ButtonChess(chessTable.getBlackPawn1().getChineseName(), chessTable.getBlackPawn1(), locationMap, manager.getWhichGame());
-		btnBlackPawn2 = new ButtonChess(chessTable.getBlackPawn2().getChineseName(), chessTable.getBlackPawn2(), locationMap, manager.getWhichGame());
-		btnBlackPawn3 = new ButtonChess(chessTable.getBlackPawn3().getChineseName(), chessTable.getBlackPawn3(), locationMap, manager.getWhichGame());
-		btnBlackPawn4 = new ButtonChess(chessTable.getBlackPawn4().getChineseName(), chessTable.getBlackPawn4(), locationMap, manager.getWhichGame());
-		btnBlackPawn5 = new ButtonChess(chessTable.getBlackPawn5().getChineseName(), chessTable.getBlackPawn5(), locationMap, manager.getWhichGame());
-		btnRedKing = new ButtonChess(chessTable.getRedKing().getChineseName(), chessTable.getRedKing(), locationMap, manager.getWhichGame());
-		btnBlackKing = new ButtonChess(chessTable.getBlackKing().getChineseName(), chessTable.getBlackKing(), locationMap, manager.getWhichGame());
-		btnRedElephant1 = new ButtonChess(chessTable.getRedElephant1().getChineseName(), chessTable.getRedElephant1(), locationMap, manager.getWhichGame());
-		btnRedElephant2 = new ButtonChess(chessTable.getRedElephant2().getChineseName(), chessTable.getRedElephant2(), locationMap, manager.getWhichGame());
-		btnBlackElephant1 = new ButtonChess(chessTable.getBlackElephant1().getChineseName(), chessTable.getBlackElephant1(), locationMap, manager.getWhichGame());
-		btnBlackElephant2 = new ButtonChess(chessTable.getBlackElephant2().getChineseName(), chessTable.getBlackElephant2(), locationMap, manager.getWhichGame());
-		btnRedWarrior1 = new ButtonChess(chessTable.getRedWarrior1().getChineseName(), chessTable.getRedWarrior1(), locationMap, manager.getWhichGame());
-		btnRedWarrior2 = new ButtonChess(chessTable.getRedWarrior2().getChineseName(), chessTable.getRedWarrior2(), locationMap, manager.getWhichGame());
-		btnBlackWarrior1 = new ButtonChess(chessTable.getBlackWarrior1().getChineseName(), chessTable.getBlackWarrior1(), locationMap, manager.getWhichGame());
-		btnBlackWarrior2 = new ButtonChess(chessTable.getBlackWarrior2().getChineseName(), chessTable.getBlackWarrior2(), locationMap, manager.getWhichGame());
+
+		btnRedHorse1 = new ButtonChess(chessTable.getRedHorse1(), locationMap, manager.getWhichGame());
+		btnRedHorse2 = new ButtonChess(chessTable.getRedHorse2(), locationMap, manager.getWhichGame());
+		btnBlackHorse1 = new ButtonChess(chessTable.getBlackHorse1(), locationMap, manager.getWhichGame());
+		btnBlackHorse2 = new ButtonChess(chessTable.getBlackHorse2(), locationMap, manager.getWhichGame());
+		btnRedRook1 = new ButtonChess(chessTable.getRedRook1(), locationMap, manager.getWhichGame());
+		btnRedRook2 = new ButtonChess(chessTable.getRedRook2(), locationMap, manager.getWhichGame());
+		btnBlackRook1 = new ButtonChess(chessTable.getBlackRook1(), locationMap, manager.getWhichGame());
+		btnBlackRook2 = new ButtonChess(chessTable.getBlackRook2(), locationMap, manager.getWhichGame());
+		btnRedCannon1 = new ButtonChess(chessTable.getRedCannon1(), locationMap, manager.getWhichGame());
+		btnRedCannon2 = new ButtonChess(chessTable.getRedCannon2(), locationMap, manager.getWhichGame());
+		btnBlackCannon1 = new ButtonChess(chessTable.getBlackCannon1(), locationMap, manager.getWhichGame());
+		btnBlackCannon2 = new ButtonChess(chessTable.getBlackCannon2(), locationMap, manager.getWhichGame());
+		btnRedPawn1 = new ButtonChess(chessTable.getRedPawn1(), locationMap, manager.getWhichGame());
+		btnRedPawn2 = new ButtonChess(chessTable.getRedPawn2(), locationMap, manager.getWhichGame());
+		btnRedPawn3 = new ButtonChess(chessTable.getRedPawn3(), locationMap, manager.getWhichGame());
+		btnRedPawn4 = new ButtonChess(chessTable.getRedPawn4(), locationMap, manager.getWhichGame());
+		btnRedPawn5 = new ButtonChess(chessTable.getRedPawn5(), locationMap, manager.getWhichGame());
+		btnBlackPawn1 = new ButtonChess(chessTable.getBlackPawn1(), locationMap, manager.getWhichGame());
+		btnBlackPawn2 = new ButtonChess(chessTable.getBlackPawn2(), locationMap, manager.getWhichGame());
+		btnBlackPawn3 = new ButtonChess(chessTable.getBlackPawn3(), locationMap, manager.getWhichGame());
+		btnBlackPawn4 = new ButtonChess(chessTable.getBlackPawn4(), locationMap, manager.getWhichGame());
+		btnBlackPawn5 = new ButtonChess(chessTable.getBlackPawn5(), locationMap, manager.getWhichGame());
+		btnRedKing = new ButtonChess(chessTable.getRedKing(), locationMap, manager.getWhichGame());
+		btnBlackKing = new ButtonChess(chessTable.getBlackKing(), locationMap, manager.getWhichGame());
+		btnRedElephant1 = new ButtonChess(chessTable.getRedElephant1(), locationMap, manager.getWhichGame());
+		btnRedElephant2 = new ButtonChess(chessTable.getRedElephant2(), locationMap, manager.getWhichGame());
+		btnBlackElephant1 = new ButtonChess(chessTable.getBlackElephant1(), locationMap, manager.getWhichGame());
+		btnBlackElephant2 = new ButtonChess(chessTable.getBlackElephant2(), locationMap, manager.getWhichGame());
+		btnRedWarrior1 = new ButtonChess(chessTable.getRedWarrior1(), locationMap, manager.getWhichGame());
+		btnRedWarrior2 = new ButtonChess(chessTable.getRedWarrior2(), locationMap, manager.getWhichGame());
+		btnBlackWarrior1 = new ButtonChess(chessTable.getBlackWarrior1(), locationMap, manager.getWhichGame());
+		btnBlackWarrior2 = new ButtonChess(chessTable.getBlackWarrior2(), locationMap, manager.getWhichGame());
 		btnArrayList.add(btnRedHorse1);
 		btnArrayList.add(btnRedHorse2);
 		btnArrayList.add(btnBlackHorse1);

@@ -3,14 +3,11 @@ package chess;
 import controlUnit.LocationPoint;
 
 public class King extends Chess {
-//	static final int chinessChess = 1;
-//	static final int red = 0;
-//	static final int black = 1;
 
 	public King(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
 		setName("King");
-		if (color == 0) {
+		if (color == red) {
 			setChineseName("帥");
 		} else {
 			setChineseName("將");
@@ -31,7 +28,7 @@ public class King extends Chess {
 
 	@Override
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
-		if (whichGame == chineseChess) {
+		if (whichGame == chinessChess) {
 
 			if (this.getColor() == red) { // 假如為紅色
 				if (board[toY][toX] != null && board[toY][toX].getName().equals("King"))// 飛將
@@ -82,12 +79,12 @@ public class King extends Chess {
 		}
 		return false;
 	};
-	
+
 	@Override
 	public void setChessCover(boolean cover) {
 		// TODO Auto-generated method stub
 		super.setChessCover(cover);
-		if (getColor() == 0) {
+		if (getColor() == red) {
 			setChineseName("帥");
 		} else {
 			setChineseName("將");

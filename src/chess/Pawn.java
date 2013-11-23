@@ -3,13 +3,11 @@ package chess;
 import controlUnit.LocationPoint;
 
 public class Pawn extends Chess {
-//	static final int chinessChess = 1;
-//	static final int red = 0;
 
 	public Pawn(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
 		setName("Pawn");
-		if (color == 0) {
+		if (color == red) {
 			setChineseName("兵");
 		} else {
 			setChineseName("卒");
@@ -31,7 +29,7 @@ public class Pawn extends Chess {
 
 	@Override
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
-		if (whichGame == chineseChess)// 軍棋
+		if (whichGame == chinessChess)// 軍棋
 		{
 			if (getColor() == red)// 紅色
 			{
@@ -76,7 +74,7 @@ public class Pawn extends Chess {
 	public void setChessCover(boolean cover) {
 		// TODO Auto-generated method stub
 		super.setChessCover(cover);
-		if (getColor() == 0) {
+		if (getColor() == red) {
 			setChineseName("兵");
 		} else {
 			setChineseName("卒");

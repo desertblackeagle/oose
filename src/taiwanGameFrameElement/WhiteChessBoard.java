@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
 /* @author Red Rose
  * Function:a element of taiwan chess board
  * Last Update:2013/11/14
@@ -11,7 +12,7 @@ import java.awt.Graphics2D;
 public class WhiteChessBoard extends Canvas {
 
 	public void paint(Graphics g) {
-
+//		((Graphics2D) g).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 1.0f));
 		float lineWidth = 3.25f;
 		((Graphics2D) g).setStroke(new BasicStroke(lineWidth));
 

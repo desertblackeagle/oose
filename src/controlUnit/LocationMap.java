@@ -6,6 +6,7 @@ public class LocationMap {
 	private LocationPoint[][] taiwanDeadLocationPoint;
 	private int taiwanDeadChessLocIndexX = -1;
 	private int taiwanDeadChessLocIndexY = 0;
+	
 	public LocationMap() {
 		// TODO Auto-generated constructor stub
 		chineseLocationPoint = new LocationPoint[10][9];

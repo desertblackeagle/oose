@@ -1,4 +1,4 @@
-package frame;
+
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,16 +6,17 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class secondpage extends javax.swing.JFrame {
+public class firstpage extends javax.swing.JFrame {
+	static firstpage app = new firstpage();
 	private JFrame mainFrame;
 
 	// 建構函式
-	public secondpage() {
-		mainFrame = new JFrame("第二頁");
+	public firstpage() {
+		mainFrame = new JFrame("第一頁");
 		JPanel jpanel1 = new JPanel();
 		jpanel1.setPreferredSize(new Dimension(550, 400));
 
-		JButton btn1 = new JButton("開啟第一頁");
+		JButton btn1 = new JButton("開啟第二頁");
 		btn1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				link();
@@ -40,10 +41,10 @@ public class secondpage extends javax.swing.JFrame {
 		// 做連接到下一頁動作
 		mainFrame.setVisible(false);// 不顯示第一頁
 		mainFrame.dispose();
-		firstpage firstframe = new firstpage();// 產生第二頁的object
-		firstframe.setLocationRelativeTo(null);// 把視窗至中
+		secondpage secondframe = new secondpage();// 產生第二頁的object
+		secondframe.setLocationRelativeTo(null);// 把視窗至中
 	}
 
-//	public static void main(String[] args) {
-//	}
+	public static void main(String[] args) {
+	}
 }

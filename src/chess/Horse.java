@@ -4,12 +4,11 @@ import chess.Chess;
 import controlUnit.LocationPoint;
 
 public class Horse extends Chess {
-//	static final int chinessChess = 1;
 
 	public Horse(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
 		setName("Horse");
-		if (color == 0) {
+		if (color == red) {
 			setChineseName("傌");
 		} else {
 			setChineseName("馬");
@@ -32,7 +31,7 @@ public class Horse extends Chess {
 
 	@Override
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
-		if (whichGame == chineseChess)// 軍棋
+		if (whichGame == chinessChess)// 軍棋
 		{
 			if (Math.abs(toX - getX()) == 2 && Math.abs(toY - getY()) == 1) {
 				if (board[getY()][getX() + ((toX - getX()) / 2)] != null) {
@@ -60,7 +59,7 @@ public class Horse extends Chess {
 	public void setChessCover(boolean cover) {
 		// TODO Auto-generated method stub
 		super.setChessCover(cover);
-		if (getColor() == 0) {
+		if (getColor() == red) {
 			setChineseName("傌");
 		} else {
 			setChineseName("馬");

@@ -4,12 +4,11 @@ import chess.Chess;
 import controlUnit.LocationPoint;
 
 public class Rook extends Chess {
-//	static final int chinessChess = 1;
 
 	public Rook(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
 		setName("Rook");
-		if (color == 0) {
+		if (color == red) {
 			setChineseName("俥");
 		} else {
 			setChineseName("車");
@@ -31,7 +30,7 @@ public class Rook extends Chess {
 	@Override
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
 		int grid;// 格子數
-		if (whichGame == chineseChess)// 軍棋
+		if (whichGame == chinessChess)// 軍棋
 		{
 			if (toX == getX())// 只移動y軸座標
 			{
@@ -87,7 +86,7 @@ public class Rook extends Chess {
 	public void setChessCover(boolean cover) {
 		// TODO Auto-generated method stub
 		super.setChessCover(cover);
-		if (getColor() == 0) {
+		if (getColor() == red) {
 			setChineseName("俥");
 		} else {
 			setChineseName("車");

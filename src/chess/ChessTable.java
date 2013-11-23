@@ -40,44 +40,44 @@ public class ChessTable {
 	private Warrior blackWarrior1;
 	private Warrior blackWarrior2;
 
-	static final int chineseChess = 1;
+	static final int chinessChess = 1;
 	static final int taiwanChess = 0;
 
 	public ChessTable(BoardManager manager) {
 		// TODO Auto-generated constructor stub
-		if (manager.getWhichGame() == chineseChess) {
-			redHorse1 = new Horse(0, false, 1, 9, manager.getChineseChessLocationList());
-			redHorse2 = new Horse(0, false, 7, 9, manager.getChineseChessLocationList());
-			blackHorse1 = new Horse(1, false, 1, 0, manager.getChineseChessLocationList());
-			blackHorse2 = new Horse(1, false, 7, 0, manager.getChineseChessLocationList());
-			redRook1 = new Rook(0, false, 0, 9, manager.getChineseChessLocationList());
-			redRook2 = new Rook(0, false, 8, 9, manager.getChineseChessLocationList());
-			blackRook1 = new Rook(1, false, 0, 0, manager.getChineseChessLocationList());
-			blackRook2 = new Rook(1, false, 8, 0, manager.getChineseChessLocationList());
-			redCannon1 = new Cannon(0, false, 1, 7, manager.getChineseChessLocationList());
-			redCannon2 = new Cannon(0, false, 7, 7, manager.getChineseChessLocationList());
-			blackCannon1 = new Cannon(1, false, 1, 2, manager.getChineseChessLocationList());
-			blackCannon2 = new Cannon(1, false, 7, 2, manager.getChineseChessLocationList());
-			redPawn1 = new Pawn(0, false, 0, 6, manager.getChineseChessLocationList());
-			redPawn2 = new Pawn(0, false, 2, 6, manager.getChineseChessLocationList());
-			redPawn3 = new Pawn(0, false, 4, 6, manager.getChineseChessLocationList());
-			redPawn4 = new Pawn(0, false, 6, 6, manager.getChineseChessLocationList());
-			redPawn5 = new Pawn(0, false, 8, 6, manager.getChineseChessLocationList());
-			blackPawn1 = new Pawn(1, false, 0, 3, manager.getChineseChessLocationList());
-			blackPawn2 = new Pawn(1, false, 2, 3, manager.getChineseChessLocationList());
-			blackPawn3 = new Pawn(1, false, 4, 3, manager.getChineseChessLocationList());
-			blackPawn4 = new Pawn(1, false, 6, 3, manager.getChineseChessLocationList());
-			blackPawn5 = new Pawn(1, false, 8, 3, manager.getChineseChessLocationList());
-			redKing = new King(0, false, 4, 9, manager.getChineseChessLocationList());
-			blackKing = new King(1, false, 4, 0, manager.getChineseChessLocationList());
-			redElephant1 = new Elephant(0, false, 2, 9, manager.getChineseChessLocationList());
-			redElephant2 = new Elephant(0, false, 6, 9, manager.getChineseChessLocationList());
-			blackElephant1 = new Elephant(1, false, 2, 0, manager.getChineseChessLocationList());
-			blackElephant2 = new Elephant(1, false, 6, 0, manager.getChineseChessLocationList());
-			redWarrior1 = new Warrior(0, false, 3, 9, manager.getChineseChessLocationList());
-			redWarrior2 = new Warrior(0, false, 5, 9, manager.getChineseChessLocationList());
-			blackWarrior1 = new Warrior(1, false, 3, 0, manager.getChineseChessLocationList());
-			blackWarrior2 = new Warrior(1, false, 5, 0, manager.getChineseChessLocationList());
+		if (manager.getWhichGame() == chinessChess) {
+			redHorse1 = new Horse(0, false, 1, 9, manager.getChessLocationList());
+			redHorse2 = new Horse(0, false, 7, 9, manager.getChessLocationList());
+			blackHorse1 = new Horse(1, false, 1, 0, manager.getChessLocationList());
+			blackHorse2 = new Horse(1, false, 7, 0, manager.getChessLocationList());
+			redRook1 = new Rook(0, false, 0, 9, manager.getChessLocationList());
+			redRook2 = new Rook(0, false, 8, 9, manager.getChessLocationList());
+			blackRook1 = new Rook(1, false, 0, 0, manager.getChessLocationList());
+			blackRook2 = new Rook(1, false, 8, 0, manager.getChessLocationList());
+			redCannon1 = new Cannon(0, false, 1, 7, manager.getChessLocationList());
+			redCannon2 = new Cannon(0, false, 7, 7, manager.getChessLocationList());
+			blackCannon1 = new Cannon(1, false, 1, 2, manager.getChessLocationList());
+			blackCannon2 = new Cannon(1, false, 7, 2, manager.getChessLocationList());
+			redPawn1 = new Pawn(0, false, 0, 6, manager.getChessLocationList());
+			redPawn2 = new Pawn(0, false, 2, 6, manager.getChessLocationList());
+			redPawn3 = new Pawn(0, false, 4, 6, manager.getChessLocationList());
+			redPawn4 = new Pawn(0, false, 6, 6, manager.getChessLocationList());
+			redPawn5 = new Pawn(0, false, 8, 6, manager.getChessLocationList());
+			blackPawn1 = new Pawn(1, false, 0, 3, manager.getChessLocationList());
+			blackPawn2 = new Pawn(1, false, 2, 3, manager.getChessLocationList());
+			blackPawn3 = new Pawn(1, false, 4, 3, manager.getChessLocationList());
+			blackPawn4 = new Pawn(1, false, 6, 3, manager.getChessLocationList());
+			blackPawn5 = new Pawn(1, false, 8, 3, manager.getChessLocationList());
+			redKing = new King(0, false, 4, 9, manager.getChessLocationList());
+			blackKing = new King(1, false, 4, 0, manager.getChessLocationList());
+			redElephant1 = new Elephant(0, false, 2, 9, manager.getChessLocationList());
+			redElephant2 = new Elephant(0, false, 6, 9, manager.getChessLocationList());
+			blackElephant1 = new Elephant(1, false, 2, 0, manager.getChessLocationList());
+			blackElephant2 = new Elephant(1, false, 6, 0, manager.getChessLocationList());
+			redWarrior1 = new Warrior(0, false, 3, 9, manager.getChessLocationList());
+			redWarrior2 = new Warrior(0, false, 5, 9, manager.getChessLocationList());
+			blackWarrior1 = new Warrior(1, false, 3, 0, manager.getChessLocationList());
+			blackWarrior2 = new Warrior(1, false, 5, 0, manager.getChessLocationList());
 		} else {
 			//location is store Locationpoing
 			LocationPoint[] location = new LocationPoint[32];
@@ -98,38 +98,38 @@ public class ChessTable {
 				location[random] = temp;
 			}
 			
-			redHorse1 = new Horse(0, true, location[0], manager.getChineseChessLocationList());
-			redHorse2 = new Horse(0, true, location[1], manager.getChineseChessLocationList());
-			blackHorse1 = new Horse(1, true, location[2], manager.getChineseChessLocationList());
-			blackHorse2 = new Horse(1, true, location[3], manager.getChineseChessLocationList());
-			redRook1 = new Rook(0, true, location[4], manager.getChineseChessLocationList());
-			redRook2 = new Rook(0, true, location[5], manager.getChineseChessLocationList());
-			blackRook1 = new Rook(1, true, location[6], manager.getChineseChessLocationList());
-			blackRook2 = new Rook(1, true, location[7], manager.getChineseChessLocationList());
-			redCannon1 = new Cannon(0, true, location[8], manager.getChineseChessLocationList());
-			redCannon2 = new Cannon(0, true, location[9], manager.getChineseChessLocationList());
-			blackCannon1 = new Cannon(1, true, location[10], manager.getChineseChessLocationList());
-			blackCannon2 = new Cannon(1, true, location[11], manager.getChineseChessLocationList());
-			redPawn1 = new Pawn(0, true, location[12], manager.getChineseChessLocationList());
-			redPawn2 = new Pawn(0, true, location[13], manager.getChineseChessLocationList());
-			redPawn3 = new Pawn(0, true, location[14], manager.getChineseChessLocationList());
-			redPawn4 = new Pawn(0, true, location[15], manager.getChineseChessLocationList());
-			redPawn5 = new Pawn(0, true, location[16], manager.getChineseChessLocationList());
-			blackPawn1 = new Pawn(1, true, location[17], manager.getChineseChessLocationList());
-			blackPawn2 = new Pawn(1, true, location[18], manager.getChineseChessLocationList());
-			blackPawn3 = new Pawn(1, true, location[19], manager.getChineseChessLocationList());
-			blackPawn4 = new Pawn(1, true, location[20], manager.getChineseChessLocationList());
-			blackPawn5 = new Pawn(1, true, location[21], manager.getChineseChessLocationList());
-			redKing = new King(0, true, location[22], manager.getChineseChessLocationList());
-			blackKing = new King(1, true, location[23], manager.getChineseChessLocationList());
-			redElephant1 = new Elephant(0, true, location[24], manager.getChineseChessLocationList());
-			redElephant2 = new Elephant(0, true, location[25], manager.getChineseChessLocationList());
-			blackElephant1 = new Elephant(1, true, location[26], manager.getChineseChessLocationList());
-			blackElephant2 = new Elephant(1, true, location[27], manager.getChineseChessLocationList());
-			redWarrior1 = new Warrior(0, true, location[28], manager.getChineseChessLocationList());
-			redWarrior2 = new Warrior(0, true, location[29], manager.getChineseChessLocationList());
-			blackWarrior1 = new Warrior(1, true, location[30], manager.getChineseChessLocationList());
-			blackWarrior2 = new Warrior(1, true, location[31], manager.getChineseChessLocationList());
+			redHorse1 = new Horse(0, true, location[0], manager.getChessLocationList());
+			redHorse2 = new Horse(0, true, location[1], manager.getChessLocationList());
+			blackHorse1 = new Horse(1, true, location[2], manager.getChessLocationList());
+			blackHorse2 = new Horse(1, true, location[3], manager.getChessLocationList());
+			redRook1 = new Rook(0, true, location[4], manager.getChessLocationList());
+			redRook2 = new Rook(0, true, location[5], manager.getChessLocationList());
+			blackRook1 = new Rook(1, true, location[6], manager.getChessLocationList());
+			blackRook2 = new Rook(1, true, location[7], manager.getChessLocationList());
+			redCannon1 = new Cannon(0, true, location[8], manager.getChessLocationList());
+			redCannon2 = new Cannon(0, true, location[9], manager.getChessLocationList());
+			blackCannon1 = new Cannon(1, true, location[10], manager.getChessLocationList());
+			blackCannon2 = new Cannon(1, true, location[11], manager.getChessLocationList());
+			redPawn1 = new Pawn(0, true, location[12], manager.getChessLocationList());
+			redPawn2 = new Pawn(0, true, location[13], manager.getChessLocationList());
+			redPawn3 = new Pawn(0, true, location[14], manager.getChessLocationList());
+			redPawn4 = new Pawn(0, true, location[15], manager.getChessLocationList());
+			redPawn5 = new Pawn(0, true, location[16], manager.getChessLocationList());
+			blackPawn1 = new Pawn(1, true, location[17], manager.getChessLocationList());
+			blackPawn2 = new Pawn(1, true, location[18], manager.getChessLocationList());
+			blackPawn3 = new Pawn(1, true, location[19], manager.getChessLocationList());
+			blackPawn4 = new Pawn(1, true, location[20], manager.getChessLocationList());
+			blackPawn5 = new Pawn(1, true, location[21], manager.getChessLocationList());
+			redKing = new King(0, true, location[22], manager.getChessLocationList());
+			blackKing = new King(1, true, location[23], manager.getChessLocationList());
+			redElephant1 = new Elephant(0, true, location[24], manager.getChessLocationList());
+			redElephant2 = new Elephant(0, true, location[25], manager.getChessLocationList());
+			blackElephant1 = new Elephant(1, true, location[26], manager.getChessLocationList());
+			blackElephant2 = new Elephant(1, true, location[27], manager.getChessLocationList());
+			redWarrior1 = new Warrior(0, true, location[28], manager.getChessLocationList());
+			redWarrior2 = new Warrior(0, true, location[29], manager.getChessLocationList());
+			blackWarrior1 = new Warrior(1, true, location[30], manager.getChessLocationList());
+			blackWarrior2 = new Warrior(1, true, location[31], manager.getChessLocationList());
 		}
 	}
 

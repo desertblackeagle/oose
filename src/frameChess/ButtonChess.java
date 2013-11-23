@@ -9,18 +9,23 @@ import chess.Chess;
 import controlUnit.LocationMap;
 
 public class ButtonChess extends JButton {
+	static final int chinessChess = 1;
+	static final int taiwanChess = 0;
+	static final int red = 0;
+	static final int black = 1;
+	
 	private Chess chess = null;
-
-	public ButtonChess(String btnName, Chess chess, LocationMap locationMap, int whichGame) {
+	
+	public ButtonChess(Chess chess, LocationMap locationMap, int whichGame) {
 		// TODO Auto-generated constructor stub
-		super(btnName);
+		super(chess.getChineseName());
 		Font f = new Font(chess.getChineseName(), Font.ROMAN_BASELINE, 15);
 		this.chess = chess;
 		setFont(f);
-		if (chess.getColor() == 0) {
+		if (chess.getColor() == red) {
 			setForeground(Color.red);
 		}
-		if (whichGame == 1) {
+		if (whichGame == chinessChess) {
 			setLocation(locationMap.getChineseLocationMap()[chess.getY()][chess.getX()].getX(), locationMap.getChineseLocationMap()[chess.getY()][chess.getX()].getY());
 		} else {
 			setLocation(locationMap.getTaiwaneseLocationMap()[chess.getY()][chess.getX()].getX(), locationMap.getTaiwaneseLocationMap()[chess.getY()][chess.getX()].getY());

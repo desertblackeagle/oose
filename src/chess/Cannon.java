@@ -4,12 +4,11 @@ import chess.Chess;
 import controlUnit.LocationPoint;
 
 public class Cannon extends Chess {
-//	static final int chinessChess = 1;
 
 	public Cannon(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
 		setName("Cannon");
-		if (color == 0) {
+		if (color == red) {
 			setChineseName("炮");
 		} else {
 			setChineseName("砲");
@@ -73,7 +72,7 @@ public class Cannon extends Chess {
 				return false;
 			}
 		}
-		if (whichGame == chineseChess)// 軍棋
+		if (whichGame == chinessChess)// 軍棋
 		{
 			if (toX == getX())// 只移動y軸座標
 			{
@@ -126,7 +125,7 @@ public class Cannon extends Chess {
 	public void setChessCover(boolean cover) {
 		// TODO Auto-generated method stub
 		super.setChessCover(cover);
-		if (getColor() == 0) {
+		if (getColor() == red) {
 			setChineseName("炮");
 		} else {
 			setChineseName("砲");
