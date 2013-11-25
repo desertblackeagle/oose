@@ -16,7 +16,8 @@ public class Chess {
 	private boolean chessDead = false;
 	private int color = 0;// 0 為 紅色 , 1 為黑色;
 	private String[] eatRule = new String[7];
-
+	private int priority;
+	
 	public Chess() {
 
 	}
@@ -36,6 +37,14 @@ public class Chess {
 		this.y = y;
 		board[y][x] = this;
 		this.chessDead = chessDead;
+	}
+	
+	public int getPriority() {
+		return priority;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 
 	public int getX() {

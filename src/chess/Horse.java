@@ -7,6 +7,7 @@ public class Horse extends Chess {
 
 	public Horse(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
+		setPriority(3);
 		setName("Horse");
 		if (color == red) {
 			setChineseName("傌");
@@ -18,6 +19,7 @@ public class Horse extends Chess {
 
 	public Horse(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
+		setPriority(3);
 		setName("Horse");
 		setEatRule("Horse,Cannon,Pawn");
 	}

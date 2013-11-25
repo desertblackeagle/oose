@@ -7,6 +7,7 @@ public class Cannon extends Chess {
 
 	public Cannon(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
+		setPriority(2);
 		setName("Cannon");
 		if (color == red) {
 			setChineseName("炮");
@@ -18,6 +19,7 @@ public class Cannon extends Chess {
 
 	public Cannon(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
+		setPriority(2);
 		setName("Cannon");
 		setEatRule("King,Warrior,Elephant,Rook,Horse,Cannon,Pawn");
 	}

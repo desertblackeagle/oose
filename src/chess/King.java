@@ -6,6 +6,7 @@ public class King extends Chess {
 
 	public King(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
+		setPriority(7);
 		setName("King");
 		if (color == red) {
 			setChineseName("帥");
@@ -17,6 +18,7 @@ public class King extends Chess {
 
 	public King(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
+		setPriority(7);
 		setName("King");
 		setEatRule("Cannon,Elephant,Horse,King,Rook,Warrior");
 	}

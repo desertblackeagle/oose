@@ -6,6 +6,7 @@ public class Warrior extends Chess {
 
 	public Warrior(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
+		setPriority(6);
 		setName("Warrior");
 		if (color == red) {
 			setChineseName("仕");
@@ -17,6 +18,7 @@ public class Warrior extends Chess {
 
 	public Warrior(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
+		setPriority(6);
 		setName("Warrior");
 		setEatRule("Cannon,Elephant,Horse,Pawn,Rook,Warrior");
 	}

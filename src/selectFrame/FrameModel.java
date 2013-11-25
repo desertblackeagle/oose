@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -47,6 +49,29 @@ public class FrameModel extends JFrame {
 
 	public void setUserName(String temp) {
 		userName = temp;
+	}
+
+	public void changeLabelText(JLabel label, String text) {
+		if (label == null) {
+			System.out.println("LABEl is NULL");
+		}
+		label.setText(text);
+	}
+
+	public JLabel initImage(JLabel label, ImageIcon image, int x, int y, int width, int height) {
+		if (image != null) {
+			img = image;
+		}
+		label = new JLabel(img);
+		label.setBounds(x, y, width, height);
+		return label;
+	}
+
+	public JLabel initLabel(JLabel label, String text, int x, int y, int width, int height, int size) {
+		label = new JLabel(text);
+		label.setFont(new Font("細明體", Font.PLAIN, size));
+		label.setBounds(x, y, width, height);
+		return label;
 	}
 }
 
@@ -118,6 +143,5 @@ class FrameCheck extends JDialog implements ActionListener {
 			setVisible(false);
 			dispose();
 		}
-
 	}
 }

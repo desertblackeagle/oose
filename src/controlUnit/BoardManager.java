@@ -1,10 +1,12 @@
 package controlUnit;
 
+import java.util.Iterator;
+
 import chess.Chess;
 import frame.ButtonChessArrayList;
 import frame.ChineseGameFrame;
+import frame.GameFrame;
 import frame.InfoFrame;
-import frame.TaiwanGameFrame;
 import frameChess.ButtonChess;
 
 /* @author Red Rose
@@ -35,7 +37,7 @@ public class BoardManager {
 		this.whichGame = whichGame;
 	}
 
-	public void moveTo(ButtonChess btnChess, int toX, int toY, ButtonChessArrayList buttonArrayList, Object gameFrame) {
+	public void moveTo(ButtonChess btnChess, int toX, int toY, ButtonChessArrayList buttonArrayList, GameFrame gameFrame) {
 		// (move chess to position already)
 		// if play dark chess than check cover
 		if (btnChess.getChess().isChessCover()) {
@@ -67,7 +69,7 @@ public class BoardManager {
 							System.out.println("eat");
 							chessRecord.record(btnChess.getChess(), toX, toY);
 							eatChess(btnChess, toX, toY, buttonArrayList, gameFrame);
-							forWhoToChess = forWhoToChess ^ 1; // change other side to chess
+							swapUserOrder(gameFrame);
 						} else {
 							// (move back) can't eat same color
 							System.out.println(btnChess.getChess().getColor() + btnChess.getChess().getName() + "[" + btnChess.getChess().getX() + "," + btnChess.getChess().getY() + "]" + "can't eat sam color " + chessLocationList[toY][toX].getName());
@@ -97,7 +99,7 @@ public class BoardManager {
 					chessLocationList[btnChess.getChess().getY()][btnChess.getChess().getX()] = null;
 					btnChess.getChess().setX(toX);
 					btnChess.getChess().setY(toY);
-					forWhoToChess = forWhoToChess ^ 1; // change other side th chess
+					swapUserOrder(gameFrame);
 				}
 			} else {
 				// (move back) can't move to
@@ -117,6 +119,15 @@ public class BoardManager {
 		}
 	}
 
+	public void swapUserOrder(GameFrame gameFrame){
+		forWhoToChess = forWhoToChess ^ 1; // change other side to chess
+		if (forWhoToChess == red) {
+			gameFrame.changeLabelText(gameFrame.getUserOrder(), "輪到紅色");
+		} else {
+			gameFrame.changeLabelText(gameFrame.getUserOrder(), "輪到黑色");
+		}
+	}
+	
 	private void moveBack(ButtonChess btnChess, int whichGame) {
 		if (whichGame == chinessChess) {
 			btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
@@ -156,16 +167,18 @@ public class BoardManager {
 		}
 	}
 
-	private void eatChess(ButtonChess btnChess, int toX, int toY, ButtonChessArrayList buttonChessArrayList, Object gameFrame) {
+	private void eatChess(ButtonChess btnChess, int toX, int toY, ButtonChessArrayList buttonChessArrayList, GameFrame gameFrame) {
 		// the chess from chessLocationList1[toX][toY] been set location to out of board
 		for (int i = 0; i < buttonChessArrayList.getBtnArrayList().size(); i++) {
 			if (buttonChessArrayList.getBtnArrayList().get(i).getChess().equals(chessLocationList[toY][toX])) {
 				if (whichGame == chinessChess) {
 					if (buttonChessArrayList.getBtnArrayList().get(i).getChess().getName().equals("King")) {
 						if (btnChess.getChess().getColor() == red) {
-							new InfoFrame("紅色贏了", "獲勝通知", (((ChineseGameFrame) gameFrame).getLocationOnScreen().x + ((ChineseGameFrame) gameFrame).getWidth() / 2) - 175, (((ChineseGameFrame) gameFrame).getLocationOnScreen().y + ((ChineseGameFrame) gameFrame).getHeight() / 2) - 20);
+							printRecord();
+							new InfoFrame("紅色贏了", "獲勝通知", (gameFrame.getLocationOnScreen().x + gameFrame.getWidth() / 2) - 175, (gameFrame.getLocationOnScreen().y + gameFrame.getHeight() / 2) - 20);
 						} else {
-							new InfoFrame("黑色贏了", "獲勝通知", (((ChineseGameFrame) gameFrame).getLocationOnScreen().x + ((ChineseGameFrame) gameFrame).getWidth() / 2) - 175, (((ChineseGameFrame) gameFrame).getLocationOnScreen().y + ((ChineseGameFrame) gameFrame).getHeight() / 2) - 20);
+							printRecord();
+							new InfoFrame("黑色贏了", "獲勝通知", (gameFrame.getLocationOnScreen().x + gameFrame.getWidth() / 2) - 175, (gameFrame.getLocationOnScreen().y + gameFrame.getHeight() / 2) - 20);
 						}
 					}
 				} else {
@@ -176,15 +189,15 @@ public class BoardManager {
 					}
 					if (redChessNum == 0) {
 						System.out.println("Black WIM");
-						new InfoFrame("黑色贏了", "獲勝通知", ((TaiwanGameFrame) gameFrame).getLocationOnScreen().x, ((ChineseGameFrame) gameFrame).getLocationOnScreen().y);
+						new InfoFrame("黑色贏了", "獲勝通知", gameFrame.getLocationOnScreen().x, ((ChineseGameFrame) gameFrame).getLocationOnScreen().y);
 					} else if (blackChessNum == 0) {
 						System.out.println("Red WIM");
-						new InfoFrame("紅色贏了", "獲勝通知", ((TaiwanGameFrame) gameFrame).getLocationOnScreen().x, ((ChineseGameFrame) gameFrame).getLocationOnScreen().y);
+						new InfoFrame("紅色贏了", "獲勝通知", gameFrame.getLocationOnScreen().x, ((ChineseGameFrame) gameFrame).getLocationOnScreen().y);
 					}
 				}
 				// dead chess remove
 				if (whichGame == chinessChess) {
-					buttonChessArrayList.getBtnArrayList().get(i).setLocation(100, 100);
+					buttonChessArrayList.getBtnArrayList().get(i).setLocation(1000, 1000);
 				} else {
 					LocationPoint tmp = locationMap.getDeadLocation();
 					System.out.println("D : " + tmp.getX() + " " + tmp.getY());
@@ -279,6 +292,13 @@ public class BoardManager {
 		}
 	}
 
+	public void printRecord(){
+		Iterator<String> it = chessRecord.getRecordStack().iterator(); 
+        while(it.hasNext()){ 
+            System.out.println(it.next());
+        } 
+	}
+	
 	public Chess[][] getChessLocationList() {
 		return chessLocationList.clone();
 	}

@@ -6,6 +6,7 @@ public class Elephant extends Chess {
 
 	public Elephant(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
+		setPriority(5);
 		setName("Elephant");
 		if (color == red) {
 			setChineseName("相");
@@ -17,6 +18,7 @@ public class Elephant extends Chess {
 
 	public Elephant(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
+		setPriority(5);
 		setName("Elephant");
 		setEatRule("Rook,Horse,Cannon,Pawn,Elephant");
 	}

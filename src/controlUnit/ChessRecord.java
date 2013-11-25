@@ -11,6 +11,10 @@ public class ChessRecord {
 		recordStack = new Stack<String>();
 	}
 	
+	public Stack<String> getRecordStack() {
+		return recordStack;
+	}
+
 	public void record(Chess chess, int toX, int toY) {
 		String record = chess.getName() + " " + chess.getChineseName() + " " + chess.getColor() + " " + chess.isChessCover() + " " + chess.getX() + " " + chess.getY() + " " + toX + " " + toY;
 		System.out.println("Chess record : " + chess.getName() + " " + chess.getChineseName() + " " + chess.getColor() + " " + chess.isChessCover() + " " + chess.getX() + " " + chess.getY() + " " + toX + " " + toY);

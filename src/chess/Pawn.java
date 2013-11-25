@@ -6,6 +6,7 @@ public class Pawn extends Chess {
 
 	public Pawn(int color, boolean chessCover, int x, int y, Chess[][] board) {
 		super(color, chessCover, x, y, board);
+		setPriority(1);
 		setName("Pawn");
 		if (color == red) {
 			setChineseName("兵");
@@ -18,6 +19,7 @@ public class Pawn extends Chess {
 
 	public Pawn(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
+		setPriority(1);
 		setName("Pawn");
 		setEatRule("King,Pawn");
 	}
