@@ -19,11 +19,6 @@ public class Pawn extends Chess {
 	public Pawn(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
 		setName("Pawn");
-//		if (color == 0) {
-//			setChineseName("兵");
-//		} else {
-//			setChineseName("卒");
-//		}
 		setEatRule("King,Pawn");
 	}
 
@@ -69,7 +64,7 @@ public class Pawn extends Chess {
 		}
 		return false;
 	};
-	
+
 	@Override
 	public void setChessCover(boolean cover) {
 		// TODO Auto-generated method stub

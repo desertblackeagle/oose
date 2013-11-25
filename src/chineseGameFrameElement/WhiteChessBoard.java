@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
 /* @author Red Rose
  * Function:a element of chinese chess board
  * Last Update:2013/11/14
@@ -39,6 +40,29 @@ public class WhiteChessBoard extends Canvas {
 			((Graphics2D) g).drawLine(379, 31 + i * 490, 241, 169 + i * 490);
 		}
 
+//		for (int i = 0; i < 10; i++) {
+//			((Graphics2D) g).drawLine(30 + i * 70, 30, 30 + i * 70, 590);
+//		}
+//
+//		for (int i = 0; i < 9; i++) {
+//			((Graphics2D) g).drawLine(30, 30 + i * 70, 310, 30 + i * 70);
+//		}
+//
+//		for (int i = 0; i < 9; i++) {
+//			((Graphics2D) g).drawLine(380, 30 + i * 70, 660, 30 + i * 70);
+//		}
+//
+//		for (int i = 0; i < 2; i++) {
+//			((Graphics2D) g).drawLine(310, 30 + i * 560, 380, 30 + i * 560);
+//		}
+//
+//		for (int i = 0; i < 2; i++) {
+//			((Graphics2D) g).drawLine(31 + i * 490, 241, 169 + i * 490, 379);
+//		}
+//
+//		for (int i = 0; i < 2; i++) {
+//			((Graphics2D) g).drawLine(31 + i * 490, 379, 169 + i * 490, 241);
+//		}
 	}
 
 }

@@ -18,11 +18,6 @@ public class Warrior extends Chess {
 	public Warrior(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
 		setName("Warrior");
-//		if (color == 0) {
-//			setChineseName("仕");
-//		} else {
-//			setChineseName("士");
-//		}
 		setEatRule("Cannon,Elephant,Horse,Pawn,Rook,Warrior");
 	}
 
@@ -56,7 +51,7 @@ public class Warrior extends Chess {
 		}
 		return false;
 	};
-	
+
 	@Override
 	public void setChessCover(boolean cover) {
 		// TODO Auto-generated method stub

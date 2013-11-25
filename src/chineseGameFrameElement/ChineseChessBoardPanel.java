@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 /* @author Red Rose
  * Function:a panel to display chinese chess board
  * Last Update:2013/11/14
@@ -52,10 +53,11 @@ public class ChineseChessBoardPanel extends JPanel {
 		}
 
 		WhiteChessBoard whiteChessBoard = new WhiteChessBoard();
-		whiteChessBoard.setBounds(0, 0, 630, 700);
+		whiteChessBoard.setBounds(0, 0, 700, 700);
 		whiteChessBoard.setBackground(Color.white);
 		this.add(whiteChessBoard);
 	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ChineseChessBoardPanel cp = new ChineseChessBoardPanel();

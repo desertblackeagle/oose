@@ -21,7 +21,6 @@ public class BoardManager {
 	static final int red = 0;
 	static final int black = 1;
 
-//	private LocationMap locationMap;
 	private ChessRecord chessRecord = new ChessRecord();
 	private LocationMap locationMap = new LocationMap();
 	private Chess[][] chessLocationList = new Chess[10][9];
@@ -38,10 +37,11 @@ public class BoardManager {
 
 	public void moveTo(ButtonChess btnChess, int toX, int toY, ButtonChessArrayList buttonArrayList, Object gameFrame) {
 		// (move chess to position already)
-
-		if (btnChess.getChess().getChessCover()) {
+		// if play dark chess than check cover
+		if (btnChess.getChess().isChessCover()) {
 			System.out.println("Chess need to take cover");
-			btnChess.setLocation(locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+			moveBack(btnChess, taiwanChess);
+//			btnChess.setLocation(locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
 			return;
 		}
 
@@ -50,9 +50,11 @@ public class BoardManager {
 			// (move back)
 			System.out.println("turn " + forWhoToChess + " to chess");
 			if (whichGame == chinessChess) {
-				btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+				moveBack(btnChess, chinessChess);
+//				btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
 			} else {
-				btnChess.setLocation(locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+				moveBack(btnChess, taiwanChess);
+//				btnChess.setLocation(locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
 			}
 			return;
 		}
@@ -64,24 +66,28 @@ public class BoardManager {
 						if (btnChess.getChess().getColor() != chessLocationList[toY][toX].getColor()) {
 							System.out.println("eat");
 							chessRecord.record(btnChess.getChess(), toX, toY);
-							eatChess(btnChess, toX, toY, buttonArrayList,gameFrame);
+							eatChess(btnChess, toX, toY, buttonArrayList, gameFrame);
 							forWhoToChess = forWhoToChess ^ 1; // change other side to chess
 						} else {
-							// (move back) can't eat sam color
+							// (move back) can't eat same color
 							System.out.println(btnChess.getChess().getColor() + btnChess.getChess().getName() + "[" + btnChess.getChess().getX() + "," + btnChess.getChess().getY() + "]" + "can't eat sam color " + chessLocationList[toY][toX].getName());
 							if (whichGame == chinessChess) {
-								btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+								moveBack(btnChess, chinessChess);
+//								btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
 							} else {
-								btnChess.setLocation(locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+								moveBack(btnChess, taiwanChess);
+//								btnChess.setLocation(locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
 							}
 						}
 					} else {
 						// (move back) can't eat
 						System.out.println(btnChess.getChess().getName() + "[" + btnChess.getChess().getX() + "," + btnChess.getChess().getY() + "]" + "can't eat " + chessLocationList[toY][toX].getName());
 						if (whichGame == chinessChess) {
-							btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+							moveBack(btnChess, chinessChess);
+//							btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
 						} else {
-							btnChess.setLocation(locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+							moveBack(btnChess, taiwanChess);
+//							btnChess.setLocation(locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
 						}
 					}
 				} else {
@@ -97,15 +103,27 @@ public class BoardManager {
 				// (move back) can't move to
 				System.out.println(btnChess.getChess().getColor() + btnChess.getChess().getName() + "[" + btnChess.getChess().getX() + "," + btnChess.getChess().getY() + "]" + "can't move to " + "[" + toX + "," + toY + "]");
 				if (whichGame == chinessChess) {
-					btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+					moveBack(btnChess, chinessChess);
+//					btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
 				} else {
-					btnChess.setLocation(locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+					moveBack(btnChess, taiwanChess);
+//					btnChess.setLocation(locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
 				}
 			}
 		} else {
 			System.out.println("King can't look each other");
-			btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+			moveBack(btnChess, chinessChess);
+//			btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
 		}
+	}
+
+	private void moveBack(ButtonChess btnChess, int whichGame) {
+		if (whichGame == chinessChess) {
+			btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+		} else {
+			btnChess.setLocation(locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getTaiwaneseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
+		}
+
 	}
 
 	private boolean canMove(Chess chess, int toX, int toY) {
@@ -125,7 +143,7 @@ public class BoardManager {
 		if (whichGame == chinessChess) {
 			return true;
 		} else {
-			if (chessLocationList[toY][toX].getChessCover()) {
+			if (chessLocationList[toY][toX].isChessCover()) {
 				System.out.println("can't eat cover chess");
 				return false;
 			}
@@ -140,19 +158,15 @@ public class BoardManager {
 
 	private void eatChess(ButtonChess btnChess, int toX, int toY, ButtonChessArrayList buttonChessArrayList, Object gameFrame) {
 		// the chess from chessLocationList1[toX][toY] been set location to out of board
-		// System.out.println(buttonChessArrayList.getBtnArrayList());
 		for (int i = 0; i < buttonChessArrayList.getBtnArrayList().size(); i++) {
 			if (buttonChessArrayList.getBtnArrayList().get(i).getChess().equals(chessLocationList[toY][toX])) {
 				if (whichGame == chinessChess) {
 					if (buttonChessArrayList.getBtnArrayList().get(i).getChess().getName().equals("King")) {
-						System.out.println(btnChess.getChess().getColor() + " WIM");
 						if (btnChess.getChess().getColor() == red) {
-							
-							new InfoFrame("紅色贏了", "獲勝通知",(((ChineseGameFrame)gameFrame).getLocationOnScreen().x + ((ChineseGameFrame)gameFrame).getWidth() / 2) - 175,(((ChineseGameFrame)gameFrame).getLocationOnScreen().y + ((ChineseGameFrame)gameFrame).getHeight() / 2) - 20);
+							new InfoFrame("紅色贏了", "獲勝通知", (((ChineseGameFrame) gameFrame).getLocationOnScreen().x + ((ChineseGameFrame) gameFrame).getWidth() / 2) - 175, (((ChineseGameFrame) gameFrame).getLocationOnScreen().y + ((ChineseGameFrame) gameFrame).getHeight() / 2) - 20);
 						} else {
-							new InfoFrame("黑色贏了", "獲勝通知",(((ChineseGameFrame)gameFrame).getLocationOnScreen().x + ((ChineseGameFrame)gameFrame).getWidth() / 2) - 175,(((ChineseGameFrame)gameFrame).getLocationOnScreen().y + ((ChineseGameFrame)gameFrame).getHeight() / 2) - 20);
+							new InfoFrame("黑色贏了", "獲勝通知", (((ChineseGameFrame) gameFrame).getLocationOnScreen().x + ((ChineseGameFrame) gameFrame).getWidth() / 2) - 175, (((ChineseGameFrame) gameFrame).getLocationOnScreen().y + ((ChineseGameFrame) gameFrame).getHeight() / 2) - 20);
 						}
-
 					}
 				} else {
 					if (buttonChessArrayList.getBtnArrayList().get(i).getChess().getColor() == red) {
@@ -162,15 +176,15 @@ public class BoardManager {
 					}
 					if (redChessNum == 0) {
 						System.out.println("Black WIM");
-						new InfoFrame("黑色贏了", "獲勝通知",((TaiwanGameFrame)gameFrame).getLocationOnScreen().x,((ChineseGameFrame)gameFrame).getLocationOnScreen().y);
+						new InfoFrame("黑色贏了", "獲勝通知", ((TaiwanGameFrame) gameFrame).getLocationOnScreen().x, ((ChineseGameFrame) gameFrame).getLocationOnScreen().y);
 					} else if (blackChessNum == 0) {
 						System.out.println("Red WIM");
-						new InfoFrame("紅色贏了", "獲勝通知",((TaiwanGameFrame)gameFrame).getLocationOnScreen().x,((ChineseGameFrame)gameFrame).getLocationOnScreen().y);
+						new InfoFrame("紅色贏了", "獲勝通知", ((TaiwanGameFrame) gameFrame).getLocationOnScreen().x, ((ChineseGameFrame) gameFrame).getLocationOnScreen().y);
 					}
 				}
 				// dead chess remove
 				if (whichGame == chinessChess) {
-					buttonChessArrayList.getBtnArrayList().get(i).setLocation(1000, 1000);
+					buttonChessArrayList.getBtnArrayList().get(i).setLocation(100, 100);
 				} else {
 					LocationPoint tmp = locationMap.getDeadLocation();
 					System.out.println("D : " + tmp.getX() + " " + tmp.getY());

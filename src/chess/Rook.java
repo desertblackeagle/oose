@@ -19,11 +19,6 @@ public class Rook extends Chess {
 	public Rook(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
 		setName("Rook");
-//		if (color == 0) {
-//			setChineseName("俥");
-//		} else {
-//			setChineseName("車");
-//		}
 		setEatRule("Rook,Horse,Cannon,Pawn");
 	}
 

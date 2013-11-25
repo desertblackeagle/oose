@@ -13,19 +13,12 @@ public class Cannon extends Chess {
 		} else {
 			setChineseName("砲");
 		}
-//		System.out.println(getName()+"set rule");
 		setEatRule("King,Warrior,Elephant,Rook,Horse,Cannon,Pawn");
 	}
 
 	public Cannon(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
 		setName("Cannon");
-//		if (color == 0) {
-//			setChineseName("炮");
-//		} else {
-//			setChineseName("砲");
-//		}
-//		System.out.println(getName()+"set rule");
 		setEatRule("King,Warrior,Elephant,Rook,Horse,Cannon,Pawn");
 	}
 
@@ -131,6 +124,5 @@ public class Cannon extends Chess {
 			setChineseName("砲");
 		}
 	};
-	
-	
+
 }

@@ -39,9 +39,9 @@ public class SecondView extends FrameModel implements ActionListener {
 		back.setFont(new Font("細明體", Font.PLAIN, 36));
 
 		startGame.addActionListener(this);
-		// configure.addActionListener(this);
 		back.addActionListener(this);
-
+		configure.addActionListener(this);
+		
 		add(startGame);
 		add(configure);
 		add(back);
@@ -60,6 +60,10 @@ public class SecondView extends FrameModel implements ActionListener {
 			setVisible(false);
 			dispose();
 			new ThirdView(from, buttonName, getLocation().x, getLocation().y);
+		} else if (buttonName.equals("設定")) {
+			setVisible(false);
+			dispose();
+			new Configure(from, buttonName, getLocation().x, getLocation().y);
 		}
 
 	}

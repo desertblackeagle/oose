@@ -18,11 +18,6 @@ public class King extends Chess {
 	public King(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
 		setName("King");
-//		if (color == 0) {
-//			setChineseName("帥");
-//		} else {
-//			setChineseName("將");
-//		}
 		setEatRule("Cannon,Elephant,Horse,King,Rook,Warrior");
 	}
 

@@ -13,19 +13,12 @@ public class Horse extends Chess {
 		} else {
 			setChineseName("馬");
 		}
-//		System.out.println(getName()+"set rule");
 		setEatRule("Horse,Cannon,Pawn");
 	}
 
 	public Horse(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
 		setName("Horse");
-//		if (color == 0) {
-//			setChineseName("傌");
-//		} else {
-//			setChineseName("馬");
-//		}
-//		System.out.println(getName()+"set rule");
 		setEatRule("Horse,Cannon,Pawn");
 	}
 
@@ -54,7 +47,7 @@ public class Horse extends Chess {
 		}
 		return false;
 	};
-	
+
 	@Override
 	public void setChessCover(boolean cover) {
 		// TODO Auto-generated method stub

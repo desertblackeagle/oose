@@ -18,11 +18,6 @@ public class Elephant extends Chess {
 	public Elephant(int color, boolean chessCover, LocationPoint point, Chess[][] board) {
 		super(color, chessCover, point.getX(), point.getY(), board);
 		setName("Elephant");
-//		if (color == 0) {
-//			setChineseName("相");
-//		} else {
-//			setChineseName("象");
-//		}
 		setEatRule("Rook,Horse,Cannon,Pawn,Elephant");
 	}
 

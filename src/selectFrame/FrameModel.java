@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -15,6 +16,9 @@ import javax.swing.SwingConstants;
 
 public class FrameModel extends JFrame {
 
+	private static String userName = "";
+	public static ImageIcon img = null;
+
 	public FrameModel() {
 		initComponents();
 		initEventListeners();
@@ -22,7 +26,7 @@ public class FrameModel extends JFrame {
 	}
 
 	public void initComponents() {
-		setSize(900, 739);
+		setSize(1000, 739);
 		setLocationRelativeTo(null);
 		setLayout(null);
 		this.getContentPane().setBackground(Color.WHITE);
@@ -37,6 +41,13 @@ public class FrameModel extends JFrame {
 		});
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String temp) {
+		userName = temp;
+	}
 }
 
 class FrameCheck extends JDialog implements ActionListener {
@@ -63,12 +74,12 @@ class FrameCheck extends JDialog implements ActionListener {
 		} else {
 			text = new JLabel(alertText);
 		}
-		
+
 		text.setHorizontalAlignment(SwingConstants.CENTER);
 		text.setSize(150, 40);
 		text.setBounds(0, 40, getSize().width, 40);
 		text.setFont(new Font("細明體", Font.PLAIN, 18));
-		
+
 		add(text);
 	}
 
@@ -81,13 +92,13 @@ class FrameCheck extends JDialog implements ActionListener {
 
 		yes = makeButton("YES");
 		no = makeButton("NO");
-		
+
 		yes.setBounds(80, 100, 80, 40);
 		no.setBounds(240, 100, 80, 40);
-		
+
 		yes.addActionListener(this);
 		no.addActionListener(this);
-		
+
 		add(yes);
 		add(no);
 	}

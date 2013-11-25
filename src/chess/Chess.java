@@ -7,7 +7,7 @@ public class Chess {
 	static final int taiwanChess = 0;
 	static final int red = 0;
 	static final int black = 1;
-	
+
 	private int x = 0;// position x
 	private int y = 0;// position y
 	private String chessName = "";
@@ -16,7 +16,7 @@ public class Chess {
 	private boolean chessDead = false;
 	private int color = 0;// 0 為 紅色 , 1 為黑色;
 	private String[] eatRule = new String[7];
-	
+
 	public Chess() {
 
 	}
@@ -28,8 +28,8 @@ public class Chess {
 		this.y = y;
 		board[y][x] = this;
 	}
-	
-	public Chess(int color, boolean chessCover, int x, int y, Chess[][] board,boolean chessDead) {
+
+	public Chess(int color, boolean chessCover, int x, int y, Chess[][] board, boolean chessDead) {
 		this.color = color;
 		this.chessCover = chessCover;
 		this.x = x;
@@ -62,7 +62,7 @@ public class Chess {
 		chessName = name;
 	}
 
-	public boolean getChessCover() {
+	public boolean isChessCover() {
 		return chessCover;
 	}
 
@@ -77,7 +77,7 @@ public class Chess {
 	public void setColor(int color) {
 		this.color = color;
 	}
-	
+
 	public boolean isChessDead() {
 		return chessDead;
 	}
@@ -101,23 +101,15 @@ public class Chess {
 	public void setChineseName(String chineseName) {
 		this.chineseName = chineseName;
 	}
-	
+
 	public void setEatRule(String eatRule) {
-//		System.out.println("String : "+eatRule);
 		String del = ",";
 		StringTokenizer st = new StringTokenizer(eatRule, del);
-//		System.out.println("Count : "+st.countTokens());
 		int count = 0;
-		while(st.hasMoreTokens()){
+		while (st.hasMoreTokens()) {
 			this.eatRule[count] = st.nextToken();
-//			System.out.println("rule: "+this.eatRule[count]);
 			count++;
 		}
-//		for (int i = 0; i < st.countTokens(); i++) {
-//			System.out.println("i : "+i);
-//			this.eatRule[i] = st.nextToken();
-//			System.out.println("rule: "+this.eatRule[i]);
-//		}
 	}
 
 	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {

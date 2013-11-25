@@ -12,8 +12,8 @@ public class ChessRecord {
 	}
 	
 	public void record(Chess chess, int toX, int toY) {
-		String record = chess.getName() + " " + chess.getChineseName() + " " + chess.getColor() + " " + chess.getChessCover() + " " + chess.getX() + " " + chess.getY() + " " + toX + " " + toY;
-		System.out.println("Chess record : " + chess.getName() + " " + chess.getChineseName() + " " + chess.getColor() + " " + chess.getChessCover() + " " + chess.getX() + " " + chess.getY() + " " + toX + " " + toY);
+		String record = chess.getName() + " " + chess.getChineseName() + " " + chess.getColor() + " " + chess.isChessCover() + " " + chess.getX() + " " + chess.getY() + " " + toX + " " + toY;
+		System.out.println("Chess record : " + chess.getName() + " " + chess.getChineseName() + " " + chess.getColor() + " " + chess.isChessCover() + " " + chess.getX() + " " + chess.getY() + " " + toX + " " + toY);
 		recordStack.add(record);
 	}
 }
