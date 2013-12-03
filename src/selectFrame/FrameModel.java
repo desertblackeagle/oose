@@ -18,8 +18,10 @@ import javax.swing.SwingConstants;
 
 public class FrameModel extends JFrame {
 
-	private static String userName = "";
-	public static ImageIcon img = null;
+	private static String userNameP1 = "";
+	private static String userNameP2 = "";
+	public static ImageIcon imgP1 = null;
+	public static ImageIcon imgP2 = null;
 
 	public FrameModel() {
 		initComponents();
@@ -43,12 +45,21 @@ public class FrameModel extends JFrame {
 		});
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUserName(int p) {
+		if (p == 1) {
+			return userNameP1;
+		} else {
+			return userNameP2;
+		}
+
 	}
 
-	public void setUserName(String temp) {
-		userName = temp;
+	public void setUserName(String temp, int p) {
+		if (p == 1) {
+			userNameP1 = temp;
+		} else {
+			userNameP2 = temp;
+		}
 	}
 
 	public void changeLabelText(JLabel label, String text) {
@@ -58,11 +69,22 @@ public class FrameModel extends JFrame {
 		label.setText(text);
 	}
 
-	public JLabel initImage(JLabel label, ImageIcon image, int x, int y, int width, int height) {
+	public JLabel initImage(JLabel label, ImageIcon image, int p, int x, int y, int width, int height) {
 		if (image != null) {
-			img = image;
+			if (p == 1) {
+				imgP1 = image;
+				label = new JLabel(imgP1);
+			} else {
+				imgP2 = image;
+				label = new JLabel(imgP2);
+			}
+		}else{
+			if (p == 1) {
+				label = new JLabel(imgP1);
+			} else {
+				label = new JLabel(imgP2);
+			}
 		}
-		label = new JLabel(img);
 		label.setBounds(x, y, width, height);
 		return label;
 	}
@@ -82,12 +104,15 @@ class FrameCheck extends JDialog implements ActionListener {
 	private JLabel text;
 
 	public FrameCheck() {
+		setResizable(false);
 		initDialog();
 		initTextLabel("");
 		setVisible(true);
+
 	}
 
 	public FrameCheck(String alertText) {
+		setResizable(false);
 		initDialog();
 		initTextLabel(alertText);
 		setVisible(true);

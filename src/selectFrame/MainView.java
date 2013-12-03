@@ -18,6 +18,13 @@ public class MainView extends FrameModel implements ActionListener {
 		createButton();
 	}
 
+	public MainView(int locationX, int locationY) {
+		super();
+		setLocation(locationX, locationY);
+		setTitle("主畫面");
+		createButton();
+	}
+
 	public JButton makeButton(String name) {
 		return new JButton(name);
 	}

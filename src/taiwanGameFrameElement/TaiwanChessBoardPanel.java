@@ -18,8 +18,8 @@ public class TaiwanChessBoardPanel extends JPanel {
 	public TaiwanChessBoardPanel() {
 		// TODO Auto-generated constructor stub
 		this.setLayout(null);
-		
-		WhiteChessBoard whiteChessBoard = new WhiteChessBoard();
+
+		WhiteChessBoard whiteChessBoard = new WhiteChessBoard(630, 700, "c://a.jpg");
 		whiteChessBoard.setBounds(0, 0, 630, 700);
 		whiteChessBoard.setBackground(Color.white);
 		this.add(whiteChessBoard);

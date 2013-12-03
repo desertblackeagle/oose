@@ -1,11 +1,14 @@
 package frame;
 
 import java.awt.Color;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
+import selectFrame.MainView;
 import taiwanGameFrameElement.TaiwanChessBoardPanel;
 import controlUnit.BoardManager;
 
@@ -17,19 +20,29 @@ public class TaiwanGameFrame extends GameFrame {
 		this.buttonArrayList = buttonArrayList;
 		setLocation(locationX, locationY);
 		setTitle(title);
-		if (img == null) {
-			try {
-				picLocation = initImage(picLocation, new ImageIcon(new URL("http://i.imgur.com/NFaCYMo.jpg")), 750, 0, 100, 100);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		if (imgP1 == null) {
+			picLocationP1 = initImage(picLocationP1, new ImageIcon("C:\\Users\\rose\\Dropbox\\JavaWorspace\\OOSE1\\src\\rose.jpg"), 1, 750, 0, 100, 100);
 		} else {
-			picLocation = initImage(picLocation, null, 750, 0, 100, 100);
+			picLocationP1 = initImage(picLocationP1, null, 1, 750, 0, 100, 100);
 		}
-		userOrder = initLabel(userOrder, "輪到紅色", 750, 100, 100, 50, 25);
-		add(picLocation);
+		userOrder = initLabel(userOrder, "決定顏色", 750, 100, 100, 50, 25);
+		add(picLocationP1);
 		add(userOrder);
+
+		backMainView = new JButton("返回主畫面");
+		backMainView.setFont(new Font("細明體", Font.PLAIN, 25));
+		backMainView.setBounds(700, 600, 200, 50);
+		backMainView.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				setVisible(false);
+				dispose();
+				new MainView(getLocation().x, getLocation().y);
+			}
+		});
+		add(backMainView);
 
 		for (int i = 0; i < buttonArrayList.getBtnArrayList().size(); i++) {
 			add(buttonArrayList.getBtnArrayList().get(i));

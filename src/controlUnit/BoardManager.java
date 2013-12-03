@@ -26,11 +26,13 @@ public class BoardManager {
 	private ChessRecord chessRecord = new ChessRecord();
 	private LocationMap locationMap = new LocationMap();
 	private Chess[][] chessLocationList = new Chess[10][9];
+	ButtonChess tmp[] = new ButtonChess[2];
 
 	private int forWhoToChess = turnRed;
 	private int whichGame; // chinese chess = 1 ; taiwan chess = 0;
 	private int redChessNum = 16;
 	private int blackChessNum = 16;
+	private int taiwanOrderCnt = 0;
 
 	public BoardManager(int whichGame) {
 		// TODO Auto-generated constructor stub
@@ -119,7 +121,33 @@ public class BoardManager {
 		}
 	}
 
-	public void swapUserOrder(GameFrame gameFrame){
+	public void taiwanChessOrder(ButtonChess btnChess, GameFrame gameFrame) {
+		if (whichGame == taiwanChess) {
+			if (taiwanOrderCnt > 2) {
+				swapUserOrder(gameFrame);
+			}
+			if (taiwanOrderCnt < 2) {
+				tmp[taiwanOrderCnt] = btnChess;
+				taiwanOrderCnt++;
+			}
+			if (taiwanOrderCnt == 2) {
+				if (tmp[0].getChess().getPriority() >= tmp[1].getChess().getPriority()) {
+					forWhoToChess = tmp[0].getChess().getColor();
+					taiwanOrderCnt++;
+				} else {
+					forWhoToChess = tmp[1].getChess().getColor();
+					taiwanOrderCnt++;
+				}
+				if (forWhoToChess == red) {
+					gameFrame.changeLabelText(gameFrame.getUserOrder(), "輪到紅色");
+				} else {
+					gameFrame.changeLabelText(gameFrame.getUserOrder(), "輪到黑色");
+				}
+			}
+		}
+	}
+
+	public void swapUserOrder(GameFrame gameFrame) {
 		forWhoToChess = forWhoToChess ^ 1; // change other side to chess
 		if (forWhoToChess == red) {
 			gameFrame.changeLabelText(gameFrame.getUserOrder(), "輪到紅色");
@@ -127,7 +155,7 @@ public class BoardManager {
 			gameFrame.changeLabelText(gameFrame.getUserOrder(), "輪到黑色");
 		}
 	}
-	
+
 	private void moveBack(ButtonChess btnChess, int whichGame) {
 		if (whichGame == chinessChess) {
 			btnChess.setLocation(locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getX(), locationMap.getChineseLocationMap()[btnChess.getChess().getY()][btnChess.getChess().getX()].getY());
@@ -223,13 +251,42 @@ public class BoardManager {
 				kingCount = 0;
 				count = 0;
 				for (int j = 0; j < 10; j++) {
+//					System.out.println((i+3) +" "+ j);
 					if (chessLocationList[j][3 + i] != null) {
 						if (j == btnChess.getChess().getY() && (3 + i) == btnChess.getChess().getX()) {
 						} else {
 							if (chessLocationList[j][3 + i].getName().equals("King")) {
+//								if (j == toY && (3 + i) == toX) {
+//									return true;
+//								}
+								System.out.println(j + " _ " + (3 + i));
+								kingCount++;
+							} else {
 								if (j == toY && (3 + i) == toX) {
-									return true;
+									if (chessLocationList[btnChess.getChess().getY()][btnChess.getChess().getX()].getName().equals("King")) {
+										System.out.println(j + " _ " + (3 + i));
+										kingCount++;
+									} else {
+										if (kingCount == 1) {
+											System.out.println(j + " _ " + (3 + i));
+											count++;
+										}
+									}
+								} else {
+									if (kingCount == 1) {
+										System.out.println(j + " _ " + (3 + i));
+										count++;
+									}
 								}
+							}
+						}
+					} else {
+						if (j == toY && (3 + i) == toX) {
+							if (chessLocationList[btnChess.getChess().getY()][btnChess.getChess().getX()].getName().equals("King")) {
+//								if (j == toY && (3 + i) == toX) {
+//									return true;
+//								}
+
 								System.out.println(j + " _ " + (3 + i));
 								kingCount++;
 							} else {
@@ -237,19 +294,8 @@ public class BoardManager {
 									System.out.println(j + " _ " + (3 + i));
 									count++;
 								}
-							}
-						}
-					} else {
-						if (j == toY && (3 + i) == toX) {
-							if (chessLocationList[btnChess.getChess().getY()][btnChess.getChess().getX()].getName().equals("King")) {
-								if (j == toY && (3 + i) == toX) {
-									return true;
-								}
-								System.out.println(j + " _ " + (3 + i));
-								kingCount++;
-							} else {
-								System.out.println(j + " _ " + (3 + i));
-								count++;
+//								System.out.println(j + " _ " + (3 + i));
+//								count++;
 							}
 						}
 					}
@@ -292,13 +338,13 @@ public class BoardManager {
 		}
 	}
 
-	public void printRecord(){
-		Iterator<String> it = chessRecord.getRecordStack().iterator(); 
-        while(it.hasNext()){ 
-            System.out.println(it.next());
-        } 
+	public void printRecord() {
+		Iterator<String> it = chessRecord.getRecordStack().iterator();
+		while (it.hasNext()) {
+			System.out.println(it.next());
+		}
 	}
-	
+
 	public Chess[][] getChessLocationList() {
 		return chessLocationList.clone();
 	}

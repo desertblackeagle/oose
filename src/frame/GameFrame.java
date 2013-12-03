@@ -16,13 +16,17 @@ public class GameFrame extends FrameModel implements MouseMotionListener, MouseL
 	static final int chinessChess = 1;
 	static final int taiwanChess = 0;
 
+	JButton backMainView;
 	int taiwanOrderCnt = 0;
 	int whichGame = chinessChess;
 	LocationMap locationMap = new LocationMap();
 	BoardManager manager;
 	ButtonChessArrayList buttonArrayList;
-	JLabel picLocation;
+	JLabel picLocationP1;
+	JLabel picLocationP2;
 	JLabel userOrder;
+	JLabel nameP1;
+	JLabel nameP2;
 
 	public void setBtnLoc(int whichGame, MouseEvent e, int x, int y, int xInc, int yInc) {
 		if (whichGame == chinessChess) {
@@ -65,6 +69,7 @@ public class GameFrame extends FrameModel implements MouseMotionListener, MouseL
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		manager.taiwanChessOrder(((ButtonChess) e.getSource()), this);
 		((ButtonChess) e.getSource()).getChess().setChessCover(false);
 		((ButtonChess) e.getSource()).setText(((ButtonChess) e.getSource()).getChess().getChineseName());
 	}
