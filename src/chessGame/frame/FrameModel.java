@@ -1,0 +1,45 @@
+﻿package chessGame.frame;
+
+import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import chessGame.frame.dialog.FrameCheck;
+
+public abstract class FrameModel extends JFrame {
+
+	boolean visable = true;
+
+	public FrameModel(boolean visable) {
+		this.visable = visable;
+		initFrame();
+		initFrameEventListeners();
+	}
+
+	public void initFrame() {
+		setSize(1000, 739);
+		setVisible(visable);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setLayout(null);
+		this.getContentPane().setBackground(Color.WHITE);
+	}
+
+	public void initFrameEventListeners() {
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				new FrameCheck();
+			}
+		});
+	}
+
+	public abstract JButton makeButton();
+
+	public static void main(String[] args) {
+//		FrameModel frame = new FrameModel(true);
+	}
+}

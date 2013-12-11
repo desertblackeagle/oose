@@ -1,0 +1,89 @@
+package edu.fcu.oose.factory;
+
+public class GameDemo {
+
+	public static void main(String[] args) {
+		Game mg = new Game();
+		mg.createMaze();
+
+		Game mg2 = new GhostGame();
+		mg2.createMaze();
+	}
+
+}
+
+class Game {
+
+	View	畫面
+	RuleMgr	規則
+	Data	資料/狀態
+
+	public void createView() {
+		//make下面東西
+		棋盤畫面 ;
+		選單 = make選單();
+		棋子
+	}
+/*
+	protected Wall makeWall() {
+		return new Wall();
+	}
+
+	protected Door makeDoor() {
+		return new Door();
+	}
+
+	protected Maze makeMaze() {
+		return new Maze();
+	}
+	*/
+}
+
+class ChineseChessGame extends Game {
+	protected 畫面  makeWall() {
+		return new GhostWall();
+	}
+
+	protected Door makeDoor() {
+		// TODO Auto-generated method stub
+		return new GhostDoor();
+	}
+
+	protected Maze makeMaze() {
+		// TODO Auto-generated method stub
+		return new GhostMaze();
+	}
+
+}
+
+class Maze {
+	public Maze() {
+		System.out.println(this);
+
+	}
+}
+
+class Wall {
+	public Wall() {
+		System.out.println(this);
+
+	}
+}
+
+class Door {
+	public Door() {
+		System.out.println(this);
+	}
+}
+
+class GhostMaze extends Maze {
+
+}
+
+class GhostDoor extends Door {
+
+}
+
+class GhostWall extends Wall {
+
+}
