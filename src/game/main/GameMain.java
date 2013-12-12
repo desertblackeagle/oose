@@ -1,8 +1,8 @@
 package game.main;
 
+import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
 import chessGame.frame.MainView;
-import chessGame.rule.ChessGameRule;
 import interfaceGame.GameFactoryInterface;
 
 public class GameMain {

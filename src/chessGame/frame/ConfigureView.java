@@ -194,7 +194,7 @@ public class ConfigureView extends FrameModel implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		ConfigureView frame = new ConfigureView(true,"123","123",0,0);
+		ConfigureView frame = new ConfigureView(true, "123", "123", 0, 0);
 	}
 
 }

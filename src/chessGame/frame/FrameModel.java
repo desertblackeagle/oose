@@ -7,11 +7,14 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import chessGame.controlUnit.GameObserver;
+import chessGame.controlUnit.GameObserverable;
 import chessGame.frame.dialog.FrameCheckDialog;
 
 public abstract class FrameModel extends JFrame {
 
 	boolean visable = true;
+	private GameObserverable gobs = new GameObserverable();
 
 	public FrameModel(boolean visable) {
 		this.visable = visable;
@@ -38,6 +41,14 @@ public abstract class FrameModel extends JFrame {
 	}
 
 	public abstract JButton makeButton(String text);
+
+	public void addObserver(GameObserver o) {
+		gobs.addObserver(o);
+	}
+
+	public void notifyObserver(Object o) {
+		gobs.notifyObserver(o);
+	}
 
 	public static void main(String[] args) {
 //		FrameModel frame = new FrameModel(true);

@@ -1,4 +1,4 @@
-package chessGame.rule;
+package chessGame.controlUnit;
 
 import interfaceGame.RuleInterface;
 
