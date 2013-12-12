@@ -2,17 +2,15 @@
 
 import java.awt.FileDialog;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class Configure extends FrameModel implements ActionListener {
+public class ConfigureView extends FrameModel implements ActionListener {
 
 	private String from;
 	private String now;
@@ -32,7 +30,7 @@ public class Configure extends FrameModel implements ActionListener {
 	private JTextField textP1;
 	private JTextField textP2;
 
-	public Configure(boolean visable, String from, String now, int locationX, int locationY) {
+	public ConfigureView(boolean visable, String from, String now, int locationX, int locationY) {
 		super(visable);
 		this.from = from;
 		this.now = now;
@@ -41,7 +39,6 @@ public class Configure extends FrameModel implements ActionListener {
 		createButton();
 		createLabel();
 		createTextField();
-
 	}
 
 	public void createButton() {
@@ -197,6 +194,7 @@ public class Configure extends FrameModel implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		Configure frame = new Configure(true,"123","123",0,0);
+		ConfigureView frame = new ConfigureView(true,"123","123",0,0);
 	}
+
 }

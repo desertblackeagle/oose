@@ -1,4 +1,4 @@
-package chessGame.frame.frameElement;
+package chessGame.frame.frameElement.taiwanChess;
 
 import java.awt.Color;
 import java.net.MalformedURLException;

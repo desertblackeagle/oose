@@ -1,4 +1,4 @@
-package chessGame.frame.frameElement;
+package chessGame.frame.frameElement.chineseChess;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import chessGame.frame.dialog.FrameCheck;
+import chessGame.frame.dialog.FrameCheckDialog;
 
 public class CrossChineseChessBoardFrame extends JPanel {
 	int width = 0, hight = 0;

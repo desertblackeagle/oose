@@ -1,4 +1,4 @@
-package chessGame.frame.frameElement;
+package chessGame.frame.frameElement.chineseChess;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

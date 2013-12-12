@@ -1,14 +1,16 @@
 ﻿package chessGame.frame;
 
+import interfaceGame.FrameInterface;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import chessGame.frame.dialog.FrameCheck;
+import chessGame.frame.dialog.FrameCheckDialog;
 
-public class MainView extends FrameModel implements ActionListener {
+public class MainView extends FrameModel implements ActionListener , FrameInterface {
 
 	private JButton chinaChess;
 	private JButton taiwanChess;
@@ -57,7 +59,7 @@ public class MainView extends FrameModel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String buttonName = e.getActionCommand();
 		if (buttonName.equals("離開")) {
-			new FrameCheck(null, "請問真的要離開遊戲嗎？", null);
+			new FrameCheckDialog(null, "請問真的要離開遊戲嗎？", null);
 		} else {
 			setVisible(false);
 			dispose();

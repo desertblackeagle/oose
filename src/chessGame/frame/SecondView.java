@@ -63,7 +63,7 @@ public class SecondView extends FrameModel implements ActionListener {
 		} else if (buttonName.equals("設定")) {
 			setVisible(false);
 			dispose();
-			new Configure(true, from, buttonName, getLocation().x, getLocation().y);
+			new ConfigureView(true, from, buttonName, getLocation().x, getLocation().y);
 		}
 
 	}

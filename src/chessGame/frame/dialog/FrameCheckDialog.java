@@ -9,20 +9,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class FrameCheck extends JDialog implements ActionListener {
+public class FrameCheckDialog extends JDialog implements ActionListener {
 	private JButton yes;
 	private JButton no;
 	private JLabel text;
 	private JFrame toFrame = null; // 要跳到的視窗
 	private JFrame source = null; // 呼叫此Dialog的視窗
 
-	public FrameCheck() {
+	public FrameCheckDialog() {
 		setVisible(true);
 		initDialog();
 		initTextLabel("");
 	}
 
-	public FrameCheck(JFrame source, String alertText, JFrame toFrame) {
+	public FrameCheckDialog(JFrame source, String alertText, JFrame toFrame) {
 		setVisible(true);
 		initDialog();
 		initTextLabel(alertText);

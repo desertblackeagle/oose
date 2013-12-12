@@ -7,7 +7,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import chessGame.frame.dialog.FrameCheck;
+import chessGame.frame.dialog.FrameCheckDialog;
 
 public abstract class FrameModel extends JFrame {
 
@@ -32,12 +32,12 @@ public abstract class FrameModel extends JFrame {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				new FrameCheck();
+				new FrameCheckDialog();
 			}
 		});
 	}
 
-	public abstract JButton makeButton();
+	public abstract JButton makeButton(String text);
 
 	public static void main(String[] args) {
 //		FrameModel frame = new FrameModel(true);
