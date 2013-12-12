@@ -8,6 +8,7 @@ public class ChessGameData implements DataInterface {
 
 	public void createData() {
 		playerInfo = new PlayerInfo();
+
 		locMap = new LocationMap();
 	}
 
