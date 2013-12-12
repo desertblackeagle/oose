@@ -10,7 +10,7 @@ import javax.swing.JButton;
 
 import chessGame.frame.dialog.FrameCheckDialog;
 
-public class MainView extends FrameModel implements ActionListener , FrameInterface {
+public class MainView extends FrameModel implements ActionListener, FrameInterface {
 
 	private JButton chinaChess;
 	private JButton taiwanChess;

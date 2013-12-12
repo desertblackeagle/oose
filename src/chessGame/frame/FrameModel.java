@@ -9,12 +9,14 @@ import javax.swing.JFrame;
 
 import chessGame.controlUnit.GameObserver;
 import chessGame.controlUnit.GameObserverable;
+import chessGame.data.ChessGameData;
 import chessGame.frame.dialog.FrameCheckDialog;
 
 public abstract class FrameModel extends JFrame {
 
 	boolean visable = true;
 	private GameObserverable gobs = new GameObserverable();
+	ChessGameData data = new ChessGameData();
 
 	public FrameModel(boolean visable) {
 		this.visable = visable;
@@ -46,8 +48,12 @@ public abstract class FrameModel extends JFrame {
 		gobs.addObserver(o);
 	}
 
-	public void notifyObserver(Object o) {
-		gobs.notifyObserver(o);
+	public void notifyObserver(Object obs, Object o) {
+		gobs.notifyObserver(obs, o);
+	}
+
+	public void notifyObserver(Object obs, Object o, Object o1) {
+		gobs.notifyObserver(obs, o, o1);
 	}
 
 	public static void main(String[] args) {
