@@ -2,9 +2,11 @@
 
 import java.awt.FileDialog;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -39,6 +41,7 @@ public class ConfigureView extends FrameModel implements ActionListener {
 		createButton();
 		createLabel();
 		createTextField();
+		addObserver(data.getPlayerInfo());
 	}
 
 	public void createButton() {
@@ -69,6 +72,7 @@ public class ConfigureView extends FrameModel implements ActionListener {
 				i = JOptionPane.showConfirmDialog(null, "確認修改此名字?", "修改確認", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (i == JOptionPane.YES_OPTION) {
 					JOptionPane.showConfirmDialog(null, "已為您修改", "修改完成", JOptionPane.PLAIN_MESSAGE);
+					notifyObserver(this, 1, textP1.getText());
 				} else {
 					return;
 				}
@@ -83,7 +87,9 @@ public class ConfigureView extends FrameModel implements ActionListener {
 				i = JOptionPane.showConfirmDialog(null, "確認修改此名字?", "修改確認", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (i == JOptionPane.YES_OPTION) {
 					JOptionPane.showConfirmDialog(null, "已為您修改", "修改完成", JOptionPane.PLAIN_MESSAGE);
+					notifyObserver(this, 2, textP2.getText());
 				} else {
+//					textP1
 					return;
 				}
 			}
@@ -158,7 +164,17 @@ public class ConfigureView extends FrameModel implements ActionListener {
 		if (file == null)
 			return;
 		file = fd.getDirectory() + file;
-
+		if (p == 1) {
+			ImageIcon imgP1 = new ImageIcon(file);
+			imgP1.setImage(imgP1.getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT));
+			notifyObserver(this, 1, imgP1);
+			picLocationP1.setIcon(imgP1);
+		} else {
+			ImageIcon imgP2 = new ImageIcon(file);
+			imgP2.setImage(imgP2.getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT));
+			notifyObserver(this, 2, imgP2);
+			picLocationP2.setIcon(imgP2);
+		}
 	}
 
 	@Override

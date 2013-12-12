@@ -10,13 +10,19 @@ public class GameObserverable {
 		list = new ArrayList<GameObserver>();
 	}
 
-	public void addObserver(GameObserver o){
+	public void addObserver(GameObserver o) {
 		list.add(o);
 	}
-	
-	public void notifyObserver(Object o) {
+
+	public void notifyObserver(Object obs, Object o) {
 		for (GameObserver go : list) {
-			go.update(o);
+			go.update(obs, o);
+		}
+	}
+
+	public void notifyObserver(Object obs, Object o, Object o1) {
+		for (GameObserver go : list) {
+			go.update(obs, o, o1);
 		}
 	}
 }
