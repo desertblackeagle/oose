@@ -48,81 +48,65 @@ public class CrossChineseChessBoardFrame extends JPanel {
 		float lineWidth = 3.25f;
 		((Graphics2D) g).setStroke(new BasicStroke(lineWidth));
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) {//直線
 			((Graphics2D) g).drawLine(30 + i * 70, 30, 30 + i * 70, 590);
 		}
 
-		for (int i = 0; i < 9; i++) {
-			((Graphics2D) g).drawLine(30 + i * 70, 30, 30 + i * 70, 310);
+		for (int i = 0; i < 9; i++) {//橫線
+			
+			if(i == 0 || i == 9)
+			{
+				((Graphics2D) g).drawLine(30 , 30  ,660, 30 );
+				((Graphics2D) g).drawLine(30 , 590 ,660, 590);
+			}
+			else
+			{
+				((Graphics2D) g).drawLine(30, 30+ i * 70  ,310, 30+ i * 70 );
+				((Graphics2D) g).drawLine(380, 30+ i * 70  ,660, 30+ i * 70 );
+			}
 		}
-
-//		for (int i = 0; i < 10; i++) {
-//			((Graphics2D) g).drawLine(30 + i * 70, 380, 30 + i * 70, 660);
-//		}
-
-//		for (int i = 0; i < 2; i++) {
-//			((Graphics2D) g).drawLine(30 + i * 560, 310, 30 + i * 560, 380);
-//		}
-//
-//		for (int i = 0; i < 2; i++) {
-//			((Graphics2D) g).drawLine(241, 31 + i * 490, 379, 169 + i * 490);
-//		}
-//
-//		for (int i = 0; i < 2; i++) {
-//			((Graphics2D) g).drawLine(379, 31 + i * 490, 241, 169 + i * 490);
-//		}
-
-//		for (int i = 0; i < 2; i++) {
-//			for (int j = 0; j < 4; j++) {
-//				((Graphics2D) g).drawLine(140 * j + 165, 225, 140 * j + 165, 235);
-//				((Graphics2D) g).drawLine(140 * j + 155, 235, 140 * j + 165, 235);
-//				((Graphics2D) g).drawLine(140 * j + 170, 225, 140 * j + 170, 260);
-//				((Graphics2D) g).drawLine(140 * j + 155, 240, 140 * j + 170, 240);
-//				((Graphics2D) g).drawLine(140 * j + 155, 245, 140 * j + 165, 245);
-//				((Graphics2D) g).drawLine(140 * j + 165, 255, 140 * j + 165, 245);
-//				((Graphics2D) g).drawLine(140 * j + 165, 225 + 210, 140 * j + 165, 235 + 210);
-//				((Graphics2D) g).drawLine(140 * j + 155, 235 + 210, 140 * j + 165, 235 + 210);
-//				((Graphics2D) g).drawLine(140 * j + 170, 225 + 210, 140 * j + 170, 260 + 210);
-//				((Graphics2D) g).drawLine(140 * j + 155, 240 + 210, 140 * j + 170, 240 + 210);
-//				((Graphics2D) g).drawLine(140 * j + 155, 245 + 210, 140 * j + 165, 245 + 210);
-//				((Graphics2D) g).drawLine(140 * j + 165, 255 + 210, 140 * j + 165, 245 + 210);
-//			}
-//		}
-//
-//		for (int i = 0; i < 2; i++) {
-//			for (int j = 0; j < 4; j++) {
-//				((Graphics2D) g).drawLine(140 * j + 35, 225, 140 * j + 35, 235);
-//				((Graphics2D) g).drawLine(140 * j + 35, 235, 140 * j + 45, 235);
-//				((Graphics2D) g).drawLine(140 * j + 30, 225, 140 * j + 30, 255);
-//				((Graphics2D) g).drawLine(140 * j + 30, 240, 140 * j + 45, 240);
-//				((Graphics2D) g).drawLine(140 * j + 35, 245, 140 * j + 45, 245);
-//				((Graphics2D) g).drawLine(140 * j + 35, 255, 140 * j + 35, 245);
-//				((Graphics2D) g).drawLine(140 * j + 35, 225 + 210, 140 * j + 35, 235 + 210);
-//				((Graphics2D) g).drawLine(140 * j + 35, 235 + 210, 140 * j + 45, 235 + 210);
-//				((Graphics2D) g).drawLine(140 * j + 30, 225 + 210, 140 * j + 30, 255 + 210);
-//				((Graphics2D) g).drawLine(140 * j + 30, 240 + 210, 140 * j + 45, 240 + 210);
-//				((Graphics2D) g).drawLine(140 * j + 35, 245 + 210, 140 * j + 45, 245 + 210);
-//				((Graphics2D) g).drawLine(140 * j + 35, 255 + 210, 140 * j + 35, 245 + 210);
-//			}
-//		}
-//
-//		for (int i = 0; i < 2; i++) {
-//			for (int j = 0; j < 2; j++) {
-//				((Graphics2D) g).drawLine(420 * j + 95, 350 * i + 155, 420 * j + 95, 350 * i + 165);
-//				((Graphics2D) g).drawLine(420 * j + 85, 350 * i + 165, 420 * j + 95, 350 * i + 165);
-//				((Graphics2D) g).drawLine(420 * j + 100, 350 * i + 155, 420 * j + 100, 350 * i + 185);
-//				((Graphics2D) g).drawLine(420 * j + 85, 350 * i + 170, 420 * j + 100, 350 * i + 170);
-//				((Graphics2D) g).drawLine(420 * j + 85, 350 * i + 175, 420 * j + 95, 350 * i + 175);
-//				((Graphics2D) g).drawLine(420 * j + 95, 350 * i + 185, 420 * j + 95, 350 * i + 175);
-//				((Graphics2D) g).drawLine(420 * j + 105, 350 * i + 155, 420 * j + 105, 350 * i + 165);
-//				((Graphics2D) g).drawLine(420 * j + 105, 350 * i + 165, 420 * j + 115, 350 * i + 165);
-//				((Graphics2D) g).drawLine(420 * j + 100, 350 * i + 155, 420 * j + 100, 350 * i + 185);
-//				((Graphics2D) g).drawLine(420 * j + 100, 350 * i + 170, 420 * j + 115, 350 * i + 170);
-//				((Graphics2D) g).drawLine(420 * j + 105, 350 * i + 175, 420 * j + 115, 350 * i + 175);
-//				((Graphics2D) g).drawLine(420 * j + 105, 350 * i + 185, 420 * j + 105, 350 * i + 175);
-//			}
-//		}
-
+		//交叉
+		((Graphics2D) g).drawLine(30, 240 , 170, 380 );
+		((Graphics2D) g).drawLine(30, 380 , 170, 240 );
+		((Graphics2D) g).drawLine(520, 240 , 660, 380 );
+		((Graphics2D) g).drawLine(520, 380 , 660, 240 );
+		
+		
+		for(int i = 0 ; i < 2 ; i++)
+		{
+			for(int j=0 ; j < 5 ; j++)
+			{
+				if(j!=0)
+				{
+					((Graphics2D) g).drawLine(225+(210*i), 25+ 140 * j  , 235+(210*i), 25+ 140 * j );
+					((Graphics2D) g).drawLine(245+(210*i), 25+ 140 * j  , 255+(210*i), 25+ 140 * j );
+					((Graphics2D) g).drawLine(235+(210*i), 15+ 140 * j  , 235+(210*i), 25+ 140 * j );
+					((Graphics2D) g).drawLine(245+(210*i), 15+ 140 * j  , 245+(210*i), 25+ 140 * j );
+				}
+				if(j!=4) 
+				{
+					((Graphics2D) g).drawLine(225+(210*i), 35+ 140 * j  , 235+(210*i), 35+ 140 * j );
+					((Graphics2D) g).drawLine(245+(210*i), 35+ 140 * j  , 255+(210*i), 35+ 140 * j );
+					((Graphics2D) g).drawLine(235+(210*i), 35+ 140 * j  , 235+(210*i), 45+ 140 * j );
+					((Graphics2D) g).drawLine(245+(210*i), 35+ 140 * j  , 245+(210*i), 45+ 140 * j );
+				}	
+			}
+		}
+		for(int i = 0 ; i < 2 ; i++)
+		{
+			for(int j = 0 ; j < 2 ; j++)
+			{
+				((Graphics2D) g).drawLine(155+(350*i), 95+ (420 * j) , 165+(350*i), 95+ (420 * j));
+				((Graphics2D) g).drawLine(175+(350*i), 95+ (420 * j) , 185+(350*i), 95+ (420 * j));
+				((Graphics2D) g).drawLine(175+(350*i), 105+ (420 * j), 185+(350*i), 105+ (420 * j));
+				((Graphics2D) g).drawLine(155+(350*i), 105+ (420 * j), 165+(350*i), 105+ (420 * j));
+				
+				((Graphics2D) g).drawLine(165+(350*i), 85+ (420 * j), 165+(350*i), 95+ (420 * j));
+				((Graphics2D) g).drawLine(165+(350*i), 105+ (420 * j), 165+(350*i), 115+ (420 * j));
+				((Graphics2D) g).drawLine(175+(350*i), 85+ (420 * j), 175+(350*i), 95+ (420 * j));
+				((Graphics2D) g).drawLine(175+(350*i), 105+ (420 * j), 175+(350*i), 115+ (420 * j));
+			}
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
