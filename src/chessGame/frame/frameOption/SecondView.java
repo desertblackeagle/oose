@@ -1,4 +1,4 @@
-﻿package chessGame.frame;
+﻿package chessGame.frame.frameOption;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -6,15 +6,19 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class SecondView extends FrameModel implements ActionListener {
+import abstractGame.chessGame.AbstractFrameModel;
+import chessGame.data.ChessGameData;
+
+public class SecondView extends AbstractFrameModel {
 
 	private String from;
 	private JButton startGame;
 	private JButton configure;
 	private JButton back;
 
-	public SecondView(boolean visable, String temp, int locationX, int locationY) {
-		super(visable);
+	public SecondView(boolean visable, ChessGameData data, String temp, int locationX, int locationY) {
+		super(visable, data);
+		System.out.println(data.getConfigData().getPlayerNameP1());
 		from = temp;
 		setTitle(from);
 		createButton();
@@ -55,15 +59,15 @@ public class SecondView extends FrameModel implements ActionListener {
 		if (buttonName.equals("返回前頁")) {
 			setVisible(false);
 			dispose();
-			new MainView(true);
+			new MainView(true, data);
 		} else if (buttonName.equals("開始遊戲")) {
 			setVisible(false);
 			dispose();
-			new ThirdView(true, from, buttonName, getLocation().x, getLocation().y);
+			new ThirdView(true, data, from, buttonName, getLocation().x, getLocation().y);
 		} else if (buttonName.equals("設定")) {
 			setVisible(false);
 			dispose();
-			new ConfigureView(true, from, buttonName, getLocation().x, getLocation().y);
+			new ConfigureView(true, data, from, buttonName, getLocation().x, getLocation().y);
 		}
 
 	}

@@ -1,5 +1,7 @@
 package chessGame.frame.frameElement.chineseChess;
 
+import interfaceGame.chessGame.InterfaceCrossChessBoardFrame;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -15,7 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class CrossChineseChessBoardFrame extends JPanel {
+public class CrossChineseChessBoardFrame extends JPanel implements InterfaceCrossChessBoardFrame{
 	int width = 0, hight = 0;
 	String imgpath = "";
 	private static Font monoFont = new Font("Monospaced", Font.BOLD | Font.ITALIC, 35);

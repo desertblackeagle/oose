@@ -1,5 +1,7 @@
 package chessGame.frame.frameElement.taiwanChess;
 
+import interfaceGame.chessGame.InterfaceStraightChessBoardFrame;
+
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -13,7 +15,7 @@ import javax.swing.JPanel;
  * Function:a element of taiwan chess board
  * Last Update:2013/11/14
  */
-public class StraightTaiwanChessBoardFrame extends JPanel {
+public class StraightTaiwanChessBoardFrame extends JPanel implements InterfaceStraightChessBoardFrame {
 
 	int width = 0, hight = 0;
 	String imgpath = "";

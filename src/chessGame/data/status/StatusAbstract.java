@@ -1,8 +1,6 @@
 package chessGame.data.status;
 
-import chessGame.controlUnit.GameObserver;
-
-public abstract class StatusAbstract implements GameObserver {
+public abstract class StatusAbstract {
 	public abstract void makeChessRecord();
 
 	public abstract void makeChessLocation();

@@ -1,4 +1,4 @@
-﻿package chessGame.frame;
+﻿package chessGame.frame.frameOption;
 
 import java.awt.FileDialog;
 import java.awt.Font;
@@ -12,7 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class ConfigureView extends FrameModel implements ActionListener {
+import abstractGame.chessGame.AbstractFrameModel;
+import chessGame.data.ChessGameData;
+
+public class ConfigureView extends AbstractFrameModel {
 
 	private String from;
 	private String now;
@@ -32,8 +35,8 @@ public class ConfigureView extends FrameModel implements ActionListener {
 	private JTextField textP1;
 	private JTextField textP2;
 
-	public ConfigureView(boolean visable, String from, String now, int locationX, int locationY) {
-		super(visable);
+	public ConfigureView(boolean visable, ChessGameData data, String from, String now, int locationX, int locationY) {
+		super(visable, data);
 		this.from = from;
 		this.now = now;
 		setTitle(now);
@@ -41,7 +44,6 @@ public class ConfigureView extends FrameModel implements ActionListener {
 		createButton();
 		createLabel();
 		createTextField();
-		addObserver(data.getPlayerInfo());
 	}
 
 	public void createButton() {
@@ -51,13 +53,21 @@ public class ConfigureView extends FrameModel implements ActionListener {
 		back.addActionListener(this);
 		add(back);
 
-		onOff = makeButton("ON");
+		if (data.getConfigData().isAutoSave()) {
+			onOff = makeButton("ON");
+		} else {
+			onOff = makeButton("OFF");
+		}
 		onOff.setFont(new Font("細明體", Font.PLAIN, 25));
 		onOff.setBounds(400, 470, 150, 60);
 		onOff.addActionListener(this);
 		add(onOff);
 
-		way = makeButton("直式");
+		if (data.getConfigData().isBoardStraight()) {
+			way = makeButton("直式");
+		} else {
+			way = makeButton("橫式");
+		}
 		way.setFont(new Font("細明體", Font.PLAIN, 25));
 		way.setBounds(400, 570, 150, 60);
 		way.addActionListener(this);
@@ -71,9 +81,10 @@ public class ConfigureView extends FrameModel implements ActionListener {
 				int i;
 				i = JOptionPane.showConfirmDialog(null, "確認修改此名字?", "修改確認", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (i == JOptionPane.YES_OPTION) {
+					data.getConfigData().setPlayerNameP1(textP1.getText());
 					JOptionPane.showConfirmDialog(null, "已為您修改", "修改完成", JOptionPane.PLAIN_MESSAGE);
-					notifyObserver(this, 1, textP1.getText());
 				} else {
+					textP1.setText(data.getConfigData().getPlayerNameP1());
 					return;
 				}
 			}
@@ -86,10 +97,10 @@ public class ConfigureView extends FrameModel implements ActionListener {
 				int i;
 				i = JOptionPane.showConfirmDialog(null, "確認修改此名字?", "修改確認", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (i == JOptionPane.YES_OPTION) {
+					data.getConfigData().setPlayerNameP2(textP2.getText());
 					JOptionPane.showConfirmDialog(null, "已為您修改", "修改完成", JOptionPane.PLAIN_MESSAGE);
-					notifyObserver(this, 2, textP2.getText());
 				} else {
-//					textP1
+					textP2.setText(data.getConfigData().getPlayerNameP2());
 					return;
 				}
 			}
@@ -128,8 +139,8 @@ public class ConfigureView extends FrameModel implements ActionListener {
 		add(autoSave);
 		add(boardWay);
 
-		picLocationP1 = makeLabel("");
-		picLocationP2 = makeLabel("");
+		picLocationP1 = makeLabel(data.getConfigData().getImgP1());
+		picLocationP2 = makeLabel(data.getConfigData().getImgP2());
 		picLocationP1.setBounds(130, 50, 200, 200);
 		picLocationP2.setBounds(480, 50, 200, 200);
 
@@ -140,9 +151,11 @@ public class ConfigureView extends FrameModel implements ActionListener {
 
 	public void createTextField() {
 		textP1 = new JTextField(18);
+		textP1.setText(data.getConfigData().getPlayerNameP1());
 		textP1.setBounds(400, 330, 150, 40);
 		textP1.setFont(new Font("細明體", Font.PLAIN, 25));
 		textP2 = new JTextField(18);
+		textP2.setText(data.getConfigData().getPlayerNameP2());
 		textP2.setBounds(400, 410, 150, 40);
 		textP2.setFont(new Font("細明體", Font.PLAIN, 25));
 		add(textP1);
@@ -157,6 +170,10 @@ public class ConfigureView extends FrameModel implements ActionListener {
 		return new JLabel(name);
 	}
 
+	public JLabel makeLabel(ImageIcon img) {
+		return new JLabel(img);
+	}
+
 	public void btnFileAction(int p) {
 		FileDialog fd = new FileDialog(this, "選擇照片", FileDialog.LOAD);
 		fd.setVisible(true);
@@ -167,12 +184,12 @@ public class ConfigureView extends FrameModel implements ActionListener {
 		if (p == 1) {
 			ImageIcon imgP1 = new ImageIcon(file);
 			imgP1.setImage(imgP1.getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT));
-			notifyObserver(this, 1, imgP1);
+			data.getConfigData().setImgP1(imgP1);
 			picLocationP1.setIcon(imgP1);
 		} else {
 			ImageIcon imgP2 = new ImageIcon(file);
 			imgP2.setImage(imgP2.getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT));
-			notifyObserver(this, 2, imgP2);
+			data.getConfigData().setImgP2(imgP2);
 			picLocationP2.setIcon(imgP2);
 		}
 	}
@@ -185,19 +202,23 @@ public class ConfigureView extends FrameModel implements ActionListener {
 		if (buttonName.equals("返回前頁")) {
 			setVisible(false);
 			dispose();
-			new SecondView(true, from, getLocation().x, getLocation().y);
+			new SecondView(true, data, from, getLocation().x, getLocation().y);
 		}
 
 		if (buttonName.equals("ON")) {
 			onOff.setText("OFF");
+			data.getConfigData().setAutoSave(false);
 		} else if (buttonName.equals("OFF")) {
 			onOff.setText("ON");
+			data.getConfigData().setAutoSave(true);
 		}
 
 		if (buttonName.equals("直式")) {
 			way.setText("橫式");
+			data.getConfigData().setBoardDirection(false);
 		} else if (buttonName.equals("橫式")) {
 			way.setText("直式");
+			data.getConfigData().setBoardDirection(true);
 		}
 
 		if (buttonName.equals("設定玩家一照片")) {
@@ -210,7 +231,7 @@ public class ConfigureView extends FrameModel implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		ConfigureView frame = new ConfigureView(true, "123", "123", 0, 0);
+//		ConfigureView frame = new ConfigureView(true, "123", "123", 0, 0);
 	}
 
 }

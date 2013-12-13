@@ -3,20 +3,31 @@ package chessGame.data;
 import interfaceGame.DataInterface;
 
 public class ChessGameData implements DataInterface {
-	PlayerInfo playerInfo;
+	private static ChessGameData data = null;
+	ConfigData config;
 	LocationMap locMap;
 
-	public void createData() {
-		playerInfo = new PlayerInfo();
+	private ChessGameData() {
+		// TODO Auto-generated constructor stub
+		createData();
+	}
 
+	public void createData() {
+		config = new ConfigData();
 		locMap = new LocationMap();
+	}
+
+	public static ChessGameData instance() {
+		if (data == null)
+			data = new ChessGameData();
+		return data;
 	}
 
 	public LocationMap getLocMap() {
 		return locMap;
 	}
 
-	public PlayerInfo getPlayerInfo() {
-		return playerInfo;
+	public ConfigData getConfigData() {
+		return config;
 	}
 }

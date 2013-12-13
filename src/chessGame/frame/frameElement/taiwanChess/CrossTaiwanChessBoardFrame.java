@@ -1,23 +1,21 @@
 package chessGame.frame.frameElement.taiwanChess;
 
+import interfaceGame.chessGame.InterfaceCrossChessBoardFrame;
+
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import chessGame.frame.dialog.FrameCheckDialog;
-
 /* @author Red Rose
  * Function:a element of taiwan chess board
  * Last Update:2013/11/14
  */
-public class CrossTaiwanChessBoardFrame extends JPanel {
+public class CrossTaiwanChessBoardFrame extends JPanel implements InterfaceCrossChessBoardFrame{
 
 	int width = 0, hight = 0;
 	String imgpath = "";

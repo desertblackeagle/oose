@@ -1,27 +1,32 @@
-﻿package chessGame.frame;
+﻿package abstractGame.chessGame;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import chessGame.controlUnit.GameObserver;
-import chessGame.controlUnit.GameObserverable;
 import chessGame.data.ChessGameData;
 import chessGame.frame.dialog.FrameCheckDialog;
 
-public abstract class FrameModel extends JFrame {
+public abstract class AbstractFrameModel extends JFrame implements ActionListener{
 
 	boolean visable = true;
-	private GameObserverable gobs = new GameObserverable();
-	ChessGameData data = new ChessGameData();
+	public ChessGameData data;
 
-	public FrameModel(boolean visable) {
+//	public FrameModel(boolean visable) {
+//		this.visable = visable;
+//		initFrame();
+//		initFrameEventListeners();
+//	}
+
+	public AbstractFrameModel(boolean visable, ChessGameData data) {
 		this.visable = visable;
 		initFrame();
 		initFrameEventListeners();
+		this.data = data;
 	}
 
 	public void initFrame() {
@@ -43,18 +48,6 @@ public abstract class FrameModel extends JFrame {
 	}
 
 	public abstract JButton makeButton(String text);
-
-	public void addObserver(GameObserver o) {
-		gobs.addObserver(o);
-	}
-
-	public void notifyObserver(Object obs, Object o) {
-		gobs.notifyObserver(obs, o);
-	}
-
-	public void notifyObserver(Object obs, Object o, Object o1) {
-		gobs.notifyObserver(obs, o, o1);
-	}
 
 	public static void main(String[] args) {
 //		FrameModel frame = new FrameModel(true);

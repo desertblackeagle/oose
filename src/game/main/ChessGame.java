@@ -4,27 +4,28 @@ import interfaceGame.DataInterface;
 import interfaceGame.FrameInterface;
 import interfaceGame.GameFactoryInterface;
 import interfaceGame.RuleInterface;
+import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
-import chessGame.frame.MainView;
+import chessGame.frame.frameOption.MainView;
 
 public class ChessGame implements GameFactoryInterface {
 
 	@Override
-	public FrameInterface makeFrame() {
+	public FrameInterface makeFrame(ChessGameData data) {
 		// TODO Auto-generated method stub
-		return new MainView(true);
+		return new MainView(true, data);
 	}
 
 	@Override
 	public RuleInterface makeRule() {
 		// TODO Auto-generated method stub
-		return null;
+		return ChessGameRule.instance();
 	}
 
 	@Override
 	public DataInterface makeData() {
 		// TODO Auto-generated method stub
-		return new ChessGameData();
+		return ChessGameData.instance();
 	}
 
 }

@@ -2,7 +2,7 @@ package game.main;
 
 import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
-import chessGame.frame.MainView;
+import chessGame.frame.frameOption.MainView;
 import interfaceGame.GameFactoryInterface;
 
 public class GameMain {
@@ -15,10 +15,10 @@ public class GameMain {
 
 		GameFactoryInterface game = new ChessGame();
 
-		frame = (MainView) game.makeFrame();
 		data = (ChessGameData) game.makeData();
+		frame = (MainView) game.makeFrame(data);
 		rule = (ChessGameRule) game.makeRule();
-		
+
 	}
 
 }

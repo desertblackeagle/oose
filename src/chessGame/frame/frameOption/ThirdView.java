@@ -1,4 +1,4 @@
-﻿package chessGame.frame;
+﻿package chessGame.frame.frameOption;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -6,7 +6,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class ThirdView extends FrameModel implements ActionListener {
+import abstractGame.chessGame.AbstractFrameModel;
+import chessGame.data.ChessGameData;
+import chessGame.frame.ChineseChessBoard;
+import chessGame.frame.TaiwanChessBoard;
+
+public class ThirdView extends AbstractFrameModel {
 
 	static final int chineseChess = 1;
 	static final int taiwaneseChess = 0;
@@ -17,8 +22,8 @@ public class ThirdView extends FrameModel implements ActionListener {
 	private JButton deleteGame;
 	private JButton back;
 
-	ThirdView(boolean visable, String from, String now, int locationX, int locationY) {
-		super(visable);
+	ThirdView(boolean visable, ChessGameData data, String from, String now, int locationX, int locationY) {
+		super(visable, data);
 		this.from = from;
 		setTitle(now);
 		createButton();
@@ -62,17 +67,21 @@ public class ThirdView extends FrameModel implements ActionListener {
 		if (buttonName.equals("返回前頁")) {
 			setVisible(false);
 			dispose();
-			new SecondView(true, from, getLocation().x, getLocation().y);
+			new SecondView(true, data, from, getLocation().x, getLocation().y);
 		} else if (buttonName.equals("開啟新局")) {
 			setVisible(false);
 			dispose();
 
 			if (from.equals("中國棋")) {
+//				new CChineseChessBoard(true, data, getLocation().x, getLocation().y);
+				new ChineseChessBoard(true, data, getLocation().x, getLocation().y);
 //				BoardManager manager = new BoardManager(chineseChess);
 //				ChessTable chessTable = new ChessTable(manager);
 //				ButtonChessArrayList buttonArrayList = new ButtonChessArrayList(manager, chessTable);
 //				new ChineseGameFrame(manager, buttonArrayList, from, getLocation().x, getLocation().y);
 			} else if (from.equals("暗棋")) {
+//				new TTaiwanChessBoard(true, data, getLocation().x, getLocation().y);
+				new TaiwanChessBoard(true, data, getLocation().x, getLocation().y);
 //				BoardManager manager = new BoardManager(taiwaneseChess);
 //				ChessTable chessTable = new ChessTable(manager);
 //				ButtonChessArrayList buttonArrayList = new ButtonChessArrayList(manager, chessTable);
