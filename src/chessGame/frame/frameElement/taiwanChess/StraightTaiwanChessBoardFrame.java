@@ -13,12 +13,12 @@ import javax.swing.JPanel;
  * Function:a element of taiwan chess board
  * Last Update:2013/11/14
  */
-public class TaiwanChessBoardFrame extends JPanel {
+public class StraightTaiwanChessBoardFrame extends JPanel {
 
 	int width = 0, hight = 0;
 	String imgpath = "";
 
-	public TaiwanChessBoardFrame(int width, int hight, String file) {
+	public StraightTaiwanChessBoardFrame(int width, int hight, String file) {
 		this.width = width;
 		this.hight = hight;
 		imgpath = file;
@@ -52,7 +52,7 @@ public class TaiwanChessBoardFrame extends JPanel {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TaiwanChessBoardFrame cp = new TaiwanChessBoardFrame(630, 700, "c:/aa.jpg");
+		StraightTaiwanChessBoardFrame cp = new StraightTaiwanChessBoardFrame(630, 700, "c:/aa.jpg");
 		cp.setBounds(0, 0, 800, 800);
 		JFrame frame = new JFrame();
 		frame.setLayout(null);
