@@ -3,10 +3,6 @@ import javax.swing.JFrame;
 import chessGame.data.ChessGameData;
 import chessGame.frame.ChineseChessBoard;
 import chessGame.frame.TaiwanChessBoard;
-import chessGame.frame.frameElement.chineseChess.CrossChineseChessBoardFrame;
-import chessGame.frame.frameElement.chineseChess.StraightChineseChessBoardFrame;
-import chessGame.frame.frameElement.taiwanChess.CrossTaiwanChessBoardFrame;
-import chessGame.frame.frameElement.taiwanChess.StraightTaiwanChessBoardFrame;
 
 public class test {
 	JFrame f;

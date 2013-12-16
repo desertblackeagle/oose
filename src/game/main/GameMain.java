@@ -1,9 +1,9 @@
 package game.main;
 
+import interfaceGame.GameFactoryInterface;
 import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
 import chessGame.frame.frameOption.MainView;
-import interfaceGame.GameFactoryInterface;
 
 public class GameMain {
 

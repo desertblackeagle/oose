@@ -1,16 +1,21 @@
 package abstractGame.chessGame;
 
+import interfaceGame.chessGame.InterfaceCrossChessBoardFrame;
+import interfaceGame.chessGame.InterfaceStraightChessBoardFrame;
+
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import interfaceGame.chessGame.InterfaceCrossChessBoardFrame;
-import interfaceGame.chessGame.InterfaceStraightChessBoardFrame;
 import chessGame.data.ChessGameData;
+import chessGame.data.chess.ChessView;
 import chessGame.frame.frameOption.MainView;
 
-public abstract class AbstractChessBoardFactory extends AbstractFrameModel {
+public abstract class AbstractChessBoardFactory extends AbstractFrameModel implements MouseListener, MouseMotionListener {
 	private JButton backMain;
 	private JPanel panel;
 
@@ -32,6 +37,12 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel {
 		initBoard();
 	}
 
+	public abstract void initBoard();
+
+	public abstract InterfaceCrossChessBoardFrame makeCrossChessBoard();
+
+	public abstract InterfaceStraightChessBoardFrame makeStraightChessBoard();
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -44,9 +55,55 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel {
 		}
 	}
 
-	public abstract void initBoard();
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if (((ChessView) e.getSource()).isChessCover()) {
+			((ChessView) e.getSource()).setChessCover(false);
+			((ChessView) e.getSource()).repaint();
+		}
+		System.out.println("mouseClicked : " + e.getX() + " " + e.getY());
+	}
 
-	public abstract InterfaceCrossChessBoardFrame makeCrossChessBoard();
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("mouseEntered");
+	}
 
-	public abstract InterfaceStraightChessBoardFrame makeStraightChessBoard();
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("mouseExited");
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("mousePressed" + e.getX() + " " + e.getY());
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("mouseReleased");
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if (!((ChessView) e.getSource()).isChessCover()) {
+			((ChessView) e.getSource()).setLocation((e.getX() + ((ChessView) e.getSource()).getLocation().x - ((ChessView) e.getSource()).getWidth() / 2), (e.getY() + ((ChessView) e.getSource()).getLocation().y - ((ChessView) e.getSource()).getHeight() / 2));
+		} else {
+			((ChessView) e.getSource()).setChessCover(false);
+			((ChessView) e.getSource()).repaint();
+		}
+		System.out.println("mouseDragged");
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("mouseMoved");
+	}
 }

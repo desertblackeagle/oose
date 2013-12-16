@@ -1,11 +1,15 @@
 package chessGame.data;
 
 import interfaceGame.DataInterface;
+import chessGame.data.chess.ChessTable;
+import chessGame.data.status.GameStatus;
 
 public class ChessGameData implements DataInterface {
 	private static ChessGameData data = null;
-	ConfigData config;
-	LocationMap locMap;
+	private ConfigData config;
+	private LocationMap locMap;
+	private ChessTable ct;
+	private GameStatus gameStatus;
 
 	private ChessGameData() {
 		// TODO Auto-generated constructor stub
@@ -15,6 +19,8 @@ public class ChessGameData implements DataInterface {
 	public void createData() {
 		config = new ConfigData();
 		locMap = new LocationMap();
+		ct = new ChessTable();
+		gameStatus = new GameStatus();
 	}
 
 	public static ChessGameData instance() {
@@ -23,11 +29,20 @@ public class ChessGameData implements DataInterface {
 		return data;
 	}
 
-	public LocationMap getLocMap() {
-		return locMap;
-	}
+//	public LocationMap getLocMap() {
+//		return locMap;
+//	}
 
 	public ConfigData getConfigData() {
 		return config;
 	}
+
+	public ChessTable getChessTable() {
+		return ct;
+	}
+
+	public GameStatus getGameStatus() {
+		return gameStatus;
+	}
+
 }

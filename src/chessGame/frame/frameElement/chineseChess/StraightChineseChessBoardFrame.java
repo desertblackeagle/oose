@@ -1,6 +1,5 @@
 package chessGame.frame.frameElement.chineseChess;
 
-import interfaceGame.chessGame.InterfaceCrossChessBoardFrame;
 import interfaceGame.chessGame.InterfaceStraightChessBoardFrame;
 
 import java.awt.BasicStroke;
