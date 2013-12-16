@@ -11,13 +11,13 @@ public class ChessList implements LocationInterface {
 		chineseChessList = new Chess[10][9];
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 9; j++) {
-				chineseChessList[j][i] = null;
+				chineseChessList[i][j] = null;
 			}
 		}
-
+		taiwanChessList = new Chess[10][9];
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 8; j++) {
-				taiwanChessList[j][i] = null;
+				taiwanChessList[i][j] = null;
 			}
 		}
 	}
