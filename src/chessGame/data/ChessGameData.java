@@ -18,9 +18,9 @@ public class ChessGameData implements DataInterface {
 
 	public void createData() {
 		config = new ConfigData();
-		locMap = new LocationMap();
-		ct = new ChessTable();
-		gameStatus = new GameStatus();
+		locMap = new LocationMap(this);
+		gameStatus = new GameStatus(this);
+		ct = new ChessTable(this);
 	}
 
 	public static ChessGameData instance() {
@@ -29,9 +29,9 @@ public class ChessGameData implements DataInterface {
 		return data;
 	}
 
-//	public LocationMap getLocMap() {
-//		return locMap;
-//	}
+	public LocationMap getLocMap() {
+		return locMap;
+	}
 
 	public ConfigData getConfigData() {
 		return config;

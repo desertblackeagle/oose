@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 import abstractGame.chessGame.AbstractFrameModel;
+import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
 import chessGame.frame.dialog.FrameCheckDialog;
 
@@ -17,14 +18,14 @@ public class MainView extends AbstractFrameModel implements FrameInterface {
 	private JButton taiwanChess;
 	private JButton exit;
 
-	public MainView(boolean visable, ChessGameData data) {
-		super(visable, data);
+	public MainView(boolean visable, ChessGameData data, ChessGameRule rule) {
+		super(visable, data, rule);
 		setTitle("主畫面");
 		createButton();
 	}
 
-	public MainView(boolean visable, int locationX, int locationY, ChessGameData data) {
-		super(visable, data);
+	public MainView(boolean visable, ChessGameData data, ChessGameRule rule, int locationX, int locationY) {
+		super(visable, data, rule);
 		setLocation(locationX, locationY);
 		setTitle("主畫面");
 		createButton();
@@ -64,7 +65,7 @@ public class MainView extends AbstractFrameModel implements FrameInterface {
 		} else {
 			setVisible(false);
 			dispose();
-			new SecondView(true, data, buttonName, getLocation().x, getLocation().y);
+			new SecondView(true, data, rule, buttonName, getLocation().x, getLocation().y);
 		}
 	}
 

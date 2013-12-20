@@ -2,7 +2,9 @@ package chessGame.data.chess;
 
 import java.util.ArrayList;
 
+import chessGame.data.ChessGameData;
 import chessGame.data.LocationPoint;
+import chessGame.data.status.GameStatus;
 
 /* @author Red Rose
  * Function:a table to create and store chess
@@ -48,41 +50,49 @@ public class ChessTable {
 	private ArrayList<Chess> taiwanChessList = new ArrayList<Chess>();
 	private String file = "C:\\Users\\rose\\Dropbox\\JavaWorspace\\OOSER3\\chess\\";
 
-	public ChessTable() {
+	public ChessTable(ChessGameData data) {
 		// TODO Auto-generated constructor stub
-//		if (1 == chinessChess) {
-			redHorse1 = new Horse(file + "redHorse.png", 0, false, 1, 9);
-			redHorse2 = new Horse(file + "redHorse.png", 0, false, 7, 9);
-			blackHorse1 = new Horse(file + "blackHorse.png", 1, false, 1, 0);
-			blackHorse2 = new Horse(file + "blackHorse.png", 1, false, 7, 0);
-			redRook1 = new Rook(file + "redRook.png", 0, false, 0, 9);
-			redRook2 = new Rook(file + "redRook.png", 0, false, 8, 9);
-			blackRook1 = new Rook(file + "blackRook.png", 1, false, 0, 0);
-			blackRook2 = new Rook(file + "blackRook.png", 1, false, 8, 0);
-			redCannon1 = new Cannon(file + "redCannon.png", 0, false, 1, 7);
-			redCannon2 = new Cannon(file + "redCannon.png", 0, false, 7, 7);
-			blackCannon1 = new Cannon(file + "blackCannon.png", 1, false, 1, 2);
-			blackCannon2 = new Cannon(file + "blackCannon.png", 1, false, 7, 2);
-			redPawn1 = new Pawn(file + "redPawn.png", 0, false, 0, 6);
-			redPawn2 = new Pawn(file + "redPawn.png", 0, false, 2, 6);
-			redPawn3 = new Pawn(file + "redPawn.png", 0, false, 4, 6);
-			redPawn4 = new Pawn(file + "redPawn.png", 0, false, 6, 6);
-			redPawn5 = new Pawn(file + "redPawn.png", 0, false, 8, 6);
-			blackPawn1 = new Pawn(file + "blackPawn.png", 1, false, 0, 3);
-			blackPawn2 = new Pawn(file + "blackPawn.png", 1, false, 2, 3);
-			blackPawn3 = new Pawn(file + "blackPawn.png", 1, false, 4, 3);
-			blackPawn4 = new Pawn(file + "blackPawn.png", 1, false, 6, 3);
-			blackPawn5 = new Pawn(file + "blackPawn.png", 1, false, 8, 3);
-			redKing = new King(file + "redKing.png", 0, false, 4, 9);
-			blackKing = new King(file + "blackKing.png", 1, false, 4, 0);
-			redElephant1 = new Elephant(file + "redElephant.png", 0, false, 2, 9);
-			redElephant2 = new Elephant(file + "redElephant.png", 0, false, 6, 9);
-			blackElephant1 = new Elephant(file + "blackElephant.png", 1, false, 2, 0);
-			blackElephant2 = new Elephant(file + "blackElephant.png", 1, false, 6, 0);
-			redWarrior1 = new Warrior(file + "redWarrior.png", 0, false, 3, 9);
-			redWarrior2 = new Warrior(file + "redWarrior.png", 0, false, 5, 9);
-			blackWarrior1 = new Warrior(file + "blackWarrior.png", 1, false, 3, 0);
-			blackWarrior2 = new Warrior(file + "blackWarrior.png", 1, false, 5, 0);
+		create(data);
+	}
+
+	public void create(ChessGameData data) {
+		if (data.getGameStatus().getChessStatus().getWhichGame() == chinessChess) {
+			if (!chineseChessList.isEmpty()) {
+				chineseChessList.clear();
+			}
+
+			redHorse1 = new Horse(file + "redHorse.png", 0, false, 1, 9, data);
+			redHorse2 = new Horse(file + "redHorse.png", 0, false, 7, 9, data);
+			blackHorse1 = new Horse(file + "blackHorse.png", 1, false, 1, 0, data);
+			blackHorse2 = new Horse(file + "blackHorse.png", 1, false, 7, 0, data);
+			redRook1 = new Rook(file + "redRook.png", 0, false, 0, 9, data);
+			redRook2 = new Rook(file + "redRook.png", 0, false, 8, 9, data);
+			blackRook1 = new Rook(file + "blackRook.png", 1, false, 0, 0, data);
+			blackRook2 = new Rook(file + "blackRook.png", 1, false, 8, 0, data);
+			redCannon1 = new Cannon(file + "redCannon.png", 0, false, 1, 7, data);
+			redCannon2 = new Cannon(file + "redCannon.png", 0, false, 7, 7, data);
+			blackCannon1 = new Cannon(file + "blackCannon.png", 1, false, 1, 2, data);
+			blackCannon2 = new Cannon(file + "blackCannon.png", 1, false, 7, 2, data);
+			redPawn1 = new Pawn(file + "redPawn.png", 0, false, 0, 6, data);
+			redPawn2 = new Pawn(file + "redPawn.png", 0, false, 2, 6, data);
+			redPawn3 = new Pawn(file + "redPawn.png", 0, false, 4, 6, data);
+			redPawn4 = new Pawn(file + "redPawn.png", 0, false, 6, 6, data);
+			redPawn5 = new Pawn(file + "redPawn.png", 0, false, 8, 6, data);
+			blackPawn1 = new Pawn(file + "blackPawn.png", 1, false, 0, 3, data);
+			blackPawn2 = new Pawn(file + "blackPawn.png", 1, false, 2, 3, data);
+			blackPawn3 = new Pawn(file + "blackPawn.png", 1, false, 4, 3, data);
+			blackPawn4 = new Pawn(file + "blackPawn.png", 1, false, 6, 3, data);
+			blackPawn5 = new Pawn(file + "blackPawn.png", 1, false, 8, 3, data);
+			redKing = new King(file + "redKing.png", 0, false, 4, 9, data);
+			blackKing = new King(file + "blackKing.png", 1, false, 4, 0, data);
+			redElephant1 = new Elephant(file + "redElephant.png", 0, false, 2, 9, data);
+			redElephant2 = new Elephant(file + "redElephant.png", 0, false, 6, 9, data);
+			blackElephant1 = new Elephant(file + "blackElephant.png", 1, false, 2, 0, data);
+			blackElephant2 = new Elephant(file + "blackElephant.png", 1, false, 6, 0, data);
+			redWarrior1 = new Warrior(file + "redWarrior.png", 0, false, 3, 9, data);
+			redWarrior2 = new Warrior(file + "redWarrior.png", 0, false, 5, 9, data);
+			blackWarrior1 = new Warrior(file + "blackWarrior.png", 1, false, 3, 0, data);
+			blackWarrior2 = new Warrior(file + "blackWarrior.png", 1, false, 5, 0, data);
 			chineseChessList.add(redHorse1);
 			chineseChessList.add(redHorse2);
 			chineseChessList.add(blackHorse1);
@@ -115,7 +125,8 @@ public class ChessTable {
 			chineseChessList.add(redWarrior2);
 			chineseChessList.add(blackWarrior1);
 			chineseChessList.add(blackWarrior2);
-//		} else {
+
+		} else {
 			// location is store Locationpoing
 			LocationPoint[] location = new LocationPoint[32];
 
@@ -134,39 +145,42 @@ public class ChessTable {
 				location[i] = location[random];
 				location[random] = temp;
 			}
+			if (!taiwanChessList.isEmpty()) {
+				taiwanChessList.clear();
+			}
 
-			redHorse1 = new Horse(file + "redHorse.png", 0, true, location[0]);
-			redHorse2 = new Horse(file + "redHorse.png", 0, true, location[1]);
-			blackHorse1 = new Horse(file + "blackHorse.png", 1, true, location[2]);
-			blackHorse2 = new Horse(file + "blackHorse.png", 1, true, location[3]);
-			redRook1 = new Rook(file + "redRook.png", 0, true, location[4]);
-			redRook2 = new Rook(file + "redRook.png", 0, true, location[5]);
-			blackRook1 = new Rook(file + "blackRook.png", 1, true, location[6]);
-			blackRook2 = new Rook(file + "blackRook.png", 1, true, location[7]);
-			redCannon1 = new Cannon(file + "redCannon.png", 0, true, location[8]);
-			redCannon2 = new Cannon(file + "redCannon.png", 0, true, location[9]);
-			blackCannon1 = new Cannon(file + "blackCannon.png", 1, true, location[10]);
-			blackCannon2 = new Cannon(file + "blackCannon.png", 1, true, location[11]);
-			redPawn1 = new Pawn(file + "redPawn.png", 0, true, location[12]);
-			redPawn2 = new Pawn(file + "redPawn.png", 0, true, location[13]);
-			redPawn3 = new Pawn(file + "redPawn.png", 0, true, location[14]);
-			redPawn4 = new Pawn(file + "redPawn.png", 0, true, location[15]);
-			redPawn5 = new Pawn(file + "redPawn.png", 0, true, location[16]);
-			blackPawn1 = new Pawn(file + "blackPawn.png", 1, true, location[17]);
-			blackPawn2 = new Pawn(file + "blackPawn.png", 1, true, location[18]);
-			blackPawn3 = new Pawn(file + "blackPawn.png", 1, true, location[19]);
-			blackPawn4 = new Pawn(file + "blackPawn.png", 1, true, location[20]);
-			blackPawn5 = new Pawn(file + "blackPawn.png", 1, true, location[21]);
-			redKing = new King(file + "redKing.png", 0, true, location[22]);
-			blackKing = new King(file + "blackKing.png", 1, true, location[23]);
-			redElephant1 = new Elephant(file + "redElephant.png", 0, true, location[24]);
-			redElephant2 = new Elephant(file + "redElephant.png", 0, true, location[25]);
-			blackElephant1 = new Elephant(file + "blackElephant.png", 1, true, location[26]);
-			blackElephant2 = new Elephant(file + "blackElephant.png", 1, true, location[27]);
-			redWarrior1 = new Warrior(file + "redWarrior.png", 0, true, location[28]);
-			redWarrior2 = new Warrior(file + "redWarrior.png", 0, true, location[29]);
-			blackWarrior1 = new Warrior(file + "blackWarrior.png", 1, true, location[30]);
-		blackWarrior2 = new Warrior(file + "blackWarrior.png", 1, true, location[31]);
+			redHorse1 = new Horse(file + "redHorse.png", 0, true, location[0], data);
+			redHorse2 = new Horse(file + "redHorse.png", 0, true, location[1], data);
+			blackHorse1 = new Horse(file + "blackHorse.png", 1, true, location[2], data);
+			blackHorse2 = new Horse(file + "blackHorse.png", 1, true, location[3], data);
+			redRook1 = new Rook(file + "redRook.png", 0, true, location[4], data);
+			redRook2 = new Rook(file + "redRook.png", 0, true, location[5], data);
+			blackRook1 = new Rook(file + "blackRook.png", 1, true, location[6], data);
+			blackRook2 = new Rook(file + "blackRook.png", 1, true, location[7], data);
+			redCannon1 = new Cannon(file + "redCannon.png", 0, true, location[8], data);
+			redCannon2 = new Cannon(file + "redCannon.png", 0, true, location[9], data);
+			blackCannon1 = new Cannon(file + "blackCannon.png", 1, true, location[10], data);
+			blackCannon2 = new Cannon(file + "blackCannon.png", 1, true, location[11], data);
+			redPawn1 = new Pawn(file + "redPawn.png", 0, true, location[12], data);
+			redPawn2 = new Pawn(file + "redPawn.png", 0, true, location[13], data);
+			redPawn3 = new Pawn(file + "redPawn.png", 0, true, location[14], data);
+			redPawn4 = new Pawn(file + "redPawn.png", 0, true, location[15], data);
+			redPawn5 = new Pawn(file + "redPawn.png", 0, true, location[16], data);
+			blackPawn1 = new Pawn(file + "blackPawn.png", 1, true, location[17], data);
+			blackPawn2 = new Pawn(file + "blackPawn.png", 1, true, location[18], data);
+			blackPawn3 = new Pawn(file + "blackPawn.png", 1, true, location[19], data);
+			blackPawn4 = new Pawn(file + "blackPawn.png", 1, true, location[20], data);
+			blackPawn5 = new Pawn(file + "blackPawn.png", 1, true, location[21], data);
+			redKing = new King(file + "redKing.png", 0, true, location[22], data);
+			blackKing = new King(file + "blackKing.png", 1, true, location[23], data);
+			redElephant1 = new Elephant(file + "redElephant.png", 0, true, location[24], data);
+			redElephant2 = new Elephant(file + "redElephant.png", 0, true, location[25], data);
+			blackElephant1 = new Elephant(file + "blackElephant.png", 1, true, location[26], data);
+			blackElephant2 = new Elephant(file + "blackElephant.png", 1, true, location[27], data);
+			redWarrior1 = new Warrior(file + "redWarrior.png", 0, true, location[28], data);
+			redWarrior2 = new Warrior(file + "redWarrior.png", 0, true, location[29], data);
+			blackWarrior1 = new Warrior(file + "blackWarrior.png", 1, true, location[30], data);
+			blackWarrior2 = new Warrior(file + "blackWarrior.png", 1, true, location[31], data);
 			taiwanChessList.add(redHorse1);
 			taiwanChessList.add(redHorse2);
 			taiwanChessList.add(blackHorse1);
@@ -199,8 +213,44 @@ public class ChessTable {
 			taiwanChessList.add(redWarrior2);
 			taiwanChessList.add(blackWarrior1);
 			taiwanChessList.add(blackWarrior2);
-//		}
+		}
 	}
+
+//	public void clearTable() {
+//		if (!taiwanChessList.isEmpty()) {
+//			taiwanChessList.clear();
+//		}
+//		if (!chineseChessList.isEmpty()) {
+//			chineseChessList.clear();
+//		}
+////		System.out.println("get " + taiwanChessList.get(5));
+////		System.out.println("size " + taiwanChessList.size());
+////		System.out.println("size " + chineseChessList.size());
+//	}
+
+//	public void allReLocation() {
+//		int co = 0;
+//		if (!taiwanChessList.isEmpty()) {
+//			for (Chess c : taiwanChessList) {
+//				co++;
+//				System.out.print(co + " ");
+//				((ChessView) c).reLocation();
+//			}
+//		} else {
+//			System.out.println("taiwanChessList is Empty");
+//		}
+//
+//		if (!chineseChessList.isEmpty()) {
+//			for (Chess c : chineseChessList) {
+//				co++;
+//				System.out.print(co + " ");
+//				((ChessView) c).reLocation();
+//			}
+//		} else {
+//			System.out.println("chineseChessList is Empty");
+//		}
+//		System.out.println("table clear");
+//	}
 
 	public Horse getRedHorse1() {
 		return redHorse1;

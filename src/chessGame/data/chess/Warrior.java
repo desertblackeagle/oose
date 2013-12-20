@@ -1,18 +1,20 @@
 package chessGame.data.chess;
 
+import chessGame.data.ChessGameData;
 import chessGame.data.LocationPoint;
+import chessGame.data.status.GameStatus;
 
 public class Warrior extends ChessView {
-	public Warrior(String path, int color, boolean cover, int chessX, int chessY) {
-		super(path, color, cover, chessX, chessY);
+	public Warrior(String path, int color, boolean cover, int chessX, int chessY, ChessGameData data) {
+		super(path, color, cover, chessX, chessY, data);
 		// TODO Auto-generated constructor stub
 		setPriority(6);
 		setName("Warrior");
 		setEatRule("Cannon,Elephant,Horse,Pawn,Rook,Warrior");
 	}
 
-	public Warrior(String path, int color, boolean cover, LocationPoint point) {
-		super(path, color, cover, point);
+	public Warrior(String path, int color, boolean cover, LocationPoint point, ChessGameData data) {
+		super(path, color, cover, point, data);
 		// TODO Auto-generated constructor stub
 		setPriority(6);
 		setName("Warrior");
@@ -20,11 +22,11 @@ public class Warrior extends ChessView {
 	}
 
 	@Override
-	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
-		if (whichGame == chinessChess) {
+	public boolean moveRule(int toX, int toY) {
+		if (getData().getGameStatus().getChessStatus().getWhichGame() == chinessChess) {
 			if (this.getColor() == red) { // 假如為紅色
 				if (toX >= 3 && toX <= 5 && toY <= 9 && toY >= 7) { // 判斷是否在九宮格內
-					if (Math.abs(toX - getX()) == 1 && Math.abs(toY - getY()) == 1) { // 只能斜向移動
+					if (Math.abs(toX - getChessX()) == 1 && Math.abs(toY - getChessY()) == 1) { // 只能斜向移動
 						return true;
 					}
 				} else {
@@ -32,7 +34,7 @@ public class Warrior extends ChessView {
 				}
 			} else if (this.getColor() == black) {// 假如為黑色
 				if (toX >= 3 && toX <= 5 && toY <= 2 && toY >= 0) {// 判斷是否在九宮格內
-					if (Math.abs(toX - getX()) == 1 && Math.abs(toY - getY()) == 1) { // 只能斜向移動
+					if (Math.abs(toX - getChessX()) == 1 && Math.abs(toY - getChessY()) == 1) { // 只能斜向移動
 						return true;
 					}
 				} else {
@@ -41,9 +43,9 @@ public class Warrior extends ChessView {
 			}
 		} else// 暗棋
 		{
-			if ((Math.abs(getX() - toX) == 1) && getY() == toY) {
+			if ((Math.abs(getChessX() - toX) == 1) && getChessY() == toY) {
 				return true;
-			} else if ((Math.abs(getY() - toY) == 1) && getX() == toX) {
+			} else if ((Math.abs(getChessY() - toY) == 1) && getChessX() == toX) {
 				return true;
 			}
 		}

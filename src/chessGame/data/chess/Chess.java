@@ -4,16 +4,19 @@ import java.util.StringTokenizer;
 
 import javax.swing.JComponent;
 
+import chessGame.data.ChessGameData;
 import chessGame.data.LocationMap;
 import chessGame.data.LocationPoint;
+import chessGame.data.status.GameStatus;
 
 public class Chess extends JComponent {
 	static final int chinessChess = 1;
 	static final int taiwanChess = 0;
 	static final int red = 0;
 	static final int black = 1;
-	
-	private LocationMap lm = new LocationMap();
+
+	private ChessGameData data;
+//	private LocationMap lm = new LocationMap();
 	private int chessX = 0; // position x
 	private int chessY = 0; // position y
 	private String chessName = "";
@@ -23,18 +26,20 @@ public class Chess extends JComponent {
 	private String[] eatRule = new String[7];
 	private int priority;
 
-	public Chess(int color, boolean chessCover, int x, int y) {
+	public Chess(int color, boolean chessCover, int x, int y, ChessGameData data) {
 		this.color = color;
 		this.chessCover = chessCover;
 		this.chessX = x;
 		this.chessY = y;
+		this.data = data;
 	}
 
-	public Chess(int color, boolean chessCover, LocationPoint point) {
+	public Chess(int color, boolean chessCover, LocationPoint point, ChessGameData data) {
 		this.color = color;
 		this.chessCover = chessCover;
 		this.chessX = point.getX();
 		this.chessY = point.getY();
+		this.data = data;
 	}
 
 	public int getPriority() {
@@ -93,6 +98,10 @@ public class Chess extends JComponent {
 		this.chessDead = chessDead;
 	}
 
+	public ChessGameData getData() {
+		return data;
+	}
+
 	public String[] getEatRule() {
 		String[] temp = new String[eatRule.length];
 		for (int i = 0; i < eatRule.length; i++) {
@@ -102,7 +111,7 @@ public class Chess extends JComponent {
 	}
 
 	public LocationMap getLocationMap() {
-		return lm;
+		return data.getLocMap();
 	}
 
 	public void setEatRule(String eatRule) {
@@ -115,7 +124,7 @@ public class Chess extends JComponent {
 		}
 	}
 
-	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
+	public boolean moveRule(int toX, int toY) {
 		return true;
 	};
 }

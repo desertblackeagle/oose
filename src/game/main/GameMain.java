@@ -16,8 +16,8 @@ public class GameMain {
 		GameFactoryInterface game = new ChessGame();
 
 		data = (ChessGameData) game.makeData();
-		frame = (MainView) game.makeFrame(data);
-		rule = (ChessGameRule) game.makeRule();
+		rule = (ChessGameRule) game.makeRule(data);
+		frame = (MainView) game.makeFrame(data,rule);
 
 	}
 

@@ -42,8 +42,8 @@ public class test {
 //		c.get().add(st);
 //		test d = new test();
 //		d.get().add(sc);
-		ChineseChessBoard c = new ChineseChessBoard(true, ChessGameData.instance(), 0, 0);
-		TaiwanChessBoard t = new TaiwanChessBoard(true, ChessGameData.instance(), 0, 0);
+//		ChineseChessBoard c = new ChineseChessBoard(true, ChessGameData.instance(), 0, 0);
+//		TaiwanChessBoard t = new TaiwanChessBoard(true, ChessGameData.instance(), 0, 0);
 	}
 
 }

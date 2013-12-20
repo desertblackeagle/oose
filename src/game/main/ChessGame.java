@@ -11,15 +11,15 @@ import chessGame.frame.frameOption.MainView;
 public class ChessGame implements GameFactoryInterface {
 
 	@Override
-	public FrameInterface makeFrame(ChessGameData data) {
+	public FrameInterface makeFrame(ChessGameData data, ChessGameRule rule) {
 		// TODO Auto-generated method stub
-		return new MainView(true, data);
+		return new MainView(true, data, rule);
 	}
 
 	@Override
-	public RuleInterface makeRule() {
+	public RuleInterface makeRule(ChessGameData data) {
 		// TODO Auto-generated method stub
-		return ChessGameRule.instance();
+		return ChessGameRule.instance(data);
 	}
 
 	@Override

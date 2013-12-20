@@ -8,13 +8,15 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
 import chessGame.frame.dialog.FrameCheckDialog;
 
-public abstract class AbstractFrameModel extends JFrame implements ActionListener{
+public abstract class AbstractFrameModel extends JFrame implements ActionListener {
 
 	boolean visable = true;
 	public ChessGameData data;
+	public ChessGameRule rule;
 
 //	public FrameModel(boolean visable) {
 //		this.visable = visable;
@@ -22,11 +24,12 @@ public abstract class AbstractFrameModel extends JFrame implements ActionListene
 //		initFrameEventListeners();
 //	}
 
-	public AbstractFrameModel(boolean visable, ChessGameData data) {
+	public AbstractFrameModel(boolean visable, ChessGameData data, ChessGameRule rule) {
 		this.visable = visable;
 		initFrame();
 		initFrameEventListeners();
 		this.data = data;
+		this.rule = rule;
 	}
 
 	public void initFrame() {

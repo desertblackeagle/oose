@@ -1,18 +1,20 @@
 package chessGame.data.chess;
 
+import chessGame.data.ChessGameData;
 import chessGame.data.LocationPoint;
+import chessGame.data.status.GameStatus;
 
 public class Rook extends ChessView {
-	public Rook(String path, int color, boolean cover, int chessX, int chessY) {
-		super(path, color, cover, chessX, chessY);
+	public Rook(String path, int color, boolean cover, int chessX, int chessY, ChessGameData data) {
+		super(path, color, cover, chessX, chessY, data);
 		// TODO Auto-generated constructor stub
 		setPriority(4);
 		setName("Rook");
 		setEatRule("Rook,Horse,Cannon,Pawn");
 	}
 
-	public Rook(String path, int color, boolean cover, LocationPoint point) {
-		super(path, color, cover, point);
+	public Rook(String path, int color, boolean cover, LocationPoint point, ChessGameData data) {
+		super(path, color, cover, point, data);
 		// TODO Auto-generated constructor stub
 		setPriority(4);
 		setName("Rook");
@@ -20,22 +22,22 @@ public class Rook extends ChessView {
 	}
 
 	@Override
-	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
+	public boolean moveRule(int toX, int toY) {
 		int grid;// 格子數
-		if (whichGame == chinessChess)// 軍棋
+		if (getData().getGameStatus().getChessStatus().getWhichGame() == chinessChess)// 軍棋
 		{
-			if (toX == getX())// 只移動y軸座標
+			if (toX == getChessX())// 只移動y軸座標
 			{
-				grid = Math.abs(toY - getY());
-				if (toY - getY() < 0) {
+				grid = Math.abs(toY - getChessY());
+				if (toY - getChessY() < 0) {
 					for (int i = 0; i < grid - 1; i++) {
-						if (board[getY() - 1 - i][toX] != null) {
+						if (getData().getGameStatus().getChessList().getChessList()[getChessY() - 1 - i][toX] != null) {
 							return false;
 						}
 					}
 				} else {
 					for (int i = 0; i < grid - 1; i++) {
-						if (board[getY() + 1 + i][toX] != null) {
+						if (getData().getGameStatus().getChessList().getChessList()[getChessY() + 1 + i][toX] != null) {
 							return false;
 						}
 					}
@@ -43,18 +45,18 @@ public class Rook extends ChessView {
 
 				return true;
 
-			} else if (toY == getY())// 只移動x軸座標
+			} else if (toY == getChessY())// 只移動x軸座標
 			{
-				grid = Math.abs(toX - getX());
-				if (toX - getX() < 0) {
+				grid = Math.abs(toX - getChessX());
+				if (toX - getChessX() < 0) {
 					for (int i = 0; i < grid - 1; i++) {
-						if (board[toY][getX() - i - 1] != null) {
+						if (getData().getGameStatus().getChessList().getChessList()[toY][getChessX() - i - 1] != null) {
 							return false;
 						}
 					}
 				} else {
 					for (int i = 0; i < grid - 1; i++) {
-						if (board[toY][getX() + i + 1] != null) {
+						if (getData().getGameStatus().getChessList().getChessList()[toY][getChessX() + i + 1] != null) {
 							return false;
 						}
 					}
@@ -64,9 +66,9 @@ public class Rook extends ChessView {
 			}
 		} else// 暗棋
 		{
-			if ((Math.abs(getX() - toX) == 1) && getY() == toY) {
+			if ((Math.abs(getChessX() - toX) == 1) && getChessY() == toY) {
 				return true;
-			} else if ((Math.abs(getY() - toY) == 1) && getX() == toX) {
+			} else if ((Math.abs(getChessY() - toY) == 1) && getChessX() == toX) {
 				return true;
 			}
 		}

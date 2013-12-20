@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import abstractGame.chessGame.AbstractFrameModel;
+import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
 
 public class ConfigureView extends AbstractFrameModel {
@@ -35,8 +36,8 @@ public class ConfigureView extends AbstractFrameModel {
 	private JTextField textP1;
 	private JTextField textP2;
 
-	public ConfigureView(boolean visable, ChessGameData data, String from, String now, int locationX, int locationY) {
-		super(visable, data);
+	public ConfigureView(boolean visable, ChessGameData data, ChessGameRule rule, String from, String now, int locationX, int locationY) {
+		super(visable, data, rule);
 		this.from = from;
 		this.now = now;
 		setTitle(now);
@@ -202,7 +203,7 @@ public class ConfigureView extends AbstractFrameModel {
 		if (buttonName.equals("返回前頁")) {
 			setVisible(false);
 			dispose();
-			new SecondView(true, data, from, getLocation().x, getLocation().y);
+			new SecondView(true, data, rule, from, getLocation().x, getLocation().y);
 		}
 
 		if (buttonName.equals("ON")) {
@@ -216,9 +217,11 @@ public class ConfigureView extends AbstractFrameModel {
 		if (buttonName.equals("直式")) {
 			way.setText("橫式");
 			data.getConfigData().setBoardDirection(false);
+//			data.getChessTable().allReLocation();
 		} else if (buttonName.equals("橫式")) {
 			way.setText("直式");
 			data.getConfigData().setBoardDirection(true);
+//			data.getChessTable().allReLocation();
 		}
 
 		if (buttonName.equals("設定玩家一照片")) {

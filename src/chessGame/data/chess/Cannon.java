@@ -1,100 +1,105 @@
 package chessGame.data.chess;
 
+import chessGame.data.ChessGameData;
 import chessGame.data.LocationPoint;
+import chessGame.data.status.GameStatus;
 
 public class Cannon extends ChessView {
 
-	public Cannon(String path, int color, boolean cover, int chessX, int chessY) {
-		super(path, color, cover, chessX, chessY);
+	public Cannon(String path, int color, boolean cover, int chessX, int chessY, ChessGameData data) {
+		super(path, color, cover, chessX, chessY, data);
 		// TODO Auto-generated constructor stub
+//		data.getGameStatus().getChessList().getChineseChessList()[chessY][chessX] = this;
+
 		setPriority(2);
 		setName("Cannon");
 		setEatRule("King,Warrior,Elephant,Rook,Horse,Cannon,Pawn");
 	}
 
-	public Cannon(String path, int color, boolean cover, LocationPoint point) {
-		super(path, color, cover, point);
+	public Cannon(String path, int color, boolean cover, LocationPoint point, ChessGameData data) {
+		super(path, color, cover, point, data);
 		// TODO Auto-generated constructor stub
+//		data.getGameStatus().getChessList().getTaiwanChessList()[point.getY()][point.getX()] = this;
 		setPriority(2);
 		setName("Cannon");
 		setEatRule("King,Warrior,Elephant,Rook,Horse,Cannon,Pawn");
 	}
 
 	@Override
-	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
+	public boolean moveRule(int toX, int toY) {
 		int grid = 0;// 格子數
 		int count;
 
-		if (toX == getX()) {
-			grid = Math.abs(toY - getY());
-		} else if (toY == getY()) {
-			grid = Math.abs(toX - getX());
+		if (toX == getChessX()) {
+			grid = Math.abs(toY - getChessY());
+		} else if (toY == getChessY()) {
+			grid = Math.abs(toX - getChessX());
 		}
 
-		if (board[toY][toX] != null) {
+		if (getData().getGameStatus().getChessList().getChessList()[toY][toX] != null) {
 			count = 0;
 			for (int i = 0; i < grid - 1; i++) {
-				if (toX == getX()) {
-					if (toY - getY() < 0) {
-						if (board[getY() - 1 - i][toX] != null) {
+				if (toX == getChessX()) {
+					if (toY - getChessY() < 0) {
+						if (getData().getGameStatus().getChessList().getChessList()[getChessY() - 1 - i][toX] != null) {
 							count++;
 						}
 					} else {
-						if (board[getY() + 1 + i][toX] != null) {
+						if (getData().getGameStatus().getChessList().getChessList()[getChessY() + 1 + i][toX] != null) {
 							count++;
 						}
 					}
-				} else if (toY == getY()) {
-					if (toX - getX() < 0) {
-						if (board[getY()][toX + 1 + i] != null) {
+				} else if (toY == getChessY()) {
+					if (toX - getChessX() < 0) {
+						if (getData().getGameStatus().getChessList().getChessList()[getChessY()][toX + 1 + i] != null) {
 							count++;
 						}
 					} else {
-						if (board[getY()][toX - 1 - i] != null) {
+						if (getData().getGameStatus().getChessList().getChessList()[getChessY()][toX - 1 - i] != null) {
 							count++;
 						}
 					}
 				}
 
 			}
-			if (count == 1 && (toX == getX() || toY == getY())) {
+			if (count == 1 && (toX == getChessX() || toY == getChessY())) {
 				return true;
 			} else {
 				return false;
 			}
 		}
-		if (whichGame == chinessChess)// 軍棋
+		if (getData().getGameStatus().getChessStatus().getWhichGame() == chinessChess)// 軍棋
 		{
-			if (toX == getX())// 只移動y軸座標
+			if (toX == getChessX())// 只移動y軸座標
 			{
 
-				if (toY - getY() < 0) {
+				if (toY - getChessY() < 0) {
 					for (int i = 0; i < grid - 1; i++) {
-						if (board[getY() - 1 - i][toX] != null) {
+						if (getData().getGameStatus().getChessList().getChessList()[getChessY() - 1 - i][toX] != null) {
 							return false;
 						}
 					}
 				} else {
 					for (int i = 0; i < grid - 1; i++) {
-						if (board[getY() + 1 + i][toX] != null) {
+						if (getData().getGameStatus().getChessList().getChessList()[getChessY() + 1 + i][toX] != null) {
 							return false;
 						}
 					}
 				}
 
 				return true;
-			} else if (toY == getY())// 只移動x軸座標
+			} else if (toY == getChessY())// 只移動x軸座標
 			{
 
-				if (toX - getX() < 0) {
+				if (toX - getChessX() < 0) {
 					for (int i = 0; i < grid - 1; i++) {
-						if (board[toY][getX() - i - 1] != null) {
+						if (getData().getGameStatus().getChessList().getChessList()[toY][getChessX() - i - 1] != null) {
 							return false;
 						}
 					}
 				} else {
 					for (int i = 0; i < grid - 1; i++) {
-						if (board[toY][getX() + i + 1] != null) {
+						if (getData().getGameStatus().getChessList().getChessList()[toY][getChessX() + i + 1] != null) {
 							return false;
 						}
 					}
@@ -103,9 +108,9 @@ public class Cannon extends ChessView {
 			}
 		} else// 暗棋
 		{
-			if ((Math.abs(getX() - toX) == 1) && getY() == toY) {
+			if ((Math.abs(getChessX() - toX) == 1) && getChessY() == toY) {
 				return true;
-			} else if ((Math.abs(getY() - toY) == 1) && getX() == toX) {
+			} else if ((Math.abs(getChessY() - toY) == 1) && getChessX() == toX) {
 				return true;
 			}
 		}

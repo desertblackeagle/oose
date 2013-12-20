@@ -1,12 +1,16 @@
 package chessGame.data.status;
 
+import chessGame.data.ChessGameData;
+
 public class GameStatus implements StatusFactory {
 	private ChessRecord chessRecord;
 	private ChessList chessList;
 	private ChessStatus chessStatus;
+	private ChessGameData data;
 
-	public GameStatus() {
+	public GameStatus(ChessGameData data) {
 		// TODO Auto-generated constructor stub
+		this.data = data;
 		chessRecord = (ChessRecord) makeChessRecord();
 		chessList = (ChessList) makeChessLocation();
 		chessStatus = (ChessStatus) makeChessStatus();
@@ -21,7 +25,7 @@ public class GameStatus implements StatusFactory {
 	@Override
 	public LocationInterface makeChessLocation() {
 		// TODO Auto-generated method stub
-		return new ChessList();
+		return new ChessList(data);
 	}
 
 	@Override

@@ -1,18 +1,20 @@
 package chessGame.data.chess;
 
+import chessGame.data.ChessGameData;
 import chessGame.data.LocationPoint;
+import chessGame.data.status.GameStatus;
 
 public class Horse extends ChessView {
-	public Horse(String path, int color, boolean cover, int chessX, int chessY) {
-		super(path, color, cover, chessX, chessY);
+	public Horse(String path, int color, boolean cover, int chessX, int chessY, ChessGameData data) {
+		super(path, color, cover, chessX, chessY, data);
 		// TODO Auto-generated constructor stub
 		setPriority(3);
 		setName("Horse");
 		setEatRule("Horse,Cannon,Pawn");
 	}
 
-	public Horse(String path, int color, boolean cover, LocationPoint point) {
-		super(path, color, cover, point);
+	public Horse(String path, int color, boolean cover, LocationPoint point, ChessGameData data) {
+		super(path, color, cover, point, data);
 		// TODO Auto-generated constructor stub
 		setPriority(3);
 		setName("Horse");
@@ -20,25 +22,25 @@ public class Horse extends ChessView {
 	}
 
 	@Override
-	public boolean moveRule(int toX, int toY, int whichGame, Chess[][] board) {
-		if (whichGame == chinessChess)// 軍棋
+	public boolean moveRule(int toX, int toY) {
+		if (getData().getGameStatus().getChessStatus().getWhichGame() == chinessChess)// 軍棋
 		{
-			if (Math.abs(toX - getX()) == 2 && Math.abs(toY - getY()) == 1) {
-				if (board[getY()][getX() + ((toX - getX()) / 2)] != null) {
+			if (Math.abs(toX - getChessX()) == 2 && Math.abs(toY - getChessY()) == 1) {
+				if (getData().getGameStatus().getChessList().getChessList()[getChessY()][getChessX() + ((toX - getChessX()) / 2)] != null) {
 					return false;
 				}
 				return true;
-			} else if (Math.abs(toY - getY()) == 2 && Math.abs(toX - getX()) == 1) {
-				if (board[getY() + ((toY - getY()) / 2)][getX()] != null) {
+			} else if (Math.abs(toY - getChessY()) == 2 && Math.abs(toX - getChessX()) == 1) {
+				if (getData().getGameStatus().getChessList().getChessList()[getChessY() + ((toY - getChessY()) / 2)][getChessX()] != null) {
 					return false;
 				}
 				return true;
 			}
 		} else// 暗棋
 		{
-			if ((Math.abs(getX() - toX) == 1) && getY() == toY) {
+			if ((Math.abs(getChessX() - toX) == 1) && getChessY() == toY) {
 				return true;
-			} else if ((Math.abs(getY() - toY) == 1) && getX() == toX) {
+			} else if ((Math.abs(getChessY() - toY) == 1) && getChessX() == toX) {
 				return true;
 			}
 		}

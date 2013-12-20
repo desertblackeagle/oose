@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 import abstractGame.chessGame.AbstractFrameModel;
+import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
 
 public class SecondView extends AbstractFrameModel {
@@ -15,8 +16,8 @@ public class SecondView extends AbstractFrameModel {
 	private JButton configure;
 	private JButton back;
 
-	public SecondView(boolean visable, ChessGameData data, String temp, int locationX, int locationY) {
-		super(visable, data);
+	public SecondView(boolean visable, ChessGameData data, ChessGameRule rule, String temp, int locationX, int locationY) {
+		super(visable, data, rule);
 		System.out.println(data.getConfigData().getPlayerNameP1());
 		from = temp;
 		setTitle(from);
@@ -58,15 +59,15 @@ public class SecondView extends AbstractFrameModel {
 		if (buttonName.equals("返回前頁")) {
 			setVisible(false);
 			dispose();
-			new MainView(true, data);
+			new MainView(true, data, rule, getLocation().x, getLocation().y);
 		} else if (buttonName.equals("開始遊戲")) {
 			setVisible(false);
 			dispose();
-			new ThirdView(true, data, from, buttonName, getLocation().x, getLocation().y);
+			new ThirdView(true, data, rule, from, buttonName, getLocation().x, getLocation().y);
 		} else if (buttonName.equals("設定")) {
 			setVisible(false);
 			dispose();
-			new ConfigureView(true, data, from, buttonName, getLocation().x, getLocation().y);
+			new ConfigureView(true, data, rule, from, buttonName, getLocation().x, getLocation().y);
 		}
 
 	}

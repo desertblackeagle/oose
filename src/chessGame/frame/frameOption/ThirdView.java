@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 import abstractGame.chessGame.AbstractFrameModel;
+import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
 import chessGame.frame.ChineseChessBoard;
 import chessGame.frame.TaiwanChessBoard;
@@ -21,8 +22,8 @@ public class ThirdView extends AbstractFrameModel {
 	private JButton deleteGame;
 	private JButton back;
 
-	ThirdView(boolean visable, ChessGameData data, String from, String now, int locationX, int locationY) {
-		super(visable, data);
+	ThirdView(boolean visable, ChessGameData data, ChessGameRule rule, String from, String now, int locationX, int locationY) {
+		super(visable, data, rule);
 		this.from = from;
 		setTitle(now);
 		createButton();
@@ -66,21 +67,21 @@ public class ThirdView extends AbstractFrameModel {
 		if (buttonName.equals("返回前頁")) {
 			setVisible(false);
 			dispose();
-			new SecondView(true, data, from, getLocation().x, getLocation().y);
+			new SecondView(true, data, rule, from, getLocation().x, getLocation().y);
 		} else if (buttonName.equals("開啟新局")) {
 			setVisible(false);
 			dispose();
 
 			if (from.equals("中國棋")) {
 //				new CChineseChessBoard(true, data, getLocation().x, getLocation().y);
-				new ChineseChessBoard(true, data, getLocation().x, getLocation().y);
+				new ChineseChessBoard(true, data, rule, getLocation().x, getLocation().y);
 //				BoardManager manager = new BoardManager(chineseChess);
 //				ChessTable chessTable = new ChessTable(manager);
 //				ButtonChessArrayList buttonArrayList = new ButtonChessArrayList(manager, chessTable);
 //				new ChineseGameFrame(manager, buttonArrayList, from, getLocation().x, getLocation().y);
 			} else if (from.equals("暗棋")) {
 //				new TTaiwanChessBoard(true, data, getLocation().x, getLocation().y);
-				new TaiwanChessBoard(true, data, getLocation().x, getLocation().y);
+				new TaiwanChessBoard(true, data, rule, getLocation().x, getLocation().y);
 //				BoardManager manager = new BoardManager(taiwaneseChess);
 //				ChessTable chessTable = new ChessTable(manager);
 //				ButtonChessArrayList buttonArrayList = new ButtonChessArrayList(manager, chessTable);
