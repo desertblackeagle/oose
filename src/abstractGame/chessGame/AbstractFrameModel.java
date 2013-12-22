@@ -45,7 +45,7 @@ public abstract class AbstractFrameModel extends JFrame implements ActionListene
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				new FrameCheckDialog();
+				FrameCheckDialog.instance();
 			}
 		});
 	}

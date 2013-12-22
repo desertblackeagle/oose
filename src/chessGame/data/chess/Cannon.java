@@ -10,9 +10,13 @@ public class Cannon extends ChessView {
 		super(path, color, cover, chessX, chessY, data);
 		// TODO Auto-generated constructor stub
 //		data.getGameStatus().getChessList().getChineseChessList()[chessY][chessX] = this;
-
 		setPriority(2);
 		setName("Cannon");
+		if (color == 0) {
+			setChineseName("炮");
+		} else {
+			setChineseName("包");
+		}
 		setEatRule("King,Warrior,Elephant,Rook,Horse,Cannon,Pawn");
 	}
 
@@ -22,6 +26,11 @@ public class Cannon extends ChessView {
 //		data.getGameStatus().getChessList().getTaiwanChessList()[point.getY()][point.getX()] = this;
 		setPriority(2);
 		setName("Cannon");
+		if (color == 0) {
+			setChineseName("炮");
+		} else {
+			setChineseName("包");
+		}
 		setEatRule("King,Warrior,Elephant,Rook,Horse,Cannon,Pawn");
 	}
 

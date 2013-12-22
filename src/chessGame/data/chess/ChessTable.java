@@ -1,5 +1,6 @@
 package chessGame.data.chess;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import chessGame.data.ChessGameData;
@@ -10,7 +11,7 @@ import chessGame.data.status.GameStatus;
  * Function:a table to create and store chess
  * Last Update:2013/11/15
  */
-public class ChessTable {
+public class ChessTable implements Serializable {
 	static final int chinessChess = 1;
 	static final int taiwanChess = 0;
 
@@ -48,7 +49,8 @@ public class ChessTable {
 	private Warrior blackWarrior2;
 	private ArrayList<Chess> chineseChessList = new ArrayList<Chess>();
 	private ArrayList<Chess> taiwanChessList = new ArrayList<Chess>();
-	private String file = "C:\\Users\\rose\\Dropbox\\JavaWorspace\\OOSER3\\chess\\";
+//	private String file = "C:\\Users\\rose\\Dropbox\\JavaWorspace\\OOSER3\\chess\\";
+	private String file = "C:\\dark\\";
 
 	public ChessTable(ChessGameData data) {
 		// TODO Auto-generated constructor stub

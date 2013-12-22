@@ -1,8 +1,15 @@
 package chessGame.data.status;
 
-public class ChessStatus implements StatusInterface {
+import java.io.Serializable;
+
+public class ChessStatus implements StatusInterface, Serializable {
 	private int whichGame = 0; // chinese 1 taiwan 0
 	private int whichOrder = 0; // player 1 = 0 player2 = 1
+
+	public void clear() {
+		whichGame = 0; // chinese 1 taiwan 0
+		whichOrder = 0;
+	}
 
 	public void setWhichGame(int whichGame) {
 		this.whichGame = whichGame;

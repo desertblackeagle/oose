@@ -23,7 +23,7 @@ public class TaiwanChessBoard extends AbstractChessBoardFactory {
 		// TODO Auto-generated constructor stub
 		data.getGameStatus().getChessStatus().setWhichGame(0);
 		data.getChessTable().create(data);
-		data.getGameStatus().getChessList().print(0);
+		data.getGameStatus().getChessList().print();
 		initBoard();
 	}
 
@@ -62,6 +62,24 @@ public class TaiwanChessBoard extends AbstractChessBoardFactory {
 		JPanel bottom = new JPanel();
 		bottom.setBounds(0, 0, 1000, 1000);
 		add(bottom);
+
+		Chess[][] tmp;
+		if (data.getGameStatus().getChessStatus().getWhichGame() == 1) {
+			tmp = new Chess[10][9];
+			for (int i = 0; i < 10; i++) {
+				for (int j = 0; j < 9; j++) {
+					tmp[i][j] = data.getGameStatus().getChessList().getChessList()[i][j];
+				}
+			}
+		} else {
+			tmp = new Chess[4][8];
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 8; j++) {
+					tmp[i][j] = data.getGameStatus().getChessList().getChessList()[i][j];
+				}
+			}
+		}
+		data.getGameStatus().getChessRecord().recordList(tmp, data.getGameStatus().getChessStatus().getWhichGame());
 	}
 
 	@Override
@@ -90,6 +108,16 @@ public class TaiwanChessBoard extends AbstractChessBoardFactory {
 	public JButton makeButton(String text) {
 		// TODO Auto-generated method stub
 		return new JButton(text);
+	}
+
+	@Override
+	public void removeChessListener() {
+		// TODO Auto-generated method stub
+		System.out.println("remove listener");
+		for (Chess cv : data.getChessTable().getTaiwanChessList()) {
+			cv.removeMouseListener(this);
+			cv.removeMouseMotionListener(this);
+		}
 	}
 
 //	public static void main(String[] args) {

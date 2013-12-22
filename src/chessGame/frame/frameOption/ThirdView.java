@@ -71,21 +71,10 @@ public class ThirdView extends AbstractFrameModel {
 		} else if (buttonName.equals("開啟新局")) {
 			setVisible(false);
 			dispose();
-
 			if (from.equals("中國棋")) {
-//				new CChineseChessBoard(true, data, getLocation().x, getLocation().y);
 				new ChineseChessBoard(true, data, rule, getLocation().x, getLocation().y);
-//				BoardManager manager = new BoardManager(chineseChess);
-//				ChessTable chessTable = new ChessTable(manager);
-//				ButtonChessArrayList buttonArrayList = new ButtonChessArrayList(manager, chessTable);
-//				new ChineseGameFrame(manager, buttonArrayList, from, getLocation().x, getLocation().y);
 			} else if (from.equals("暗棋")) {
-//				new TTaiwanChessBoard(true, data, getLocation().x, getLocation().y);
 				new TaiwanChessBoard(true, data, rule, getLocation().x, getLocation().y);
-//				BoardManager manager = new BoardManager(taiwaneseChess);
-//				ChessTable chessTable = new ChessTable(manager);
-//				ButtonChessArrayList buttonArrayList = new ButtonChessArrayList(manager, chessTable);
-//				new TaiwanGameFrame(manager, buttonArrayList, from, getLocation().x, getLocation().y);
 			}
 		}
 

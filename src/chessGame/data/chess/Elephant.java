@@ -11,6 +11,11 @@ public class Elephant extends ChessView {
 		// TODO Auto-generated constructor stub
 		setPriority(5);
 		setName("Elephant");
+		if (color == 0) {
+			setChineseName("相");
+		} else {
+			setChineseName("象");
+		}
 		setEatRule("Rook,Horse,Cannon,Pawn,Elephant");
 	}
 
@@ -19,6 +24,11 @@ public class Elephant extends ChessView {
 		// TODO Auto-generated constructor stub
 		setPriority(5);
 		setName("Elephant");
+		if (color == 0) {
+			setChineseName("相");
+		} else {
+			setChineseName("象");
+		}
 		setEatRule("Rook,Horse,Cannon,Pawn,Elephant");
 	}
 

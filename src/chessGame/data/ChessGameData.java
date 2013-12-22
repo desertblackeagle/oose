@@ -1,10 +1,12 @@
 package chessGame.data;
 
+import java.io.Serializable;
+
 import interfaceGame.DataInterface;
 import chessGame.data.chess.ChessTable;
 import chessGame.data.status.GameStatus;
 
-public class ChessGameData implements DataInterface {
+public class ChessGameData implements DataInterface, Serializable {
 	private static ChessGameData data = null;
 	private ConfigData config;
 	private LocationMap locMap;

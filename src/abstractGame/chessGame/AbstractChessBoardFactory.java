@@ -3,29 +3,46 @@ package abstractGame.chessGame;
 import interfaceGame.chessGame.InterfaceCrossChessBoardFrame;
 import interfaceGame.chessGame.InterfaceStraightChessBoardFrame;
 
+import java.awt.FileDialog;
+import java.awt.Font;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import chessGame.controlUnit.ChessGameRule;
+import chessGame.controlUnit.Save;
 import chessGame.data.ChessGameData;
 import chessGame.data.LocationPoint;
+import chessGame.data.SaveData;
 import chessGame.data.chess.AcceptView;
+import chessGame.data.chess.Chess;
 import chessGame.data.chess.ChessView;
+import chessGame.frame.InfoFrame;
 import chessGame.frame.frameOption.MainView;
 
 public abstract class AbstractChessBoardFactory extends AbstractFrameModel implements MouseListener, MouseMotionListener {
 	private JButton backMain;
+	private JButton surrend;
+	private JButton save;
 	private JPanel infoPanel;
+	private JLabel picLocationP1;
+	private JLabel picLocationP2;
+	private JLabel nameP1;
+	private JLabel nameP2;
+	private JLabel whichOrder;
 	private TextArea infotArea;
 	private int xMax, xMin;
 	private int yMax, yMin;
+	private int surrendP1Cnt = 0;
+	private int surrendP2Cnt = 0;
 	private ChessGameRule rule;
 	private ArrayList<AcceptView> acceptList = new ArrayList<AcceptView>();
 
@@ -34,28 +51,65 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 		// TODO Auto-generated constructor stub
 		setLocation(x, y);
 		this.rule = rule;
-
+//		data.getGameStatus().getChessList();
 		infoPanel = new JPanel();
 		infotArea = new TextArea();
 
-		infotArea.setBounds(0, 590, 318, 110);
+		infotArea.setBounds(0, 590, 310, 110);
 
 		backMain = makeButton("返回主畫面");
 		backMain.addActionListener(this);
 		backMain.setBounds(0, 530, 100, 50);
 
+		surrend = makeButton("投降");
+		surrend.addActionListener(this);
+		surrend.setBounds(0, 470, 100, 50);
+
+		save = makeButton("存檔");
+		save.addActionListener(this);
+		save.setBounds(0, 410, 100, 50);
+
+		picLocationP1 = new JLabel(data.getConfigData().getImgP1());
+		picLocationP2 = new JLabel(data.getConfigData().getImgP2());
+		picLocationP1.setBounds(0, 0, 100, 100);
+		picLocationP2.setBounds(110, 0, 100, 100);
+
+		nameP1 = new JLabel();
+		nameP1.setFont(new Font(data.getConfigData().getPlayerNameP1(), Font.PLAIN, 25));
+		nameP1.setText(data.getConfigData().getPlayerNameP1());
+		nameP2 = new JLabel();
+		nameP2.setFont(new Font(data.getConfigData().getPlayerNameP2(), Font.PLAIN, 25));
+		nameP2.setText(data.getConfigData().getPlayerNameP2());
+		nameP1.setBounds(0, 90, 100, 50);
+		nameP2.setBounds(110, 90, 100, 50);
+
+		whichOrder = new JLabel();
+		whichOrder.setFont(new Font("輪到紅色", Font.PLAIN, 20));
+		whichOrder.setText("輪到紅色");
+		whichOrder.setBounds(0, 105, 100, 100);
+
 		infoPanel.setLayout(null);
 		infoPanel.setBounds(690, 0, 310, 739);
 
-		add(infoPanel);
+		infoPanel.add(whichOrder);
+		infoPanel.add(save);
+		infoPanel.add(nameP1);
+		infoPanel.add(nameP2);
+		infoPanel.add(picLocationP1);
+		infoPanel.add(picLocationP2);
+		infoPanel.add(surrend);
 		infoPanel.add(infotArea);
 		infoPanel.add(backMain);
+		add(infoPanel);
+
 //		initBoard();
 	}
 
+	public abstract void removeChessListener();
+
 	public void setInfotAreaText(String text) {
-		infotArea.append(text + "\n");
-//		infotArea.setText(text);
+//		infotArea.append(text + "\n");
+		infotArea.setText(text);
 	}
 
 	public JPanel getInfoPanel() {
@@ -94,23 +148,112 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 		this.yMin = yMin;
 	}
 
+	public JLabel getWhichOrder() {
+		return whichOrder;
+	}
+
 	public abstract void initBoard();
 
 	public abstract InterfaceCrossChessBoardFrame makeCrossChessBoard();
 
 	public abstract InterfaceStraightChessBoardFrame makeStraightChessBoard();
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		String buttonName = e.getActionCommand();
-
+		int infoLocX = getLocation().x + (getWidth() / 2) - 200;
+		int infoLocY = getLocation().y + (getHeight() / 2) - 100;
 		if (buttonName.equals("返回主畫面")) {
 			setVisible(false);
 //			data.getChessTable().clearTable();
 			dispose();
+
+			data.getGameStatus().getChessRecord().printListRecord(data.getGameStatus().getChessStatus().getWhichGame());
+			data.getGameStatus().getChessRecord().printRecord();
 			data.getGameStatus().getChessList().clearList();
+			data.getGameStatus().getChessStatus().clear();
+			data.getGameStatus().getChessRecord().clear();
 			new MainView(true, data, rule, this.getLocation().x, this.getLocation().y);
+		} else if (buttonName.equals("投降")) {
+			if (data.getGameStatus().getChessStatus().getWhichOrder() == 0) {
+				removeChessListener();
+				new InfoFrame("黑色贏了", infoLocX, infoLocY);
+			} else {
+				removeChessListener();
+				new InfoFrame("紅色贏了", infoLocX, infoLocY);
+			}
+		} else if (buttonName.equals("存檔")) {
+			FileDialog fileDialog = new FileDialog(this, "Save...", FileDialog.SAVE);
+			fileDialog.setVisible(true);
+			String file = fileDialog.getFile();
+			file = fileDialog.getDirectory() + file;
+			System.out.println(file);
+
+			File files = new File(file);
+			SaveData saveData = new SaveData(data.getGameStatus().getChessStatus().getWhichGame(), data.getGameStatus().getChessStatus().getWhichOrder(), data.getGameStatus().getChessRecord().getRecordStack(), data.getGameStatus().getChessRecord().getListRecord());
+//			Data ddd = new Data(data.getGameStatus().getChessStatus().getWhichGame(), data.getGameStatus().getChessStatus().getWhichOrder(), data.getGameStatus().getChessRecord().getRecordStack(), data.getGameStatus().getChessRecord().getListRecord());
+			Save save = new Save();
+
+		} else if (buttonName.equals("悔棋")) {
+			if (data.getGameStatus().getChessStatus().getWhichOrder() == 0) {
+				if (surrendP1Cnt < 1) {
+					surrendP1Cnt++;
+					if (data.getGameStatus().getChessRecord().takeOneChess() != null) {
+						data.getGameStatus().getChessRecord().getRecordStack().pop();
+						data.getGameStatus().getChessRecord().getRecordStack().pop();
+						data.getGameStatus().getChessRecord().getListRecord().pop();
+						data.getGameStatus().getChessList().setChessList(data.getGameStatus().getChessRecord().getListRecord().peek());
+						data.getGameStatus().getChessList().reloadChessLoc();
+						chessRelocation();
+						infotArea.setText(data.getGameStatus().getChessRecord().recordToString());
+					} else {
+						new InfoFrame("您沒有上一步棋", infoLocX, infoLocY);
+					}
+				} else {
+					new InfoFrame("你的悔棋coda已經沒了", infoLocX, infoLocY);
+				}
+			} else {
+				if (surrendP2Cnt < 1) {
+					surrendP2Cnt++;
+					if (data.getGameStatus().getChessRecord().takeOneChess() != null) {
+						data.getGameStatus().getChessRecord().getRecordStack().pop();
+						data.getGameStatus().getChessRecord().getRecordStack().pop();
+
+						data.getGameStatus().getChessRecord().getListRecord().pop();
+						data.getGameStatus().getChessList().setChessList(data.getGameStatus().getChessRecord().getListRecord().peek());
+						data.getGameStatus().getChessList().reloadChessLoc();
+						chessRelocation();
+						infotArea.setText(data.getGameStatus().getChessRecord().recordToString());
+					} else {
+						new InfoFrame("您沒有上一步棋", infoLocX, infoLocY);
+					}
+				} else {
+					new InfoFrame("你的悔棋coda已經沒了", infoLocX, infoLocY);
+				}
+			}
+
+		}
+	}
+
+	public void chessRelocation() {
+		if (data.getGameStatus().getChessStatus().getWhichGame() == 0) {
+			for (Chess c : data.getChessTable().getTaiwanChessList()) {
+				int locX = data.getLocMap().getLocationMap()[c.getChessY()][c.getChessX()].getX();
+				int locY = data.getLocMap().getLocationMap()[c.getChessY()][c.getChessX()].getY();
+				c.setLocation(locX, locY);
+			}
+		} else {
+			for (Chess c : data.getChessTable().getChineseChessList()) {
+				int locX = data.getLocMap().getLocationMap()[c.getChessY()][c.getChessX()].getX();
+				int locY = data.getLocMap().getLocationMap()[c.getChessY()][c.getChessX()].getY();
+				c.setLocation(locX, locY);
+			}
 		}
 	}
 
@@ -118,6 +261,7 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 //		System.out.println("mouseClicked : " + e.getX() + " " + e.getY());
+//		rule.getChessRule().taiwanChessOrder(((ChessView)e.getSource()), this);
 	}
 
 	@Override
@@ -143,7 +287,7 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 						AcceptView cv = new AcceptView();
 						cv.setLocation(data.getLocMap().getLocationMap()[j][i].getX(), data.getLocMap().getLocationMap()[j][i].getY());
 						add(cv);
-						getContentPane().setComponentZOrder(cv, 1);
+						getContentPane().setComponentZOrder(cv, 0);
 						acceptList.add(cv);
 						this.repaint();
 						System.out.println(i + " : " + j);
@@ -151,27 +295,25 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 				}
 			}
 		}
+		this.repaint();
+
 		System.out.println("mousePressed end" + e.getX() + " " + e.getY());
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 		for (AcceptView cv : acceptList) {
 			remove(cv);
 		}
 		this.repaint();
-		if (((ChessView) e.getSource()).isChessCover()) {
-			rule.getChessRule().swapUserOrder(((ChessView) e.getSource()));
-			((ChessView) e.getSource()).setChessCover(false);
-			((ChessView) e.getSource()).repaint();
-		}
-		LocationPoint point = rule.getChessRule().findChessInBoardLoc(e, this);
-		if (point != null) {
-			rule.getChessRule().moveTo(((ChessView) e.getSource()), this, point.getX(), point.getY());
-			data.getGameStatus().getChessList().print(1);
-			
+
+		if (!((ChessView) e.getSource()).isChessCover()) {
+			LocationPoint point = rule.getChessRule().findChessInBoardLoc(e, this);
+			if (point != null) {
+				rule.getChessRule().moveTo(((ChessView) e.getSource()), this, point.getX(), point.getY());
+				data.getGameStatus().getChessList().print();
+
 //			if (rule.getChessRule().moveTo(((ChessView) e.getSource()), point.getX(), point.getY())) {
 //				System.out.println("can move ----------");
 //			} else {
@@ -182,10 +324,16 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 //			}else{
 //				System.out.println("can't eat ----------");
 //			}
+			}
 		}
-
+		if (((ChessView) e.getSource()).isChessCover()) {
+			rule.getChessRule().swapUserOrder(((ChessView) e.getSource()), this);
+			((ChessView) e.getSource()).setChessCover(false);
+			((ChessView) e.getSource()).repaint();
+		}
 //		int locX = e.getXOnScreen() - 3 - getLocationOnScreen().x;
 //		int locY = e.getYOnScreen() - 25 - getLocationOnScreen().y;
+		System.out.println("mouseReleased : ");
 //		System.out.println("mouseReleased : " + (e.getXOnScreen() - getLocationOnScreen().x) + " " + (e.getYOnScreen() - getLocationOnScreen().y) + " : " + locX + " " + locY);
 ////		System.out.println("Max Min " + xMax + " : " + yMax);
 //		if (locX > xMax || locX < xMin || locY > yMax || locY < yMin) {
@@ -239,7 +387,7 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 //			((ChessView) e.getSource()).repaint();
 //		}
 //		}
-//		System.out.println("mouseDragged");
+		System.out.println("mouseDragged");
 	}
 
 	@Override

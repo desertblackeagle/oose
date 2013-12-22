@@ -61,7 +61,8 @@ public class MainView extends AbstractFrameModel implements FrameInterface {
 	public void actionPerformed(ActionEvent e) {
 		String buttonName = e.getActionCommand();
 		if (buttonName.equals("離開")) {
-			new FrameCheckDialog(null, "請問真的要離開遊戲嗎？", null);
+			FrameCheckDialog.instance(null, "請問真的要離開遊戲嗎？", null);
+//			new FrameCheckDialog(null, "請問真的要離開遊戲嗎？", null);
 		} else {
 			setVisible(false);
 			dispose();

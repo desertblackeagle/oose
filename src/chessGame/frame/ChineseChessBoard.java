@@ -15,6 +15,7 @@ import chessGame.frame.frameElement.chineseChess.StraightChineseChessBoardFrame;
 
 public class ChineseChessBoard extends AbstractChessBoardFactory {
 //	private static ChineseChessBoard board = null;
+	private JButton regret;
 
 //	private JButton backMain;
 //	private JPanel panel;
@@ -24,7 +25,7 @@ public class ChineseChessBoard extends AbstractChessBoardFactory {
 		data.getGameStatus().getChessStatus().setWhichGame(1);
 		System.out.println("which : " + data.getGameStatus().getChessStatus().getWhichGame());
 		data.getChessTable().create(data);
-		data.getGameStatus().getChessList().print(1);
+		data.getGameStatus().getChessList().print();
 		// TODO Auto-generated constructor stub
 //		panel = new JPanel();
 		initBoard();
@@ -46,6 +47,10 @@ public class ChineseChessBoard extends AbstractChessBoardFactory {
 	@Override
 	public void initBoard() {
 		// TODO Auto-generated method stub
+		regret = makeButton("悔棋");
+		regret.addActionListener(this);
+		regret.setBounds(0, 350, 100, 50);
+		getInfoPanel().add(regret);
 		System.out.println("create table");
 		for (Chess cv : data.getChessTable().getChineseChessList()) {
 			cv.addMouseListener(this);
@@ -69,6 +74,24 @@ public class ChineseChessBoard extends AbstractChessBoardFactory {
 		JPanel bottom = new JPanel();
 		bottom.setBounds(0, 0, 1000, 1000);
 		add(bottom);
+
+		Chess[][] tmp;
+		if (data.getGameStatus().getChessStatus().getWhichGame() == 1) {
+			tmp = new Chess[10][9];
+			for (int i = 0; i < 10; i++) {
+				for (int j = 0; j < 9; j++) {
+					tmp[i][j] = data.getGameStatus().getChessList().getChessList()[i][j];
+				}
+			}
+		} else {
+			tmp = new Chess[4][8];
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 8; j++) {
+					tmp[i][j] = data.getGameStatus().getChessList().getChessList()[i][j];
+				}
+			}
+		}
+		data.getGameStatus().getChessRecord().recordList(tmp, data.getGameStatus().getChessStatus().getWhichGame());
 	}
 
 	@Override
@@ -99,8 +122,17 @@ public class ChineseChessBoard extends AbstractChessBoardFactory {
 		return new JButton(text);
 	}
 
-	public static void main(String[] args) {
-		
-		ChineseChessBoard c = new ChineseChessBoard(true, ChessGameData.instance(), ChessGameRule.instance(ChessGameData.instance()), 0, 0);
+//	public static void main(String[] args) {
+//		
+//		ChineseChessBoard c = new ChineseChessBoard(true, ChessGameData.instance(), ChessGameRule.instance(ChessGameData.instance()), 0, 0);
+//	}
+
+	@Override
+	public void removeChessListener() {
+		// TODO Auto-generated method stub
+		for (Chess cv : data.getChessTable().getChineseChessList()) {
+			cv.removeMouseListener(this);
+			cv.removeMouseMotionListener(this);
+		}
 	}
 }

@@ -10,6 +10,11 @@ public class Rook extends ChessView {
 		// TODO Auto-generated constructor stub
 		setPriority(4);
 		setName("Rook");
+		if (color == 0) {
+			setChineseName("俥");
+		} else {
+			setChineseName("車");
+		}
 		setEatRule("Rook,Horse,Cannon,Pawn");
 	}
 
@@ -18,6 +23,11 @@ public class Rook extends ChessView {
 		// TODO Auto-generated constructor stub
 		setPriority(4);
 		setName("Rook");
+		if (color == 0) {
+			setChineseName("俥");
+		} else {
+			setChineseName("車");
+		}
 		setEatRule("Rook,Horse,Cannon,Pawn");
 	}
 

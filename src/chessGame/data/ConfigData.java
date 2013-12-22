@@ -1,8 +1,10 @@
 package chessGame.data;
 
+import java.io.Serializable;
+
 import javax.swing.ImageIcon;
 
-public class ConfigData {
+public class ConfigData implements Serializable {
 	private String playerNameP1 = "Player1";
 	private String playerNameP2 = "Player2";
 	private ImageIcon imgP1 = new ImageIcon("C:\\Users\\rose\\Dropbox\\JavaWorspace\\OOSE1\\src\\rose.jpg");

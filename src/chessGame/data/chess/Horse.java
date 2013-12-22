@@ -10,6 +10,11 @@ public class Horse extends ChessView {
 		// TODO Auto-generated constructor stub
 		setPriority(3);
 		setName("Horse");
+		if (color == 0) {
+			setChineseName("傌");
+		} else {
+			setChineseName("馬");
+		}
 		setEatRule("Horse,Cannon,Pawn");
 	}
 
@@ -18,6 +23,11 @@ public class Horse extends ChessView {
 		// TODO Auto-generated constructor stub
 		setPriority(3);
 		setName("Horse");
+		if (color == 0) {
+			setChineseName("傌");
+		} else {
+			setChineseName("馬");
+		}
 		setEatRule("Horse,Cannon,Pawn");
 	}
 

@@ -10,6 +10,11 @@ public class Pawn extends ChessView {
 		// TODO Auto-generated constructor stub
 		setPriority(1);
 		setName("Pawn");
+		if (color == 0) {
+			setChineseName("兵");
+		} else {
+			setChineseName("卒");
+		}
 		setEatRule("King,Pawn");
 	}
 
@@ -18,6 +23,11 @@ public class Pawn extends ChessView {
 		// TODO Auto-generated constructor stub
 		setPriority(1);
 		setName("Pawn");
+		if (color == 0) {
+			setChineseName("兵");
+		} else {
+			setChineseName("卒");
+		}
 		setEatRule("King,Pawn");
 	}
 

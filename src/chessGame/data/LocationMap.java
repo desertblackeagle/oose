@@ -9,10 +9,13 @@ public class LocationMap {
 	private LocationPoint[][] taiwanDeadLocationPointCross;
 	private int taiwanDeadChessLocIndexX = -1;
 	private int taiwanDeadChessLocIndexY = 0;
+	private int taiwanCrossDeadChessLocIndexX = -1;
+	private int taiwanCrossDeadChessLocIndexY = 0;
 	private ChessGameData data;
 
 	public LocationMap(ChessGameData data) {
 		// TODO Auto-generated constructor stub
+		System.out.println("--------------------------------------------");
 		this.data = data;
 		chineseLocationPoint = new LocationPoint[10][9];
 		taiwanLocationPoint = new LocationPoint[4][8];
@@ -36,7 +39,7 @@ public class LocationMap {
 		}
 
 		for (int i = 0; i < 4; i++) {
-			for (int j = 8; j < 8; j++) {
+			for (int j = 0; j < 8; j++) {
 				taiwanDeadLocationPoint[i][j] = new LocationPoint(j * 70 + 40, i * 70 + 390);
 			}
 		}
@@ -53,13 +56,16 @@ public class LocationMap {
 //				System.out.printf("%d ::: %d",j,i);
 				taiwanLocationPointCross[i][j] = new LocationPoint(i * 70 + 40, 570 - (j * 70 + 40));
 			}
-			System.out.println();
+//			System.out.println();
 		}
 
 		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 8; j++) {
-				taiwanDeadLocationPointCross[i][j] = new LocationPoint(j * 70 + 40, i * 70 + 390);
+			for (int j = 7; j >= 0; j--) {
+				
+				taiwanDeadLocationPointCross[i][j] = new LocationPoint(i * 70 + 390, (920 - (j * 70 + 390)));
+				System.out.printf("%d ::: %d %s ",j,i,taiwanDeadLocationPointCross[i][j].getY());
 			}
+			System.out.println();
 		}
 	}
 
@@ -91,15 +97,42 @@ public class LocationMap {
 	}
 
 	public LocationPoint getDeadLocation() {
-		if (taiwanDeadChessLocIndexX >= 7) {
-			taiwanDeadChessLocIndexX = 0;
-			taiwanDeadChessLocIndexY++;
+		LocationPoint tmp;
+		if (data.getConfigData().isBoardStraight()) {
+			System.out.println("str");
+			if (taiwanDeadChessLocIndexX >= 7) {
+				taiwanDeadChessLocIndexX = 0;
+				taiwanDeadChessLocIndexY++;
+			} else {
+				taiwanDeadChessLocIndexX++;
+			}
+//			System.out.println("TAI "+getTaiwanDeadLocationPoint()[0][0]);
+			tmp = getTaiwanDeadLocationPoint()[taiwanDeadChessLocIndexY][taiwanDeadChessLocIndexX];
+//			System.out.println(tmp);
+//			System.out.println("XY : " + taiwanDeadChessLocIndexY + " " + taiwanDeadChessLocIndexX);
+			
 		} else {
-			taiwanDeadChessLocIndexX++;
+			System.out.println("cro");
+			if (taiwanCrossDeadChessLocIndexX >= 7) {
+				taiwanCrossDeadChessLocIndexX = 0;
+				taiwanCrossDeadChessLocIndexY++;
+			} else {
+				taiwanCrossDeadChessLocIndexX++;
+			}
+			System.out.println("TCroo "+taiwanCrossDeadChessLocIndexX+" : "+taiwanCrossDeadChessLocIndexY);
+			System.out.println("TCroo2 "+getTaiwanDeadLocationPointCross()[taiwanCrossDeadChessLocIndexY][taiwanCrossDeadChessLocIndexX].getX()+" : "+getTaiwanDeadLocationPointCross()[taiwanCrossDeadChessLocIndexY][taiwanCrossDeadChessLocIndexX].getY());
+			tmp = getTaiwanDeadLocationPointCross()[taiwanCrossDeadChessLocIndexY][taiwanCrossDeadChessLocIndexX];
+//			System.out.println("XY : " + taiwanDeadChessLocIndexY + " " + taiwanDeadChessLocIndexX);
+//			return tmp;
 		}
-		LocationPoint tmp = taiwanDeadLocationPoint[taiwanDeadChessLocIndexY][taiwanDeadChessLocIndexX];
-//		System.out.println("XY : " + taiwanDeadChessLocIndexY + " " + taiwanDeadChessLocIndexX);
 		return tmp;
+//		if (taiwanDeadChessLocIndexX >= 7) {
+//			taiwanDeadChessLocIndexX = 0;
+//			taiwanDeadChessLocIndexY++;
+//		} else {
+//			taiwanDeadChessLocIndexX++;
+//		}
+		
 	}
 
 	public LocationPoint[][] getLocationMap() {
@@ -121,6 +154,19 @@ public class LocationMap {
 //				System.out.println("game cro");
 				return chineseLocationPointCross;
 			}
+		}
+	}
+
+	public LocationPoint[][] getTaiwanDeadLocationPoint() {
+		return taiwanDeadLocationPoint;
+	}
+
+	public LocationPoint[][] getDeadLocationMap() {
+
+		if (data.getConfigData().isBoardStraight()) {
+			return taiwanDeadLocationPoint;
+		} else {
+			return taiwanDeadLocationPointCross;
 		}
 	}
 //	public static void main(String[] args) {

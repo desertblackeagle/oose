@@ -11,19 +11,38 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class FrameCheckDialog extends JDialog implements ActionListener {
+	private static FrameCheckDialog dialog = null;
 	private JButton yes;
 	private JButton no;
 	private JLabel text;
 	private JFrame toFrame = null; // 要跳到的視窗
 	private JFrame source = null; // 呼叫此Dialog的視窗
 
-	public FrameCheckDialog() {
+	public static void instance() {
+		if (dialog == null) {
+			dialog = new FrameCheckDialog();
+		} else {
+			dialog.dispose();
+			dialog = new FrameCheckDialog();
+		}
+	}
+
+	public static void instance(JFrame source, String alertText, JFrame toFrame) {
+		if (dialog == null) {
+			dialog = new FrameCheckDialog(source, alertText, toFrame);
+		} else {
+			dialog.dispose();
+			dialog = new FrameCheckDialog(source, alertText, toFrame);
+		}
+	}
+
+	private FrameCheckDialog() {
 		setVisible(true);
 		initDialog();
 		initTextLabel("");
 	}
 
-	public FrameCheckDialog(JFrame source, String alertText, JFrame toFrame) {
+	private FrameCheckDialog(JFrame source, String alertText, JFrame toFrame) {
 		setVisible(true);
 		initDialog();
 		initTextLabel(alertText);
