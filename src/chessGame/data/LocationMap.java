@@ -69,6 +69,13 @@ public class LocationMap {
 		}
 	}
 
+	public void clearIndex(){
+		taiwanDeadChessLocIndexX = -1;
+		taiwanDeadChessLocIndexY = 0;
+		taiwanCrossDeadChessLocIndexX = -1;
+		taiwanCrossDeadChessLocIndexY = 0;
+	}
+	
 	public LocationPoint[][] getChineseLocationMap() {
 		LocationPoint[][] temp = chineseLocationPoint.clone();
 		return temp;

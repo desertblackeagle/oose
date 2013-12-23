@@ -1,13 +1,18 @@
 ﻿package chessGame.frame.frameOption;
 
+import java.awt.FileDialog;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 import javax.swing.JButton;
 
 import abstractGame.chessGame.AbstractFrameModel;
 import chessGame.controlUnit.ChessGameRule;
+import chessGame.controlUnit.Save2;
+import chessGame.controlUnit.Save;
 import chessGame.data.ChessGameData;
+import chessGame.data.SaveData;
 import chessGame.frame.ChineseChessBoard;
 import chessGame.frame.TaiwanChessBoard;
 
@@ -52,6 +57,7 @@ public class ThirdView extends AbstractFrameModel {
 
 		back.addActionListener(this);
 		newGame.addActionListener(this);
+		loadGame.addActionListener(this);
 
 		add(newGame);
 		add(loadGame);
@@ -72,9 +78,27 @@ public class ThirdView extends AbstractFrameModel {
 			setVisible(false);
 			dispose();
 			if (from.equals("中國棋")) {
-				new ChineseChessBoard(true, data, rule, getLocation().x, getLocation().y);
+				new ChineseChessBoard(true, data, rule, null, getLocation().x, getLocation().y);
 			} else if (from.equals("暗棋")) {
-				new TaiwanChessBoard(true, data, rule, getLocation().x, getLocation().y);
+				new TaiwanChessBoard(true, data, rule,null, getLocation().x, getLocation().y);
+			}
+		} else if (buttonName.equals("讀取舊檔")) {
+			FileDialog fileDialog = new FileDialog(this, "Load...", FileDialog.LOAD);
+			fileDialog.setVisible(true);
+			String file = fileDialog.getFile();
+			file = fileDialog.getDirectory() + file;
+			System.out.println(file);
+
+			File files = new File(file);
+			Save save = new Save();
+			SaveData saveData = (SaveData) save.loadGame(file);
+			System.out.println(saveData.toString());
+			setVisible(false);
+			dispose();
+			if (from.equals("中國棋")) {
+				new ChineseChessBoard(true, data, rule, saveData, getLocation().x, getLocation().y);
+			} else if (from.equals("暗棋")) {
+				new TaiwanChessBoard(true, data, rule, saveData, getLocation().x, getLocation().y);
 			}
 		}
 

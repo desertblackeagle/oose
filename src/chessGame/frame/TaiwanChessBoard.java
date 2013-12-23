@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import abstractGame.chessGame.AbstractChessBoardFactory;
 import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
+import chessGame.data.SaveData;
 import chessGame.data.chess.Chess;
 import chessGame.frame.frameElement.taiwanChess.CrossTaiwanChessBoardFrame;
 import chessGame.frame.frameElement.taiwanChess.StraightTaiwanChessBoardFrame;
@@ -18,13 +19,25 @@ public class TaiwanChessBoard extends AbstractChessBoardFactory {
 
 //	private JButton backMain;
 
-	public TaiwanChessBoard(boolean visable, ChessGameData data, ChessGameRule rule, int x, int y) {
+	public TaiwanChessBoard(boolean visable, ChessGameData data, ChessGameRule rule, SaveData saveData, int x, int y) {
 		super(visable, data, rule, x, y);
 		// TODO Auto-generated constructor stub
 		data.getGameStatus().getChessStatus().setWhichGame(0);
-		data.getChessTable().create(data);
+		if (saveData != null) {
+			data.getChessTable().create(data);
+			data.getChessTable().loadAllTaiwanChessData(saveData.getArray());
+			data.getGameStatus().getChessStatus().setWhichGame(saveData.getWhichGame());
+			data.getGameStatus().getChessStatus().setWhichOrder(saveData.getWhichOrder());
+			data.getGameStatus().getChessRecord().setRecordStack(saveData.getRecordStack());
+			data.getGameStatus().getChessList().reloadChessList(data.getChessTable().getTaiwanChessList());
+		}else{
+			data.getChessTable().create(data);
+		}
+		
 		data.getGameStatus().getChessList().print();
 		initBoard();
+		chessRelocation();
+		getInfotArea().setText(data.getGameStatus().getChessRecord().recordToString());
 	}
 
 //	public static void instance(boolean visable, ChessGameData data, int x, int y) {

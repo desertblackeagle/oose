@@ -19,14 +19,14 @@ public class ChessRecord implements RecordInterface, Serializable {
 		return recordStack;
 	}
 
-	public Chess[][] takeOneChess(){
+	public Chess[][] takeOneChess() {
 		if (listRecord.size() <= 2) {
 			return null;
 		} else {
 			return listRecord.pop();
 		}
 	}
-	
+
 	public void clear() {
 		recordStack.clear();
 		listRecord.clear();
@@ -44,7 +44,7 @@ public class ChessRecord implements RecordInterface, Serializable {
 //		}
 //		System.out.println(listRecord.size());
 		for (int i = 0; i < listRecord.size(); i++) {
-			System.out.println(i + " " + listRecord.get(i));
+			System.out.println(i);
 //			System.out.println("WWWW "+listRecord.get(i).data.getGameStatus().getChessStatus().getWhichOrder());
 			if (w == 1) {
 				for (int z = 0; z < 10; z++) {
@@ -74,7 +74,7 @@ public class ChessRecord implements RecordInterface, Serializable {
 	}
 
 	public void recordList(Chess[][] recordList, int w) {
-		System.out.print("588888888\n");
+//		System.out.print("588888888\n");
 		listRecord.add(recordList);
 		System.out.print("588888888 start\n");
 		printListRecord(w);
@@ -101,5 +101,9 @@ public class ChessRecord implements RecordInterface, Serializable {
 			}
 		}
 		return ss;
+	}
+
+	public void setRecordStack(Stack<String> recordStack) {
+		this.recordStack = recordStack;
 	}
 }

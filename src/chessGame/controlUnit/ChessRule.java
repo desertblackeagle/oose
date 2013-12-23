@@ -38,15 +38,18 @@ public class ChessRule {
 							return false;
 						}
 					} else {
+
 						return false;
 					}
 				} else {
 					return true;
 				}
 			} else {
+
 				return false;
 			}
 		} else {
+
 			return false;
 		}
 	}
@@ -58,7 +61,7 @@ public class ChessRule {
 
 		if (chess.isChessCover()) {
 			System.out.println("Chess need to take cover");
-			new InfoFrame("請先翻棋", infoLocX, infoLocY);
+			InfoFrame.instance("請先翻棋", infoLocX, infoLocY);
 			moveBack(chess);
 			return false;
 		}
@@ -67,7 +70,7 @@ public class ChessRule {
 		if (!chess.isChessCover()) {
 			if (chess.getData().getGameStatus().getChessStatus().getWhichOrder() != chess.getColor()) {
 				// (move back)
-				new InfoFrame("換對手下", infoLocX, infoLocY);
+				InfoFrame.instance("換對手下", infoLocX, infoLocY);
 				System.out.println("turn " + chess.getData().getGameStatus().getChessStatus().getWhichOrder() + " to chess");
 				moveBack(chess);
 				return false;
@@ -91,7 +94,7 @@ public class ChessRule {
 							}
 							abstractChessBoard.setInfotAreaText(chess.getData().getGameStatus().getChessRecord().recordToString());
 							eatChess(chess, abstractChessBoard, toX, toY);
-							System.out.print("999999999999999\n");
+//							System.out.print("999999999999999\n");
 //							System.out.println(chess.getData().getGameStatus().getChessRecord().getListRecord().size());
 //							chess.getData().getGameStatus().getChessList().print();
 //							chess.getData().getGameStatus().getChessList().print();
@@ -112,18 +115,32 @@ public class ChessRule {
 								}
 							}
 							chess.getData().getGameStatus().getChessRecord().recordList(tmp, chess.getData().getGameStatus().getChessStatus().getWhichGame());
+//							if (chess.getData().getGameStatus().getChessStatus().getWhichGame() == 1) {
+//								for (int i = 0; i < 9; i++) {
+//									for (int j = 0; j < 10; j++) {
+//										if (moveToNoAction(chess, i, j)) {
+//											if (chess.getData().getGameStatus().getChessList().getChessList()[j][i] != null) {
+//												if (chess.getData().getGameStatus().getChessList().getChessList()[j][i].getName().equals("King")) {
+//													InfoFrame.instance("將軍", infoLocX, infoLocY);
+//												}
+//											}
+//										}
+//									}
+//								}
+//							}
+							System.out.println("Swap");
 							swapUserOrder(chess, abstractChessBoard);
 							return true;
 						} else {
 							// (move back) can't eat same color
-							new InfoFrame("不能吃自己的棋子", infoLocX, infoLocY);
+							InfoFrame.instance("不能吃自己的棋子", infoLocX, infoLocY);
 							System.out.println(chess.getColor() + chess.getName() + "[" + chess.getChessX() + "," + chess.getChessY() + "]" + "can't eat sam color " + chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].getName());
 							moveBack(chess);
 							return false;
 						}
 					} else {
 						// (move back) can't eat
-						new InfoFrame("你無法吃這顆棋子", infoLocX, infoLocY);
+						InfoFrame.instance("你無法吃這顆棋子", infoLocX, infoLocY);
 						System.out.println(chess.getName() + "[" + chess.getChessX() + "," + chess.getChessY() + "]" + "can't eat " + chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].getName());
 						moveBack(chess);
 						return false;
@@ -141,7 +158,7 @@ public class ChessRule {
 					chess.getData().getGameStatus().getChessList().getChessList()[chess.getChessY()][chess.getChessX()] = null;
 					chess.setChessX(toX);
 					chess.setChessY(toY);
-					System.out.print("999999999999999\n");
+					System.out.print("999999999999998\n");
 					Chess[][] tmp;
 					if (chess.getData().getGameStatus().getChessStatus().getWhichGame() == 1) {
 						tmp = new Chess[10][9];
@@ -160,6 +177,20 @@ public class ChessRule {
 					}
 					abstractChessBoard.setInfotAreaText(chess.getData().getGameStatus().getChessRecord().recordToString());
 					chess.getData().getGameStatus().getChessRecord().recordList(tmp, chess.getData().getGameStatus().getChessStatus().getWhichGame());
+//					if (chess.getData().getGameStatus().getChessStatus().getWhichGame() == 1) {
+//						for (int i = 0; i < 9; i++) {
+//							for (int j = 0; j < 10; j++) {
+//								if (moveToNoAction(chess, i, j)) {
+//									if (chess.getData().getGameStatus().getChessList().getChessList()[j][i] != null) {
+//										if (chess.getData().getGameStatus().getChessList().getChessList()[j][i].getName().equals("King")) {
+//											InfoFrame.instance("將軍", infoLocX, infoLocY);
+//										}
+//									}
+//								}
+//							}
+//						}
+//					}
+					System.out.println("Swap");
 					swapUserOrder(chess, abstractChessBoard);
 					return true;
 				}
@@ -168,14 +199,14 @@ public class ChessRule {
 				if (chess.getChessX() == toX && chess.getChessY() == toY) {
 
 				} else {
-					new InfoFrame("無法移動到這個位置", infoLocX, infoLocY);
+					InfoFrame.instance("無法移動到這個位置", infoLocX, infoLocY);
 				}
 				System.out.println(chess.getColor() + chess.getName() + "[" + chess.getChessX() + "," + chess.getChessY() + "]" + "can't move to " + "[" + toX + "," + toY + "]");
 				moveBack(chess);
 				return false;
 			}
 		} else {
-			new InfoFrame("將帥不可對峙", infoLocX, infoLocY);
+			InfoFrame.instance("將帥不可對峙", infoLocX, infoLocY);
 			System.out.println("King can't look each other");
 			moveBack(chess);
 			return false;
@@ -186,32 +217,6 @@ public class ChessRule {
 		System.out.println("Back");
 		chess.setLocation(chess.getData().getLocMap().getLocationMap()[chess.getChessY()][chess.getChessX()].getX(), chess.getData().getLocMap().getLocationMap()[chess.getChessY()][chess.getChessX()].getY());
 	}
-
-//	public void taiwanChessOrder(ChessView chess, GameFrame gameFrame) {
-//		if (whichGame == taiwanChess) {
-//			if (taiwanOrderCnt > 2) {
-//				swapUserOrder(gameFrame);
-//			}
-//			if (taiwanOrderCnt < 2) {
-//				tmp[taiwanOrderCnt] = btnChess;
-//				taiwanOrderCnt++;
-//			}
-//			if (taiwanOrderCnt == 2) {
-//				if (tmp[0].getPriority() >= tmp[1].getPriority()) {
-//					forWhoToChess = tmp[0].getColor();
-//					taiwanOrderCnt++;
-//				} else {
-//					forWhoToChess = tmp[1].getColor();
-//					taiwanOrderCnt++;
-//				}
-//				if (forWhoToChess == red) {
-//					gameFrame.changeLabelText(gameFrame.getUserOrder(), "輪到紅色");
-//				} else {
-//					gameFrame.changeLabelText(gameFrame.getUserOrder(), "輪到黑色");
-//				}
-//			}
-//		}
-//	}
 
 	public void swapUserOrder(ChessView chess, AbstractChessBoardFactory abstractChessBoard) {
 		chess.getData().getGameStatus().getChessStatus().setWhichOrder(chess.getData().getGameStatus().getChessStatus().getWhichOrder() ^ 1); // change other side to chess
@@ -262,17 +267,15 @@ public class ChessRule {
 			chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].setLocation(1000, 1000);
 			if (chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].getName().equals("King")) {
 				if (chess.getColor() == red) {
-					new InfoFrame("紅色贏了", infoLocX, infoLocY);
+					InfoFrame.instance("紅色贏了", infoLocX, infoLocY);
 					abstractChessBoard.removeChessListener();
 				} else {
-					new InfoFrame("黑色贏了", infoLocX, infoLocY);
+					InfoFrame.instance("黑色贏了", infoLocX, infoLocY);
 					abstractChessBoard.removeChessListener();
 				}
 			}
 		} else {
-//			chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].setLocation(chess.getData().getLocMap().getDeadLocationMap()[0][0].getX(), chess.getData().getLocMap().getDeadLocationMap()[0][0].getY());
 			LocationPoint tmp = chess.getData().getLocMap().getDeadLocation();
-//			System.out.println("D : " + tmp.getX() + " " + tmp.getY());
 			chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].setLocation(tmp.getX(), tmp.getY());
 			if (chess.getColor() == red) {
 				blackChessNum--;
@@ -282,34 +285,22 @@ public class ChessRule {
 			if (redChessNum == 10) {
 				System.out.println("Black WIM");
 				abstractChessBoard.removeChessListener();
-				new InfoFrame("黑色贏了", infoLocX, infoLocY);
-//				new InfoFrame("黑色贏了", "獲勝通知", gameFrame.getLocationOnScreen().x, ((ChineseGameFrame) gameFrame).getLocationOnScreen().y);
-//				new InfoFrame("黑色贏了", "獲勝通知", gameFrame.getLocationOnScreen().x + gameFrame.getWidth() / 2 - 200, gameFrame.getLocationOnScreen().y + gameFrame.getHeight() / 2 - 100);
-//				gameFrame.removeBtnListener();
+				InfoFrame.instance("黑色贏了", infoLocX, infoLocY);
 			} else if (blackChessNum == 10) {
 				System.out.println("Red WIM");
 				abstractChessBoard.removeChessListener();
-				new InfoFrame("紅色贏了", infoLocX, infoLocY);
-//				new InfoFrame("紅色贏了", "獲勝通知", gameFrame.getLocationOnScreen().x + gameFrame.getWidth() / 2 - 200, gameFrame.getLocationOnScreen().y + gameFrame.getHeight() / 2 - 100);
-//				gameFrame.removeBtnListener();
+				InfoFrame.instance("紅色贏了", infoLocX, infoLocY);
 			}
 		}
-
-//		System.out.println("toy tox " + chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].getName());
-
+		chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].setChessDead(true);
+//		System.out.println("Chess dead :" + chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].isChessDead());
+		// swap
 		chess.getData().getGameStatus().getChessList().getChessList()[toY][toX] = chess.getData().getGameStatus().getChessList().getChessList()[chess.getChessY()][chess.getChessX()];
-
-//		System.out.println("foX foY " + chess.getData().getGameStatus().getChessList().getChessList()[chess.getChessY()][chess.getChessX()].getName());
-//		System.out.println("aft toy tox " + chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].getName());
-
 		chess.getData().getGameStatus().getChessList().getChessList()[chess.getChessY()][chess.getChessX()] = null;
 
-//		System.out.println("soy sox " + chess.getData().getGameStatus().getChessList().getChessList()[chess.getChessY()][chess.getChessX()]);
-		chess.setChessDead(true);
 		chess.setChessX(toX);
 		chess.setChessY(toY);
 		System.out.println("eat end   ------------------");
-//		chess.getData().getGameStatus().getChessList().print(1);
 	}
 
 	public boolean kingIsLookEach(ChessView chess, int toX, int toY) {
@@ -374,11 +365,11 @@ public class ChessRule {
 		}
 	}
 
-	public void taiwanChessOrder(ChessView chess,AbstractChessBoardFactory abstractChessBoard) {
+	public void taiwanChessOrder(ChessView chess, AbstractChessBoardFactory abstractChessBoard) {
 		ChessView tmp[] = new ChessView[2];
 		if (chess.getData().getGameStatus().getChessStatus().getWhichGame() == taiwanChess) {
 			if (taiwanOrderCnt > 2) {
-				swapUserOrder(chess,abstractChessBoard);
+				swapUserOrder(chess, abstractChessBoard);
 			}
 			if (taiwanOrderCnt < 2) {
 				tmp[taiwanOrderCnt] = chess;
@@ -463,5 +454,9 @@ public class ChessRule {
 //		System.out.println("aft Loc : " + boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getX() + " : " + boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getY());
 		((ChessView) e.getSource()).setLocation(boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getX(), boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getY());
 		return new LocationPoint(aftChessX, aftChessY);
+	}
+
+	public void clearCnt() {
+		taiwanOrderCnt = 0;
 	}
 }

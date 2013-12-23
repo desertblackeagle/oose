@@ -1,6 +1,7 @@
 package chessGame.data.status;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import chessGame.data.ChessGameData;
 import chessGame.data.chess.Chess;
@@ -54,7 +55,7 @@ public class ChessList implements LocationInterface, Serializable {
 			}
 		}
 	}
-	
+
 	public Chess[][] getChessList() {
 		if (data.getGameStatus().getChessStatus().getWhichGame() == 0) {
 			return taiwanChessList;
@@ -70,7 +71,7 @@ public class ChessList implements LocationInterface, Serializable {
 			chineseChessList = tmp;
 		}
 	}
-	
+
 	public void clearList() {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -83,14 +84,34 @@ public class ChessList implements LocationInterface, Serializable {
 			}
 		}
 	}
-	
-	public void reloadChessLoc(){
+
+	public void reloadChessList(ArrayList<Chess> chessArray) {
+		clearList();
+		if (data.getGameStatus().getChessStatus().getWhichGame() == 1) {
+			for (Chess c : chessArray) {
+				if (!c.isChessDead()) {
+					chineseChessList[c.getChessY()][c.getChessX()] = c;
+				}
+
+			}
+		} else {
+			for (Chess c : chessArray) {
+				if (!c.isChessDead()) {
+					taiwanChessList[c.getChessY()][c.getChessX()] = c;
+				}
+			}
+		}
+	}
+
+	public void reloadChessLoc() {
+		
 		if (data.getGameStatus().getChessStatus().getWhichGame() == 0) {
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 8; j++) {
 					if (taiwanChessList[i][j] != null) {
 						taiwanChessList[i][j].setChessX(j);
 						taiwanChessList[i][j].setChessY(i);
+						taiwanChessList[i][j].setChessDead(false);
 					}
 				}
 			}
@@ -100,6 +121,7 @@ public class ChessList implements LocationInterface, Serializable {
 					if (chineseChessList[i][j] != null) {
 						chineseChessList[i][j].setChessX(j);
 						chineseChessList[i][j].setChessY(i);
+						chineseChessList[i][j].setChessDead(false);
 //						System.out.printf("%8s", chineseChessList[i][j].getName());
 					}
 //					else {
@@ -110,7 +132,7 @@ public class ChessList implements LocationInterface, Serializable {
 			}
 		}
 	}
-	
+
 //	public Chess[][] getChineseChessList() {
 //		return chineseChessList;
 //	}

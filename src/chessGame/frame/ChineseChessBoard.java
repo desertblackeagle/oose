@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import abstractGame.chessGame.AbstractChessBoardFactory;
 import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
+import chessGame.data.SaveData;
 import chessGame.data.chess.Chess;
 import chessGame.frame.frameElement.chineseChess.CrossChineseChessBoardFrame;
 import chessGame.frame.frameElement.chineseChess.StraightChineseChessBoardFrame;
@@ -20,16 +21,27 @@ public class ChineseChessBoard extends AbstractChessBoardFactory {
 //	private JButton backMain;
 //	private JPanel panel;
 
-	public ChineseChessBoard(boolean visable, ChessGameData data, ChessGameRule rule, int x, int y) {
+	public ChineseChessBoard(boolean visable, ChessGameData data, ChessGameRule rule, SaveData saveData, int x, int y) {
 		super(visable, data, rule, x, y);
 		data.getGameStatus().getChessStatus().setWhichGame(1);
-		System.out.println("which : " + data.getGameStatus().getChessStatus().getWhichGame());
-		data.getChessTable().create(data);
-		data.getGameStatus().getChessList().print();
+//		System.out.println("which : " + data.getGameStatus().getChessStatus().getWhichGame());
+		if (saveData != null) {
+			data.getChessTable().create(data);
+			data.getChessTable().loadAllChineseChessData(saveData.getArray());
+			data.getGameStatus().getChessStatus().setWhichGame(saveData.getWhichGame());
+			data.getGameStatus().getChessStatus().setWhichOrder(saveData.getWhichOrder());
+			data.getGameStatus().getChessRecord().setRecordStack(saveData.getRecordStack());
+			data.getGameStatus().getChessList().reloadChessList(data.getChessTable().getChineseChessList());
+		} else {
+			data.getChessTable().create(data);
+		}
+
+//		data.getGameStatus().getChessList().print();
 		// TODO Auto-generated constructor stub
 //		panel = new JPanel();
 		initBoard();
-
+		chessRelocation();
+		getInfotArea().setText(data.getGameStatus().getChessRecord().recordToString());
 	}
 
 //	public static void instance(boolean visable, ChessGameData data, int x, int y) {

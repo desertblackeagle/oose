@@ -3,9 +3,9 @@ package chessGame.data.chess;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import chessGame.data.ChessData;
 import chessGame.data.ChessGameData;
 import chessGame.data.LocationPoint;
-import chessGame.data.status.GameStatus;
 
 /* @author Red Rose
  * Function:a table to create and store chess
@@ -144,6 +144,14 @@ public class ChessTable implements Serializable {
 			for (int i = 0; i < 32; i++) {
 				LocationPoint temp = location[i];
 				int random = (int) (Math.random() * 32);
+//				System.out.println("R :" + random);
+				location[i] = location[random];
+				location[random] = temp;
+			}
+			for (int i = 0; i < 32; i++) {
+				LocationPoint temp = location[i];
+				int random = (int) (Math.random() * 32);
+//				System.out.println("R :" + random);
 				location[i] = location[random];
 				location[random] = temp;
 			}
@@ -390,4 +398,65 @@ public class ChessTable implements Serializable {
 		return taiwanChessList;
 	}
 
+	public ArrayList<ChessData> getAllChineseChessData() {
+		ArrayList<ChessData> array = new ArrayList<ChessData>();
+		for (Chess c : chineseChessList) {
+			LocationPoint tmp = new LocationPoint(c.getChessX(), c.getChessY());
+			ChessData chessData = new ChessData(tmp, c.isChessDead(), c.isChessCover());
+			array.add(chessData);
+//			System.out.println(c.getChineseName() + " " + c.getChessX() + " " + c.getChessY());
+		}
+		return array;
+	}
+
+	public ArrayList<ChessData> getAllTaiwanChessData() {
+		ArrayList<ChessData> array = new ArrayList<ChessData>();
+		for (Chess c : taiwanChessList) {
+			LocationPoint tmp = new LocationPoint(c.getChessX(), c.getChessY());
+			ChessData chessData = new ChessData(tmp, c.isChessDead(), c.isChessCover());
+			array.add(chessData);
+//			System.out.println(c.getChineseName() + " " + c.getChessX() + " " + c.getChessY());
+		}
+		return array;
+	}
+
+	public void loadAllChineseChessData(ArrayList<ChessData> array) {
+//		ArrayList<LocationPoint> array = new ArrayList<LocationPoint>();
+		int cnt = 0;
+		for (Chess c : chineseChessList) {
+//			System.out.println("Debug " + array.get(cnt).getPoint());
+			c.setChessX(array.get(cnt).getPoint().getX());
+			c.setChessY(array.get(cnt).getPoint().getY());
+			c.setChessCover(array.get(cnt).isChessCover());
+//			System.out.println("Load chess data " + array.get(cnt).isChessDead());
+			c.setChessDead(array.get(cnt).isChessDead());
+//			System.out.println("Load loc " + array.get(cnt).getX() + " " + array.get(cnt).getY());
+//			System.out.println(c.getChineseName() + " " + c.getChessX() + " " + c.getChessY());
+			cnt++;
+		}
+	}
+
+	public void loadAllTaiwanChessData(ArrayList<ChessData> array) {
+//		ArrayList<LocationPoint> array = new ArrayList<LocationPoint>();
+		int cnt = 0;
+		for (Chess c : taiwanChessList) {
+			c.setChessX(array.get(cnt).getPoint().getX());
+			c.setChessY(array.get(cnt).getPoint().getY());
+			c.setChessCover(array.get(cnt).isChessCover());
+			c.setChessDead(array.get(cnt).isChessDead());
+			cnt++;
+//			System.out.println(c.getChineseName() + " " + c.getChessX() + " " + c.getChessY());
+		}
+	}
+
+	public void setAllChess(Chess[][] chess) {
+		for (Chess c : chineseChessList) {
+//			System.out.println("Debug "+c.getChessX()+" "+c.getChessY());
+			if (chess[c.getChessY()][c.getChessX()] != null) {
+				c.setChessDead(chess[c.getChessY()][c.getChessX()].isChessDead());
+				c.setChessCover(chess[c.getChessY()][c.getChessX()].isChessCover());
+			}
+		}
+
+	}
 }

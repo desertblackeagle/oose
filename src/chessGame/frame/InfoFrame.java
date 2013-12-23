@@ -10,11 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class InfoFrame extends JFrame implements ActionListener {
-
+	private static InfoFrame infoFrame = null;
 	private JButton confirm;
 	private JLabel textLabel;
 
-	public InfoFrame(String text, int locX, int locY) {
+	private InfoFrame(String text, int locX, int locY) {
 		// TODO Auto-generated constructor stub
 		setSize(400, 200);
 		setVisible(true);
@@ -36,6 +36,15 @@ public class InfoFrame extends JFrame implements ActionListener {
 //		setLocationRelativeTo(null);
 		textLabel.setBounds(50, 25, 300, 50);
 		add(textLabel);
+	}
+
+	public static InfoFrame instance(String text, int locX, int locY) {
+//		if (infoFrame == null) {
+			infoFrame = new InfoFrame(text, locX, locY);
+//		}
+		
+//		infoFrame.setVisible(true);
+		return infoFrame;
 	}
 
 	@Override
