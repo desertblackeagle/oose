@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import chessGame.data.SaveData;
-
 public class Save {
 	public void saveGame(String file, Object data) {
 

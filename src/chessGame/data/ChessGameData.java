@@ -2,9 +2,7 @@ package chessGame.data;
 
 import java.io.Serializable;
 
-import interfaceGame.DataInterface;
-import chessGame.data.chess.ChessTable;
-import chessGame.data.status.GameStatus;
+import chessGame.frame.ChessTable;
 
 public class ChessGameData implements DataInterface, Serializable {
 	private static ChessGameData data = null;

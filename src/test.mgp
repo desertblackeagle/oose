@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PackageAnalysis>
+    <Package name="game.main" x="373" y="76">
+        <DependencyLink destination="chessGame.data"/>
+        <DependencyLink destination="chessGame.frame"/>
+        <DependencyLink destination="chessGame.controlUnit"/>
+        <DependencyLink destination="chessGame.frame.board"/>
+    </Package>
+    <Package name="chessGame.controlUnit" x="467" y="215">
+        <DependencyLink destination="chessGame.data"/>
+        <DependencyLink destination="chessGame.frame"/>
+    </Package>
+    <Package name="chessGame.data" x="848" y="279">
+        <DependencyLink destination="chessGame.frame"/>
+        <DependencyLink destination="chessGame.data.te"/>
+    </Package>
+    <Package name="chessGame.frame" x="184" y="279">
+        <DependencyLink destination="chessGame.data"/>
+        <DependencyLink destination="chessGame.frame.dialog"/>
+        <DependencyLink destination="chessGame.controlUnit"/>
+        <DependencyLink destination="chessGame.frame.board"/>
+        <DependencyLink destination="chessGame.frame.chess"/>
+    </Package>
+    <Package name="chessGame.frame.board" x="-19" y="275"/>
+    <Package name="chessGame.frame.dialog" x="164" y="382"/>
+    <Package name="chessGame.data.te" x="868" y="375"/>
+    <Package name="chessGame.frame.chess" x="494" y="552">
+        <DependencyLink destination="chessGame.frame"/>
+        <DependencyLink destination="chessGame.data"/>
+    </Package>
+</PackageAnalysis>

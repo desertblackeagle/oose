@@ -1,18 +1,15 @@
 package chessGame.frame;
 
-import interfaceGame.chessGame.InterfaceCrossChessBoardFrame;
-import interfaceGame.chessGame.InterfaceStraightChessBoardFrame;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import abstractGame.chessGame.AbstractChessBoardFactory;
 import chessGame.controlUnit.ChessGameRule;
 import chessGame.data.ChessGameData;
 import chessGame.data.SaveData;
-import chessGame.data.chess.Chess;
-import chessGame.frame.frameElement.taiwanChess.CrossTaiwanChessBoardFrame;
-import chessGame.frame.frameElement.taiwanChess.StraightTaiwanChessBoardFrame;
+import chessGame.frame.board.CrossTaiwanChessBoardFrame;
+import chessGame.frame.board.InterfaceCrossChessBoardFrame;
+import chessGame.frame.board.InterfaceStraightChessBoardFrame;
+import chessGame.frame.board.StraightTaiwanChessBoardFrame;
 
 public class TaiwanChessBoard extends AbstractChessBoardFactory {
 //	private static TaiwanChessBoard board = null;
@@ -20,43 +17,31 @@ public class TaiwanChessBoard extends AbstractChessBoardFactory {
 //	private JButton backMain;
 
 	public TaiwanChessBoard(boolean visable, ChessGameData data, ChessGameRule rule, SaveData saveData, int x, int y) {
-		super(visable, data, rule, x, y);
 		// TODO Auto-generated constructor stub
-		data.getGameStatus().getChessStatus().setWhichGame(0);
-		if (saveData != null) {
-			data.getChessTable().create(data);
-			data.getChessTable().loadAllTaiwanChessData(saveData.getArray());
-			data.getGameStatus().getChessStatus().setWhichGame(saveData.getWhichGame());
-			data.getGameStatus().getChessStatus().setWhichOrder(saveData.getWhichOrder());
-			data.getGameStatus().getChessRecord().setRecordStack(saveData.getRecordStack());
-			data.getGameStatus().getChessList().reloadChessList(data.getChessTable().getTaiwanChessList());
-		}else{
-			data.getChessTable().create(data);
-		}
-		
-		data.getGameStatus().getChessList().print();
-		initBoard();
-		chessRelocation();
-		getInfotArea().setText(data.getGameStatus().getChessRecord().recordToString());
-	}
+		super(visable, data, rule, x, y);
 
-//	public static void instance(boolean visable, ChessGameData data, int x, int y) {
-//		if (board == null) {
-//			board = new TaiwanChessBoard(visable, data, x, y);
-//		} else {
-//			System.out.println("4648646886868684884646884648648664864846");
-//			System.out.println("Ta dir " + data.getConfigData().isBoardStraight());
-//			board.setVisible(visable);
-//			data.getGameStatus().getChessStatus().setWhichGame(0);
-//			data.getChessTable().create(data);
-//		}
-//	}
+		chessStatus.setWhichGame(taiwaneseChess);
+
+		if (saveData != null) {
+			chessTable.create(data);
+			chessTable.loadAllTaiwanChessData(saveData.getArray());
+			chessStatus.setWhichGame(saveData.getWhichGame());
+			chessStatus.setWhichOrder(saveData.getWhichOrder());
+			chessRecord.setRecordStack(saveData.getRecordStack());
+			chessList.reloadChessList(chessTable.getChessList(chessStatus.getWhichGame()));
+		} else {
+			chessTable.create(data);
+		}
+
+		createBoard();
+		getInfotArea().setText(chessRecord.recordToString());
+	}
 
 	@Override
 	public void initBoard() {
 		// TODO Auto-generated method stub
 
-		for (Chess cv : data.getChessTable().getTaiwanChessList()) {
+		for (Chess cv : chessTable.getTaiwanChessList()) {
 			cv.addMouseListener(this);
 			cv.addMouseMotionListener(this);
 			add(cv);
@@ -77,22 +62,13 @@ public class TaiwanChessBoard extends AbstractChessBoardFactory {
 		add(bottom);
 
 		Chess[][] tmp;
-		if (data.getGameStatus().getChessStatus().getWhichGame() == 1) {
-			tmp = new Chess[10][9];
-			for (int i = 0; i < 10; i++) {
-				for (int j = 0; j < 9; j++) {
-					tmp[i][j] = data.getGameStatus().getChessList().getChessList()[i][j];
-				}
-			}
-		} else {
-			tmp = new Chess[4][8];
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 8; j++) {
-					tmp[i][j] = data.getGameStatus().getChessList().getChessList()[i][j];
-				}
+		tmp = new Chess[4][8];
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 8; j++) {
+				tmp[i][j] = chessList.getChessList()[i][j];
 			}
 		}
-		data.getGameStatus().getChessRecord().recordList(tmp, data.getGameStatus().getChessStatus().getWhichGame());
+		chessRecord.recordList(tmp, chessStatus.getWhichGame());
 	}
 
 	@Override
@@ -102,7 +78,6 @@ public class TaiwanChessBoard extends AbstractChessBoardFactory {
 		setxMin(-34);
 		setyMax(244);
 		setyMin(-34);
-//		return new StraightTaiwanChessBoardFrame(620, 690, "c:\\aa.jpg");
 		return new StraightTaiwanChessBoardFrame(820, 890, "c:\\aa.jpg");
 	}
 
@@ -113,7 +88,6 @@ public class TaiwanChessBoard extends AbstractChessBoardFactory {
 		setxMin(-34);
 		setyMax(524);
 		setyMin(-34);
-//		return new CrossTaiwanChessBoardFrame(690, 620, "c:\\aa.jpg");
 		return new CrossTaiwanChessBoardFrame(890, 820, "c:\\aa.jpg");
 	}
 
@@ -127,13 +101,10 @@ public class TaiwanChessBoard extends AbstractChessBoardFactory {
 	public void removeChessListener() {
 		// TODO Auto-generated method stub
 		System.out.println("remove listener");
-		for (Chess cv : data.getChessTable().getTaiwanChessList()) {
+		for (Chess cv : chessTable.getTaiwanChessList()) {
 			cv.removeMouseListener(this);
 			cv.removeMouseMotionListener(this);
 		}
 	}
 
-//	public static void main(String[] args) {
-//		TaiwanChessBoard c = new TaiwanChessBoard(true, ChessGameData.instance(), 0, 0);
-//	}
 }

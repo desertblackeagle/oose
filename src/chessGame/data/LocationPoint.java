@@ -1,8 +1,6 @@
 package chessGame.data;
 
-import java.io.Serializable;
-
-public class LocationPoint implements Serializable {
+public class LocationPoint {
 	private int x;
 	private int y;
 

@@ -10,15 +10,12 @@ public class SaveData implements Serializable {
 	private Stack<String> recordStack;
 	private ArrayList<ChessData> array;
 
-//	private Stack<Chess[][]> listRecord;
-
 	public SaveData(int whichGame, int whichOrder, Stack<String> recordStack, ArrayList<ChessData> array) {
 		// TODO Auto-generated constructor stub
 		this.whichGame = whichGame;
 		this.whichOrder = whichOrder;
 		this.recordStack = recordStack;
 		this.array = array;
-//		this.listRecord = listRecord;
 	}
 
 	public int getWhichGame() {

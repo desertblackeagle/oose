@@ -33,18 +33,22 @@ public class InfoFrame extends JFrame implements ActionListener {
 		textLabel.setFont(new Font(text, Font.PLAIN, 25));
 		textLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		textLabel.setText(text);
-//		setLocationRelativeTo(null);
 		textLabel.setBounds(50, 25, 300, 50);
 		add(textLabel);
 	}
 
 	public static InfoFrame instance(String text, int locX, int locY) {
-//		if (infoFrame == null) {
+		if (infoFrame == null) {
 			infoFrame = new InfoFrame(text, locX, locY);
-//		}
-		
-//		infoFrame.setVisible(true);
+		} else {
+			infoFrame.set(text, locX, locY);
+			infoFrame.setVisible(true);
+		}
 		return infoFrame;
+	}
+
+	private void set(String text, int locX, int locY) {
+		textLabel.setText(text);
 	}
 
 	@Override
@@ -53,9 +57,5 @@ public class InfoFrame extends JFrame implements ActionListener {
 		if (e.getActionCommand().equals("確定")) {
 			dispose();
 		}
-	}
-
-	public static void main(String[] args) {
-		InfoFrame iff = new InfoFrame("錯誤", 100, 100);
 	}
 }

@@ -2,23 +2,22 @@ package chessGame.controlUnit;
 
 import java.awt.event.MouseEvent;
 
-import abstractGame.chessGame.AbstractChessBoardFactory;
 import chessGame.data.LocationPoint;
-import chessGame.data.chess.Chess;
-import chessGame.data.chess.ChessView;
+import chessGame.frame.AbstractChessBoardFactory;
+import chessGame.frame.Chess;
 import chessGame.frame.InfoFrame;
 
 public class ChessRule {
 
-	static final int chinessChess = 1;
-	static final int taiwanChess = 0;
-	static final int red = 0;
-	static final int black = 1;
+	public static final int chinessChess = 1;
+	public static final int taiwanChess = 0;
+	public static final int red = 0;
+	public static final int black = 1;
 	private int redChessNum = 16;
 	private int blackChessNum = 16;
 	private int taiwanOrderCnt = 0;
 
-	public boolean moveToNoAction(ChessView chess, int toX, int toY) {
+	public boolean moveToNoAction(Chess chess, int toX, int toY) {
 
 		if (chess.isChessCover()) {
 			return false;
@@ -38,27 +37,28 @@ public class ChessRule {
 							return false;
 						}
 					} else {
-
 						return false;
 					}
 				} else {
 					return true;
 				}
 			} else {
-
 				return false;
 			}
 		} else {
-
 			return false;
 		}
 	}
 
-	public boolean moveTo(ChessView chess, AbstractChessBoardFactory abstractChessBoard, int toX, int toY) {
+	public boolean moveTo(Chess chess, AbstractChessBoardFactory abstractChessBoard, int toX, int toY) {
 		System.out.println("to XY " + toX + " : " + toY);
 		int infoLocX = abstractChessBoard.getLocation().x + (abstractChessBoard.getWidth() / 2) - 200;
 		int infoLocY = abstractChessBoard.getLocation().y + (abstractChessBoard.getHeight() / 2) - 100;
-
+		
+		if(chess.getChessX() == toX && chess.getChessY() == toY){
+			return false;
+		}
+		
 		if (chess.isChessCover()) {
 			System.out.println("Chess need to take cover");
 			InfoFrame.instance("請先翻棋", infoLocX, infoLocY);
@@ -82,7 +82,6 @@ public class ChessRule {
 				if (haveTarget(chess, toX, toY)) {
 					if (canEat(chess, toX, toY)) {
 						if (chess.getColor() != chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].getColor()) {
-//							abstractChessBoard.setInfotAreaText(chess.getName() + " 吃掉  " + chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].getName());
 
 							System.out.println(chess.getName() + " eat " + chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].getName());
 							if (chess.getData().getGameStatus().getChessStatus().getWhichOrder() == 0) {
@@ -94,10 +93,6 @@ public class ChessRule {
 							}
 							abstractChessBoard.setInfotAreaText(chess.getData().getGameStatus().getChessRecord().recordToString());
 							eatChess(chess, abstractChessBoard, toX, toY);
-//							System.out.print("999999999999999\n");
-//							System.out.println(chess.getData().getGameStatus().getChessRecord().getListRecord().size());
-//							chess.getData().getGameStatus().getChessList().print();
-//							chess.getData().getGameStatus().getChessList().print();
 							Chess[][] tmp;
 							if (chess.getData().getGameStatus().getChessStatus().getWhichGame() == 1) {
 								tmp = new Chess[10][9];
@@ -115,19 +110,6 @@ public class ChessRule {
 								}
 							}
 							chess.getData().getGameStatus().getChessRecord().recordList(tmp, chess.getData().getGameStatus().getChessStatus().getWhichGame());
-//							if (chess.getData().getGameStatus().getChessStatus().getWhichGame() == 1) {
-//								for (int i = 0; i < 9; i++) {
-//									for (int j = 0; j < 10; j++) {
-//										if (moveToNoAction(chess, i, j)) {
-//											if (chess.getData().getGameStatus().getChessList().getChessList()[j][i] != null) {
-//												if (chess.getData().getGameStatus().getChessList().getChessList()[j][i].getName().equals("King")) {
-//													InfoFrame.instance("將軍", infoLocX, infoLocY);
-//												}
-//											}
-//										}
-//									}
-//								}
-//							}
 							System.out.println("Swap");
 							swapUserOrder(chess, abstractChessBoard);
 							return true;
@@ -146,7 +128,6 @@ public class ChessRule {
 						return false;
 					}
 				} else {
-//					abstractChessBoard.setInfotAreaText(chess.getName() + " 移動從 [" + chess.getChessX() + "," + chess.getChessY() + "] to [" + toX + "," + toY + "]");
 
 					if (chess.getData().getGameStatus().getChessStatus().getWhichOrder() == 0) {
 						chess.getData().getGameStatus().getChessRecord().record("紅" + chess.getChineseName() + " 移動 [" + chess.getChessX() + "," + chess.getChessY() + "] 到 [" + toX + "," + toY + "]");
@@ -158,9 +139,9 @@ public class ChessRule {
 					chess.getData().getGameStatus().getChessList().getChessList()[chess.getChessY()][chess.getChessX()] = null;
 					chess.setChessX(toX);
 					chess.setChessY(toY);
-					System.out.print("999999999999998\n");
+
 					Chess[][] tmp;
-					if (chess.getData().getGameStatus().getChessStatus().getWhichGame() == 1) {
+					if (chess.getData().getGameStatus().getChessStatus().getWhichGame() == chinessChess) {
 						tmp = new Chess[10][9];
 						for (int i = 0; i < 10; i++) {
 							for (int j = 0; j < 9; j++) {
@@ -177,19 +158,6 @@ public class ChessRule {
 					}
 					abstractChessBoard.setInfotAreaText(chess.getData().getGameStatus().getChessRecord().recordToString());
 					chess.getData().getGameStatus().getChessRecord().recordList(tmp, chess.getData().getGameStatus().getChessStatus().getWhichGame());
-//					if (chess.getData().getGameStatus().getChessStatus().getWhichGame() == 1) {
-//						for (int i = 0; i < 9; i++) {
-//							for (int j = 0; j < 10; j++) {
-//								if (moveToNoAction(chess, i, j)) {
-//									if (chess.getData().getGameStatus().getChessList().getChessList()[j][i] != null) {
-//										if (chess.getData().getGameStatus().getChessList().getChessList()[j][i].getName().equals("King")) {
-//											InfoFrame.instance("將軍", infoLocX, infoLocY);
-//										}
-//									}
-//								}
-//							}
-//						}
-//					}
 					System.out.println("Swap");
 					swapUserOrder(chess, abstractChessBoard);
 					return true;
@@ -213,23 +181,21 @@ public class ChessRule {
 		}
 	}
 
-	private void moveBack(ChessView chess) {
+	private void moveBack(Chess chess) {
 		System.out.println("Back");
 		chess.setLocation(chess.getData().getLocMap().getLocationMap()[chess.getChessY()][chess.getChessX()].getX(), chess.getData().getLocMap().getLocationMap()[chess.getChessY()][chess.getChessX()].getY());
 	}
 
-	public void swapUserOrder(ChessView chess, AbstractChessBoardFactory abstractChessBoard) {
+	public void swapUserOrder(Chess chess, AbstractChessBoardFactory abstractChessBoard) {
 		chess.getData().getGameStatus().getChessStatus().setWhichOrder(chess.getData().getGameStatus().getChessStatus().getWhichOrder() ^ 1); // change other side to chess
 		if (chess.getData().getGameStatus().getChessStatus().getWhichOrder() == red) {
 			abstractChessBoard.getWhichOrder().setText("輪到紅色");
-//			gameFrame.changeLabelText(gameFrame.getUserOrder(), "輪到紅色");
 		} else {
 			abstractChessBoard.getWhichOrder().setText("輪到黑色");
-//			gameFrame.changeLabelText(gameFrame.getUserOrder(), "輪到黑色");
 		}
 	}
 
-	public boolean canEat(ChessView chess, int toX, int toY) {
+	public boolean canEat(Chess chess, int toX, int toY) {
 		if (chess.getData().getGameStatus().getChessStatus().getWhichGame() == chinessChess) {
 			return true;
 		} else {
@@ -246,7 +212,7 @@ public class ChessRule {
 		}
 	}
 
-	public boolean haveTarget(ChessView chess, int toX, int toY) {
+	public boolean haveTarget(Chess chess, int toX, int toY) {
 		if (chess.getData().getGameStatus().getChessList().getChessList()[toY][toX] == null) {
 			return false;
 		} else {
@@ -254,11 +220,11 @@ public class ChessRule {
 		}
 	}
 
-	private boolean canMove(ChessView chess, int toX, int toY) {
+	private boolean canMove(Chess chess, int toX, int toY) {
 		return chess.moveRule(toX, toY);
 	}
 
-	private void eatChess(ChessView chess, AbstractChessBoardFactory abstractChessBoard, int toX, int toY) {
+	private void eatChess(Chess chess, AbstractChessBoardFactory abstractChessBoard, int toX, int toY) {
 		System.out.println("eat start ------------------");
 		int infoLocX = abstractChessBoard.getLocation().x + (abstractChessBoard.getWidth() / 2) - 200;
 		int infoLocY = abstractChessBoard.getLocation().y + (abstractChessBoard.getHeight() / 2) - 100;
@@ -282,18 +248,17 @@ public class ChessRule {
 			} else {
 				redChessNum--;
 			}
-			if (redChessNum == 10) {
+			if (redChessNum == 0) {
 				System.out.println("Black WIM");
 				abstractChessBoard.removeChessListener();
 				InfoFrame.instance("黑色贏了", infoLocX, infoLocY);
-			} else if (blackChessNum == 10) {
+			} else if (blackChessNum == 0) {
 				System.out.println("Red WIM");
 				abstractChessBoard.removeChessListener();
 				InfoFrame.instance("紅色贏了", infoLocX, infoLocY);
 			}
 		}
 		chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].setChessDead(true);
-//		System.out.println("Chess dead :" + chess.getData().getGameStatus().getChessList().getChessList()[toY][toX].isChessDead());
 		// swap
 		chess.getData().getGameStatus().getChessList().getChessList()[toY][toX] = chess.getData().getGameStatus().getChessList().getChessList()[chess.getChessY()][chess.getChessX()];
 		chess.getData().getGameStatus().getChessList().getChessList()[chess.getChessY()][chess.getChessX()] = null;
@@ -303,7 +268,7 @@ public class ChessRule {
 		System.out.println("eat end   ------------------");
 	}
 
-	public boolean kingIsLookEach(ChessView chess, int toX, int toY) {
+	public boolean kingIsLookEach(Chess chess, int toX, int toY) {
 		int kingCount = 0;
 		int count = 0;
 
@@ -319,22 +284,18 @@ public class ChessRule {
 								if (j == toY && (3 + i) == toX) {
 									return true;
 								}
-//								System.out.println(j + " _ " + (3 + i));
 								kingCount++;
 							} else {
 								if (j == toY && (3 + i) == toX) {
 									if (chess.getData().getGameStatus().getChessList().getChessList()[chess.getChessY()][chess.getChessX()].getName().equals("King")) {
-//										System.out.println(j + " _ " + (3 + i));
 										kingCount++;
 									} else {
 										if (kingCount == 1) {
-//											System.out.println(j + " _ " + (3 + i));
 											count++;
 										}
 									}
 								} else {
 									if (kingCount == 1) {
-//										System.out.println(j + " _ " + (3 + i));
 										count++;
 									}
 								}
@@ -343,18 +304,15 @@ public class ChessRule {
 					} else {
 						if (j == toY && (3 + i) == toX) {
 							if (chess.getData().getGameStatus().getChessList().getChessList()[chess.getChessY()][chess.getChessX()].getName().equals("King")) {
-//								System.out.println(j + " _ " + (3 + i));
 								kingCount++;
 							} else {
 								if (kingCount == 1) {
-//									System.out.println(j + " _ " + (3 + i));
 									count++;
 								}
 							}
 						}
 					}
 				}
-//				System.out.println(i + " king : " + kingCount + " count : " + count);
 				if (kingCount == 2 && count == 0) {
 					return false;
 				}
@@ -365,8 +323,8 @@ public class ChessRule {
 		}
 	}
 
-	public void taiwanChessOrder(ChessView chess, AbstractChessBoardFactory abstractChessBoard) {
-		ChessView tmp[] = new ChessView[2];
+	public void taiwanChessOrder(Chess chess, AbstractChessBoardFactory abstractChessBoard) {
+		Chess tmp[] = new Chess[2];
 		if (chess.getData().getGameStatus().getChessStatus().getWhichGame() == taiwanChess) {
 			if (taiwanOrderCnt > 2) {
 				swapUserOrder(chess, abstractChessBoard);
@@ -416,31 +374,25 @@ public class ChessRule {
 			}
 		}
 
-//		System.out.println("mouseReleased : " + (e.getXOnScreen() - boardFactpry.getLocationOnScreen().x) + " " + (e.getYOnScreen() - boardFactpry.getLocationOnScreen().y) + " : " + locX + " " + locY);
 		if (locX > boardFactpry.getxMax() || locX < boardFactpry.getxMin() || locY > boardFactpry.getyMax() || locY < boardFactpry.getyMin()) {
 			System.out.println("超出範圍");
 			System.out.println("far : " + boardFactpry.getxMax() + " " + boardFactpry.getxMin() + " , " + boardFactpry.getyMax() + " " + boardFactpry.getyMin());
-			System.out.println(((ChessView) e.getSource()).getChessY() + " : " + ((ChessView) e.getSource()).getChessX());
-			((ChessView) e.getSource()).setLocation(boardFactpry.data.getLocMap().getLocationMap()[((ChessView) e.getSource()).getChessY()][((ChessView) e.getSource()).getChessX()].getX(),
-					boardFactpry.data.getLocMap().getLocationMap()[((ChessView) e.getSource()).getChessY()][((ChessView) e.getSource()).getChessX()].getY());
+			System.out.println(((Chess) e.getSource()).getChessY() + " : " + ((Chess) e.getSource()).getChessX());
+			((Chess) e.getSource()).setLocation(boardFactpry.data.getLocMap().getLocationMap()[((Chess) e.getSource()).getChessY()][((Chess) e.getSource()).getChessX()].getX(),
+					boardFactpry.data.getLocMap().getLocationMap()[((Chess) e.getSource()).getChessY()][((Chess) e.getSource()).getChessX()].getY());
 			return null;
 		}
 		int aftChessX = 0, aftChessY = 0;
-//		System.out.println("inLoc" + locX + " : " + locY);
 		if ((locX % 70) <= 35 && (locY % 70) <= 35) {
-//			System.out.println(locX / 70 + " " + locY / 70);
 			aftChessX = locX / 70;
 			aftChessY = locY / 70;
 		} else if ((locX % 70) > 35 && (locY % 70) > 35) {
-//			System.out.println((locX / 70 + 1) + " " + (locY / 70 + 1));
 			aftChessX = (locX / 70 + 1);
 			aftChessY = (locY / 70 + 1);
 		} else if ((locX % 70) > 35 && (locY % 70) < 35) {
-//			System.out.println((locX / 70 + 1) + " " + locY / 70);
 			aftChessX = (locX / 70 + 1);
 			aftChessY = locY / 70;
 		} else if ((locX % 70) < 35 && (locY % 70) > 35) {
-//			System.out.println(locX / 70 + " " + (locY / 70 + 1));
 			aftChessX = locX / 70;
 			aftChessY = (locY / 70 + 1);
 		}
@@ -450,9 +402,7 @@ public class ChessRule {
 			aftChessX = aftChessY;
 			aftChessY = tmp;
 		}
-//		System.out.println("inLocCCCC :" + aftChessX + " : " + aftChessY);
-//		System.out.println("aft Loc : " + boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getX() + " : " + boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getY());
-		((ChessView) e.getSource()).setLocation(boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getX(), boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getY());
+		((Chess) e.getSource()).setLocation(boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getX(), boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getY());
 		return new LocationPoint(aftChessX, aftChessY);
 	}
 

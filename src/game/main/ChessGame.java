@@ -1,14 +1,13 @@
 package game.main;
 
-import interfaceGame.DataInterface;
-import interfaceGame.FrameInterface;
-import interfaceGame.GameFactoryInterface;
-import interfaceGame.RuleInterface;
 import chessGame.controlUnit.ChessGameRule;
+import chessGame.controlUnit.RuleInterface;
 import chessGame.data.ChessGameData;
-import chessGame.frame.frameOption.MainView;
+import chessGame.data.DataInterface;
+import chessGame.frame.MainView;
+import chessGame.frame.board.FrameInterface;
 
-public class ChessGame implements GameFactoryInterface {
+public class ChessGame extends GameFactory {
 
 	@Override
 	public FrameInterface makeFrame(ChessGameData data, ChessGameRule rule) {
