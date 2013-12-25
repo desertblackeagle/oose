@@ -3,7 +3,7 @@ package chessGame.data;
 import java.io.Serializable;
 import java.util.Stack;
 
-import chessGame.data.te.RecordInterface;
+import chessGame.data.interfaceData.RecordInterface;
 import chessGame.frame.Chess;
 
 public class ChessRecord implements RecordInterface, Serializable {

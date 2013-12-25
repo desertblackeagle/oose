@@ -454,8 +454,10 @@ public class ChessTable {
 	public void setAllChess(Chess[][] chess) {
 		for (Chess c : chineseChessList) {
 			if (chess[c.getChessY()][c.getChessX()] != null) {
-				c.setChessDead(chess[c.getChessY()][c.getChessX()].isChessDead());
-				c.setChessCover(chess[c.getChessY()][c.getChessX()].isChessCover());
+				if (!c.isChessDead()) {
+					c.setChessDead(chess[c.getChessY()][c.getChessX()].isChessDead());
+					c.setChessCover(chess[c.getChessY()][c.getChessX()].isChessCover());
+				}
 			}
 		}
 	}

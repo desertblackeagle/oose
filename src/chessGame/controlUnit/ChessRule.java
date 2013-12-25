@@ -2,12 +2,15 @@ package chessGame.controlUnit;
 
 import java.awt.event.MouseEvent;
 
+import observer.ChessObserver;
+import observer.ChessObservable;
 import chessGame.data.LocationPoint;
 import chessGame.frame.AbstractChessBoardFactory;
 import chessGame.frame.Chess;
 import chessGame.frame.InfoFrame;
+import chessGame.frame.chess.ChessView;
 
-public class ChessRule {
+public class ChessRule implements ChessObserver {
 
 	public static final int chinessChess = 1;
 	public static final int taiwanChess = 0;
@@ -16,6 +19,33 @@ public class ChessRule {
 	private int redChessNum = 16;
 	private int blackChessNum = 16;
 	private int taiwanOrderCnt = 0;
+
+	@Override
+	public void update(Object source, Object o1) {
+		// TODO Auto-generated method stub
+		if (source instanceof AbstractChessBoardFactory) {
+			if (o1.toString().equals("clearCnt")) {
+				clearCnt();
+			}
+		}
+	}
+
+	@Override
+	public void update(Object source, Object o1, Object o2) {
+		// TODO Auto-generated method stub
+		ObserverPkg pkg = ((ObserverPkg) o2);
+		if (source instanceof AbstractChessBoardFactory) {
+			if (o1.toString().equals("moveTo")) {
+				moveTo(((Chess) pkg.oList.get(0)), (AbstractChessBoardFactory) source, ((LocationPoint) pkg.oList.get(1)).getX(), ((LocationPoint) pkg.oList.get(1)).getY());
+			} else if (o1.toString().equals("moveToNoAction")) {
+				if (moveToNoAction(((Chess) pkg.oList.get(0)), ((Integer) pkg.oList.get(1)), ((Integer) pkg.oList.get(2)))) {
+					((AbstractChessBoardFactory) source).addAcceptView(((Integer) pkg.oList.get(1)), ((Integer) pkg.oList.get(2)));
+				}
+			} else if (o1.toString().equals("swapUserOrder")) {
+				swapUserOrder(((Chess) pkg.oList.get(0)), (AbstractChessBoardFactory) source);
+			}
+		}
+	}
 
 	public boolean moveToNoAction(Chess chess, int toX, int toY) {
 
@@ -54,11 +84,11 @@ public class ChessRule {
 		System.out.println("to XY " + toX + " : " + toY);
 		int infoLocX = abstractChessBoard.getLocation().x + (abstractChessBoard.getWidth() / 2) - 200;
 		int infoLocY = abstractChessBoard.getLocation().y + (abstractChessBoard.getHeight() / 2) - 100;
-		
-		if(chess.getChessX() == toX && chess.getChessY() == toY){
+
+		if (chess.getChessX() == toX && chess.getChessY() == toY) {
 			return false;
 		}
-		
+
 		if (chess.isChessCover()) {
 			System.out.println("Chess need to take cover");
 			InfoFrame.instance("請先翻棋", infoLocX, infoLocY);
@@ -350,63 +380,69 @@ public class ChessRule {
 		}
 	}
 
-	public LocationPoint findChessInBoardLoc(MouseEvent e, AbstractChessBoardFactory boardFactpry) {
-		int locX = e.getXOnScreen() - 3 - boardFactpry.getLocationOnScreen().x;
-		int locY = e.getYOnScreen() - 25 - boardFactpry.getLocationOnScreen().y;
-
-		if (boardFactpry.data.getGameStatus().getChessStatus().getWhichGame() == 0) {
-			if (!boardFactpry.data.getConfigData().isBoardStraight()) {
-				locX -= 65;
-				locY -= 555;
-				locY = locY * -1;
-			} else {
-				locX -= 65;
-				locY -= 65;
-			}
-		} else {
-			if (!boardFactpry.data.getConfigData().isBoardStraight()) {
-				locX -= 30;
-				locY -= 590;
-				locY = locY * -1;
-			} else {
-				locX -= 30;
-				locY -= 30;
-			}
-		}
-
-		if (locX > boardFactpry.getxMax() || locX < boardFactpry.getxMin() || locY > boardFactpry.getyMax() || locY < boardFactpry.getyMin()) {
-			System.out.println("超出範圍");
-			System.out.println("far : " + boardFactpry.getxMax() + " " + boardFactpry.getxMin() + " , " + boardFactpry.getyMax() + " " + boardFactpry.getyMin());
-			System.out.println(((Chess) e.getSource()).getChessY() + " : " + ((Chess) e.getSource()).getChessX());
-			((Chess) e.getSource()).setLocation(boardFactpry.data.getLocMap().getLocationMap()[((Chess) e.getSource()).getChessY()][((Chess) e.getSource()).getChessX()].getX(),
-					boardFactpry.data.getLocMap().getLocationMap()[((Chess) e.getSource()).getChessY()][((Chess) e.getSource()).getChessX()].getY());
-			return null;
-		}
-		int aftChessX = 0, aftChessY = 0;
-		if ((locX % 70) <= 35 && (locY % 70) <= 35) {
-			aftChessX = locX / 70;
-			aftChessY = locY / 70;
-		} else if ((locX % 70) > 35 && (locY % 70) > 35) {
-			aftChessX = (locX / 70 + 1);
-			aftChessY = (locY / 70 + 1);
-		} else if ((locX % 70) > 35 && (locY % 70) < 35) {
-			aftChessX = (locX / 70 + 1);
-			aftChessY = locY / 70;
-		} else if ((locX % 70) < 35 && (locY % 70) > 35) {
-			aftChessX = locX / 70;
-			aftChessY = (locY / 70 + 1);
-		}
-		if (!boardFactpry.data.getConfigData().isBoardStraight()) {
-			int tmp = 0;
-			tmp = aftChessX;
-			aftChessX = aftChessY;
-			aftChessY = tmp;
-		}
-		((Chess) e.getSource()).setLocation(boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getX(), boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getY());
-		return new LocationPoint(aftChessX, aftChessY);
-	}
+//	public LocationPoint findChessInBoardLoc(MouseEvent e, AbstractChessBoardFactory boardFactpry) {
+//		int locX = e.getXOnScreen() - 3 - boardFactpry.getLocationOnScreen().x;
+//		int locY = e.getYOnScreen() - 25 - boardFactpry.getLocationOnScreen().y;
+//
+//		if (boardFactpry.data.getGameStatus().getChessStatus().getWhichGame() == 0) {
+//			if (!boardFactpry.data.getConfigData().isBoardStraight()) {
+//				locX -= 65;
+//				locY -= 555;
+//				locY = locY * -1;
+//			} else {
+//				locX -= 65;
+//				locY -= 65;
+//			}
+//		} else {
+//			if (!boardFactpry.data.getConfigData().isBoardStraight()) {
+//				locX -= 30;
+//				locY -= 590;
+//				locY = locY * -1;
+//			} else {
+//				locX -= 30;
+//				locY -= 30;
+//			}
+//		}
+//
+//		if (locX > boardFactpry.getxMax() || locX < boardFactpry.getxMin() || locY > boardFactpry.getyMax() || locY < boardFactpry.getyMin()) {
+//			System.out.println("超出範圍");
+//			System.out.println("far : " + boardFactpry.getxMax() + " " + boardFactpry.getxMin() + " , " + boardFactpry.getyMax() + " " + boardFactpry.getyMin());
+//			System.out.println(((Chess) e.getSource()).getChessY() + " : " + ((Chess) e.getSource()).getChessX());
+//			((Chess) e.getSource()).setLocation(boardFactpry.data.getLocMap().getLocationMap()[((Chess) e.getSource()).getChessY()][((Chess) e.getSource()).getChessX()].getX(),
+//					boardFactpry.data.getLocMap().getLocationMap()[((Chess) e.getSource()).getChessY()][((Chess) e.getSource()).getChessX()].getY());
+//			return null;
+//		}
+//		int aftChessX = 0, aftChessY = 0;
+//		if ((locX % 70) <= 35 && (locY % 70) <= 35) {
+//			aftChessX = locX / 70;
+//			aftChessY = locY / 70;
+//		} else if ((locX % 70) > 35 && (locY % 70) > 35) {
+//			aftChessX = (locX / 70 + 1);
+//			aftChessY = (locY / 70 + 1);
+//		} else if ((locX % 70) > 35 && (locY % 70) < 35) {
+//			aftChessX = (locX / 70 + 1);
+//			aftChessY = locY / 70;
+//		} else if ((locX % 70) < 35 && (locY % 70) > 35) {
+//			aftChessX = locX / 70;
+//			aftChessY = (locY / 70 + 1);
+//		}
+//		if (!boardFactpry.data.getConfigData().isBoardStraight()) {
+//			int tmp = 0;
+//			tmp = aftChessX;
+//			aftChessX = aftChessY;
+//			aftChessY = tmp;
+//		}
+//		((Chess) e.getSource()).setLocation(boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getX(), boardFactpry.data.getLocMap().getLocationMap()[aftChessY][aftChessX].getY());
+//		return new LocationPoint(aftChessX, aftChessY);
+//	}
 
 	public void clearCnt() {
 		taiwanOrderCnt = 0;
+	}
+
+	@Override
+	public void connectTarget() {
+		// TODO Auto-generated method stub
+
 	}
 }

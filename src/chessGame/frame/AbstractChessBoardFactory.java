@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import chessGame.controlUnit.ChessGameRule;
+import chessGame.controlUnit.ObserverPkg;
 import chessGame.controlUnit.Save;
 import chessGame.data.ChessGameData;
 import chessGame.data.LocationPoint;
@@ -110,7 +111,7 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 		infoPanel.add(infotArea);
 		infoPanel.add(backMain);
 		add(infoPanel);
-
+		addObserver(rule.getChessRule());
 	}
 
 	public void createBoard() {
@@ -142,7 +143,9 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 			chessRecord.clear();
 
 			locationMap.clearIndex();
-			chessRule.clearCnt();
+
+			notifyAll("clearCnt");
+//			chessRule.clearCnt();
 
 			new MainView(true, data, rule, this.getLocation().x, this.getLocation().y);
 		} else if (buttonName.equals("投降")) {
@@ -170,16 +173,18 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 			}
 
 		} else if (buttonName.equals("悔棋")) {
-			if (chessStatus.getWhichOrder() == taiwaneseChess) {
+			if (chessStatus.getWhichOrder() == 0) {
 				if (surrendP1Cnt < 1) {
 					if (chessRecord.takeOneChess() != null) {
 						chessRecord.getRecordStack().pop();
 						chessRecord.getRecordStack().pop();
+
 						chessRecord.getListRecord().pop();
-
-						chessTable.setAllChess(chessRecord.getListRecord().peek());
-
 						chessList.setChessList(chessRecord.getListRecord().peek());
+						System.out.println("D");
+						chessList.print();
+						chessTable.setAllChess(chessList.getChessList());
+
 						System.out.println("aft peek");
 						chessList.print();
 						chessList.reloadChessLoc();
@@ -201,10 +206,11 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 						chessRecord.getRecordStack().pop();
 
 						chessRecord.getListRecord().pop();
-
-						chessTable.setAllChess(chessRecord.getListRecord().peek());
-
 						chessList.setChessList(chessRecord.getListRecord().peek());
+						System.out.println("D");
+						chessList.print();
+						chessTable.setAllChess(chessList.getChessList());
+
 						System.out.println("aft peek");
 						chessList.print();
 						chessList.reloadChessLoc();
@@ -320,20 +326,34 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 		if (chessStatus.getWhichGame() == chineseChess) {
 			for (int i = 0; i < 9; i++) {
 				for (int j = 0; j < 10; j++) {
-					if (chessRule.moveToNoAction(((ChessView) e.getSource()), i, j)) {
-						AcceptView av = new AcceptView();
-						av.setLocation(locationMap.getLocationMap()[j][i].getX(), locationMap.getLocationMap()[j][i].getY());
-						add(av);
-						getContentPane().setComponentZOrder(av, 0);
-						acceptList.add(av);
-						this.repaint();
-					}
+					ObserverPkg pkg = new ObserverPkg();
+					pkg.addPkg(((ChessView) e.getSource()));
+					pkg.addPkg(i);
+					pkg.addPkg(j);
+					notifyAll("moveToNoAction", pkg);
+//					if (chessRule.moveToNoAction(((ChessView) e.getSource()), i, j)) {
+//						AcceptView av = new AcceptView();
+//						av.setLocation(locationMap.getLocationMap()[j][i].getX(), locationMap.getLocationMap()[j][i].getY());
+//						add(av);
+//						getContentPane().setComponentZOrder(av, 0);
+//						acceptList.add(av);
+//						this.repaint();
+//					}
 				}
 			}
 		}
 		this.repaint();
 
 		System.out.println("mousePressed end" + e.getX() + " " + e.getY());
+	}
+
+	public void addAcceptView(int i, int j) {
+		AcceptView av = new AcceptView();
+		av.setLocation(locationMap.getLocationMap()[j][i].getX(), locationMap.getLocationMap()[j][i].getY());
+		add(av);
+		getContentPane().setComponentZOrder(av, 0);
+		acceptList.add(av);
+		this.repaint();
 	}
 
 	@Override
@@ -348,13 +368,20 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 		this.repaint();
 
 		if (!((ChessView) e.getSource()).isChessCover()) {
-			LocationPoint point = chessRule.findChessInBoardLoc(e, this);
+			LocationPoint point = findChessInBoardLoc(e);
 			if (point != null) {
-				chessRule.moveTo(((ChessView) e.getSource()), this, point.getX(), point.getY());
+				ObserverPkg pkg = new ObserverPkg();
+				pkg.addPkg(((ChessView) e.getSource()));
+				pkg.addPkg(point);
+				notifyAll("moveTo", pkg);
 			}
 		}
 		if (((ChessView) e.getSource()).isChessCover()) {
-			chessRule.swapUserOrder(((ChessView) e.getSource()), this);
+			System.out.println("cover");
+			ObserverPkg pkg = new ObserverPkg();
+			pkg.addPkg(((ChessView) e.getSource()));
+			notifyAll("swapUserOrder", pkg);
+//			chessRule.swapUserOrder(((ChessView) e.getSource()), this);
 			((ChessView) e.getSource()).setChessCover(false);
 			((ChessView) e.getSource()).repaint();
 		}
@@ -426,5 +453,60 @@ public abstract class AbstractChessBoardFactory extends AbstractFrameModel imple
 
 	public TextArea getInfotArea() {
 		return infotArea;
+	}
+
+	public LocationPoint findChessInBoardLoc(MouseEvent e) {
+		int locX = e.getXOnScreen() - 3 - getLocationOnScreen().x;
+		int locY = e.getYOnScreen() - 25 - getLocationOnScreen().y;
+
+		if (data.getGameStatus().getChessStatus().getWhichGame() == 0) {
+			if (!data.getConfigData().isBoardStraight()) {
+				locX -= 65;
+				locY -= 555;
+				locY = locY * -1;
+			} else {
+				locX -= 65;
+				locY -= 65;
+			}
+		} else {
+			if (!data.getConfigData().isBoardStraight()) {
+				locX -= 30;
+				locY -= 590;
+				locY = locY * -1;
+			} else {
+				locX -= 30;
+				locY -= 30;
+			}
+		}
+
+		if (locX > getxMax() || locX < getxMin() || locY > getyMax() || locY < getyMin()) {
+			System.out.println("超出範圍");
+			System.out.println("far : " + getxMax() + " " + getxMin() + " , " + getyMax() + " " + getyMin());
+			System.out.println(((Chess) e.getSource()).getChessY() + " : " + ((Chess) e.getSource()).getChessX());
+			((Chess) e.getSource()).setLocation(data.getLocMap().getLocationMap()[((Chess) e.getSource()).getChessY()][((Chess) e.getSource()).getChessX()].getX(), data.getLocMap().getLocationMap()[((Chess) e.getSource()).getChessY()][((Chess) e.getSource()).getChessX()].getY());
+			return null;
+		}
+		int aftChessX = 0, aftChessY = 0;
+		if ((locX % 70) <= 35 && (locY % 70) <= 35) {
+			aftChessX = locX / 70;
+			aftChessY = locY / 70;
+		} else if ((locX % 70) > 35 && (locY % 70) > 35) {
+			aftChessX = (locX / 70 + 1);
+			aftChessY = (locY / 70 + 1);
+		} else if ((locX % 70) > 35 && (locY % 70) < 35) {
+			aftChessX = (locX / 70 + 1);
+			aftChessY = locY / 70;
+		} else if ((locX % 70) < 35 && (locY % 70) > 35) {
+			aftChessX = locX / 70;
+			aftChessY = (locY / 70 + 1);
+		}
+		if (!data.getConfigData().isBoardStraight()) {
+			int tmp = 0;
+			tmp = aftChessX;
+			aftChessX = aftChessY;
+			aftChessY = tmp;
+		}
+		((Chess) e.getSource()).setLocation(data.getLocMap().getLocationMap()[aftChessY][aftChessX].getX(), data.getLocMap().getLocationMap()[aftChessY][aftChessX].getY());
+		return new LocationPoint(aftChessX, aftChessY);
 	}
 }

@@ -2,7 +2,7 @@ package chessGame.data;
 
 import java.io.Serializable;
 
-import chessGame.data.te.StatusInterface;
+import chessGame.data.interfaceData.StatusInterface;
 
 public class ChessStatus implements StatusInterface, Serializable {
 	private int whichGame = 0; // chinese 1 taiwan 0

@@ -8,6 +8,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import observer.ChessObserver;
+import observer.ChessObservable;
 import chessGame.controlUnit.ChessGameRule;
 import chessGame.controlUnit.ChessRule;
 import chessGame.data.ChessGameData;
@@ -22,6 +24,7 @@ public abstract class AbstractFrameModel extends JFrame implements ActionListene
 
 	public static final int chineseChess = 1;
 	public static final int taiwaneseChess = 0;
+	private ChessObservable chessObs = new ChessObservable();
 
 	boolean visable = true;
 	public ChessGameData data;
@@ -67,6 +70,18 @@ public abstract class AbstractFrameModel extends JFrame implements ActionListene
 				FrameCheckDialog.instance();
 			}
 		});
+	}
+
+	public void addObserver(ChessObserver o) {
+		chessObs.addObserver(o);
+	}
+
+	public void notifyAll(Object o1) {
+		chessObs.notifyAll(this, o1);
+	}
+
+	public void notifyAll(Object o1, Object o2) {
+		chessObs.notifyAll(this, o1, o2);
 	}
 
 	public abstract JButton makeButton(String text);

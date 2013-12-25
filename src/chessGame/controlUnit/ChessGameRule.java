@@ -8,10 +8,10 @@ public class ChessGameRule implements RuleInterface {
 
 	private ChessGameRule(ChessGameData data) {
 		// TODO Auto-generated constructor stub
-		createData(data);
+		createRule(data);
 	}
 
-	public void createData(ChessGameData data) {
+	public void createRule(ChessGameData data) {
 		chessRule = new ChessRule();
 	}
 

@@ -1,4 +1,4 @@
-package chessGame.data.te;
+package chessGame.data.interfaceData;
 
 
 public interface StatusFactory {

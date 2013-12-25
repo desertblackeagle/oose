@@ -1,9 +1,9 @@
 package chessGame.data;
 
-import chessGame.data.te.LocationInterface;
-import chessGame.data.te.RecordInterface;
-import chessGame.data.te.StatusFactory;
-import chessGame.data.te.StatusInterface;
+import chessGame.data.interfaceData.LocationInterface;
+import chessGame.data.interfaceData.RecordInterface;
+import chessGame.data.interfaceData.StatusFactory;
+import chessGame.data.interfaceData.StatusInterface;
 
 
 public class GameStatus implements StatusFactory {

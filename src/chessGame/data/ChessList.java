@@ -3,7 +3,7 @@ package chessGame.data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import chessGame.data.te.LocationInterface;
+import chessGame.data.interfaceData.LocationInterface;
 import chessGame.frame.Chess;
 
 public class ChessList implements LocationInterface, Serializable {
