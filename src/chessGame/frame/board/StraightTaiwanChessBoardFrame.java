@@ -4,9 +4,9 @@ import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /* @author Red Rose
@@ -16,9 +16,9 @@ import javax.swing.JPanel;
 public class StraightTaiwanChessBoardFrame extends JPanel implements InterfaceStraightChessBoardFrame {
 
 	int width = 0, hight = 0;
-	String imgpath = "";
+	URL imgpath = null;
 
-	public StraightTaiwanChessBoardFrame(int width, int hight, String file) {
+	public StraightTaiwanChessBoardFrame(int width, int hight, URL file) {
 		this.width = width;
 		this.hight = hight;
 		imgpath = file;

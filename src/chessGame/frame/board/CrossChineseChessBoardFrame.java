@@ -7,16 +7,17 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class CrossChineseChessBoardFrame extends JPanel implements InterfaceCrossChessBoardFrame {
 	int width = 0, hight = 0;
-	String imgpath = "";
+	URL imgpath = null;
 	private static Font monoFont = new Font("Monospaced", Font.BOLD | Font.ITALIC, 35);
 
-	public CrossChineseChessBoardFrame(int width, int hight, String file) {
+	public CrossChineseChessBoardFrame(int width, int hight, URL file) {
 		this.width = width;
 		this.hight = hight;
 		imgpath = file;

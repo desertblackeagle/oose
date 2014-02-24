@@ -55,10 +55,16 @@ public class ChessTable {
 	private Warrior blackWarrior2;
 	private ArrayList<Chess> chineseChessList = new ArrayList<Chess>();
 	private ArrayList<Chess> taiwanChessList = new ArrayList<Chess>();
+
 	private String file = "C:\\dark\\";
 
 	public ChessTable(ChessGameData data) {
 		// TODO Auto-generated constructor stub
+		java.net.URL imUrl = getClass().getResource("/chess");
+		System.out.println("999999999999999999999999999999999999999999999999999" + imUrl);
+		file = imUrl.toString().substring(6, imUrl.toString().length());
+		file = file + "/";
+		System.out.println("999999999999999999999999999999999999999999999999999" + file);
 		create(data);
 	}
 

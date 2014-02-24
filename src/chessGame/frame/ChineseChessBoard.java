@@ -81,7 +81,10 @@ public class ChineseChessBoard extends AbstractChessBoardFactory {
 		setxMin(-34);
 		setyMax(664);
 		setyMin(-34);
-		return new StraightChineseChessBoardFrame(820, 890, "c:\\aa.jpg");
+		java.net.URL imUrl = getClass().getResource("/image/board.jpg");
+		System.out.println("999999999999999999999999999999999999999999999999999" + imUrl);
+		return new StraightChineseChessBoardFrame(820, 890, imUrl);
+//		return new StraightChineseChessBoardFrame(820, 890, "c:\\b.jpg");
 	}
 
 	@Override
@@ -91,7 +94,10 @@ public class ChineseChessBoard extends AbstractChessBoardFactory {
 		setxMin(-34);
 		setyMax(594);
 		setyMin(-34);
-		return new CrossChineseChessBoardFrame(890, 820, "c:\\aa.jpg");
+		java.net.URL imUrl = getClass().getResource("/image/board.jpg");
+		System.out.println("999999999999999999999999999999999999999999999999999" + imUrl);
+		return new CrossChineseChessBoardFrame(890, 820, imUrl);
+//		return new CrossChineseChessBoardFrame(890, 820, "c:\\b.jpg");
 	}
 
 	@Override

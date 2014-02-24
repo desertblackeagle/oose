@@ -78,7 +78,8 @@ public class TaiwanChessBoard extends AbstractChessBoardFactory {
 		setxMin(-34);
 		setyMax(244);
 		setyMin(-34);
-		return new StraightTaiwanChessBoardFrame(820, 890, "c:\\aa.jpg");
+		java.net.URL imUrl = getClass().getResource("/image/board.jpg");
+		return new StraightTaiwanChessBoardFrame(820, 890, imUrl);
 	}
 
 	@Override
@@ -88,7 +89,8 @@ public class TaiwanChessBoard extends AbstractChessBoardFactory {
 		setxMin(-34);
 		setyMax(524);
 		setyMin(-34);
-		return new CrossTaiwanChessBoardFrame(890, 820, "c:\\aa.jpg");
+		java.net.URL imUrl = getClass().getResource("/image/board.jpg");
+		return new CrossTaiwanChessBoardFrame(890, 820, imUrl);
 	}
 
 	@Override
