@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 
@@ -81,8 +82,11 @@ public class ChessView extends Chess {
 			icon = new ImageIcon(path);
 			img = icon.getImage();
 			g.drawImage(img, -2, -2, 55, 55, this);
-
-			icon = new ImageIcon("c:\\dark\\cover.png");
+			java.net.URL imUrl = getClass().getResource("/chess");
+			String file = imUrl.toString().substring(6, imUrl.toString().length());
+			file = file + "/cover.png";
+			System.out.println("1111111111111111111111111111111111111" + file);
+			icon = new ImageIcon(file);
 			img = icon.getImage();
 			g.drawImage(img, -7, -5, 64, 64, this);
 
